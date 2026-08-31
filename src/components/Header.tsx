@@ -32,7 +32,7 @@ export function Header() {
         </a>
 
         <div className="flex min-w-0 items-center gap-5 lg:gap-8">
-          <nav className="hidden max-w-3xl flex-wrap items-center justify-end gap-x-5 gap-y-1 xl:flex" aria-label="Primary">
+          <nav className="hidden max-w-4xl flex-wrap items-center justify-end gap-x-4 gap-y-1 2xl:flex" aria-label="Primary">
             {nav.map((item) => (
               <a
                 key={item.href}
@@ -65,13 +65,13 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-t border-gray bg-white">
+        <div className="max-h-[min(28rem,calc(100dvh-4.5rem))] overflow-y-auto border-t border-gray bg-white">
           <nav className="flex flex-col px-4 py-2 sm:px-6" aria-label="Mobile">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="border-b border-gray py-3 text-[0.9rem] font-medium text-ink"
+                className="border-b border-gray py-3 text-[0.88rem] leading-snug font-medium text-ink"
                 onClick={() => setOpen(false)}
               >
                 {item.label}

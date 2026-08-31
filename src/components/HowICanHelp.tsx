@@ -12,7 +12,7 @@ export function HowICanHelp() {
         <Reveal delay={60}>
           <p className="mx-auto mt-5 max-w-2xl text-center text-body">{whatIBring.subhead}</p>
         </Reveal>
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 sm:mt-12 md:grid-cols-2">
           {whatIBring.items.map((card, i) => {
             const Icon = helpIcons[card.icon]
             return (

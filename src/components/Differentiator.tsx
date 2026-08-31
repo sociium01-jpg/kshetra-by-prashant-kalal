@@ -8,7 +8,7 @@ export function Differentiator() {
         <Reveal>
           <h2 className="section-title text-center text-balance">{journey.heading}</h2>
         </Reveal>
-        <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
           {journey.steps.map((step, i) => {
             const last = i === journey.steps.length - 1
             return (

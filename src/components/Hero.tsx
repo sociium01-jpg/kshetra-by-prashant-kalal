@@ -85,9 +85,16 @@ export function Hero() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="relative mx-auto w-full max-w-2xl px-6 py-10 text-center sm:px-8 sm:py-12">
+      <h1 className="sr-only">Kshetra by Prashant Kalal</h1>
+      <div className="relative mx-auto w-full max-w-lg px-6 py-10 text-center sm:max-w-xl sm:px-10 sm:py-12">
         <QuoteMark />
-        <div className="relative z-10 min-h-[10.5rem] overflow-hidden sm:min-h-[11.5rem] md:min-h-[12.5rem]">
+        <div className="relative z-10 overflow-hidden">
+          <blockquote
+            className="invisible px-1 text-[clamp(0.98rem,3.6vw,1.5rem)] leading-[1.55] font-normal"
+            aria-hidden="true"
+          >
+            <QuoteLines lines={quote.lines} animate={false} />
+          </blockquote>
           {quotes.map((item, i) => {
             const active = i === index
             const exiting = i === prevIndex && prevIndex !== index
@@ -99,7 +106,7 @@ export function Hero() {
               <blockquote
                 key={item.lines[0]}
                 aria-hidden={!active}
-                className={`absolute inset-0 flex flex-col justify-center text-[clamp(1.05rem,2.6vw,1.5rem)] leading-[1.55] font-normal text-ink ${slide}`}
+                className={`absolute inset-0 flex flex-col justify-center px-1 text-[clamp(0.98rem,3.6vw,1.5rem)] leading-[1.55] font-normal text-ink ${slide}`}
               >
                 <QuoteLines key={active ? `on-${i}` : `off-${i}`} lines={item.lines} animate={active} />
               </blockquote>

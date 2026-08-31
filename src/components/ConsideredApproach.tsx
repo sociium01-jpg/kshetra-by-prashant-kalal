@@ -4,7 +4,7 @@ import { Logo } from "./Logo"
 export function ConsideredApproach() {
   return (
     <section id="why" className="grid w-full overflow-hidden lg:grid-cols-2">
-      <div className="relative min-h-[320px] overflow-hidden bg-ink sm:min-h-[420px] lg:min-h-[560px]">
+      <div className="relative min-h-[260px] overflow-hidden bg-ink sm:min-h-[380px] md:min-h-[440px] lg:min-h-[560px]">
         <img
           src="/kshetra-cityscape.jpg"
           alt="Pune"
@@ -14,10 +14,10 @@ export function ConsideredApproach() {
         <div className="absolute top-5 right-5 z-10 sm:top-7 sm:right-7 md:top-8 md:right-8">
           <Logo invert compact />
         </div>
-        <div className="absolute inset-0 flex items-start p-6 pt-16 sm:p-10 sm:pt-20 md:p-12 md:pt-24">
-          <div className="flex max-w-lg items-stretch gap-4">
+        <div className="absolute inset-0 flex items-end p-5 pt-16 sm:items-start sm:p-10 sm:pt-20 md:p-12 md:pt-24">
+          <div className="flex max-w-lg items-stretch gap-3 sm:gap-4">
             <span className="w-[3px] shrink-0 bg-brand" aria-hidden="true" />
-            <h2 className="text-[1.35rem] leading-[1.2] font-semibold tracking-[0.06em] text-white uppercase sm:text-[1.75rem] md:text-[2.05rem]">
+            <h2 className="text-[1.15rem] leading-[1.25] font-semibold tracking-[0.06em] text-white uppercase sm:text-[1.75rem] md:text-[2.05rem]">
               {whyKshetra.subhead}
             </h2>
           </div>
