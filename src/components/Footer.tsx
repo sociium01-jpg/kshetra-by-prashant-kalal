@@ -14,8 +14,7 @@ export function Footer() {
           <p className="text-[0.7rem] tracking-[0.2em] text-brand uppercase">
             Prashant Kalal
           </p>
-          <p className="mt-2 text-sm text-white/70">Real Estate Advisor</p>
-          <p className="mt-1 text-sm text-white/70">Kshetra by Prashant Kalal</p>
+          <p className="mt-2 text-sm text-white/70">Kshetra By Prashant Kalal</p>
         </div>
         <div>
           <p className="text-[0.7rem] tracking-[0.2em] text-white/50 uppercase">
@@ -33,7 +32,7 @@ export function Footer() {
             rel="noreferrer"
             className="mt-1 block text-sm hover:text-brand"
           >
-            Instagram: {contact.instagram}
+            {contact.instagram}
           </a>
         </div>
         <div>
@@ -41,9 +40,6 @@ export function Footer() {
             MahaRERA
           </p>
           <p className="mt-2 text-sm text-white/80">No. {contact.rera}</p>
-          <p className="mt-4 text-sm text-white/50">
-            Helping clients make informed real estate decisions.
-          </p>
         </div>
       </div>
     </footer>

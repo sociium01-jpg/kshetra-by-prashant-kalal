@@ -1,32 +1,48 @@
-import { insightTopics } from "../content/home"
+import { journal } from "../content/home"
 import { Reveal } from "./Reveal"
 
 export function Insights() {
   return (
-    <section id="insights" className="bg-gray py-16 md:py-24">
+    <section id="journal" className="bg-gray py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
         <Reveal>
-          <h2 className="section-title text-center">Insights</h2>
+          <h2 className="section-title text-center">{journal.heading}</h2>
         </Reveal>
         <Reveal delay={60}>
-          <p className="mx-auto mt-5 max-w-2xl text-center text-body">
-            Notes on Pune real estate, residential and commercial, luxury,
-            investment, and the practical side of buying. Coming as I write them.
-          </p>
+          <div className="mx-auto mt-5 max-w-2xl space-y-4 text-center text-body">
+            {journal.intro.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
         </Reveal>
-        <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {insightTopics.map((topic, i) => (
-            <Reveal key={topic} delay={i * 50}>
-              <article className="card-lift glass flex min-h-[140px] flex-col justify-between px-6 py-6">
-                <h3 className="text-sm font-semibold tracking-[0.08em] text-ink uppercase sm:tracking-[0.12em]">
-                  {topic}
-                </h3>
-                <p className="mt-6 text-[0.7rem] tracking-[0.18em] text-muted uppercase">
-                  Coming soon
-                </p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <Reveal delay={80}>
+            <article className="card-lift bg-white px-6 py-8 sm:px-8 sm:py-10">
+              <h3 className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">
+                {journal.realEstate.heading}
+              </h3>
+              <p className="mt-4 leading-relaxed text-body">{journal.realEstate.body}</p>
+            </article>
+          </Reveal>
+          <Reveal delay={140}>
+            <article className="card-lift bg-white px-6 py-8 sm:px-8 sm:py-10">
+              <h3 className="text-sm font-semibold tracking-[0.12em] text-brand uppercase">
+                {journal.beyondTheCity.heading}
+              </h3>
+              <p className="mt-4 leading-relaxed text-body">{journal.beyondTheCity.body}</p>
+              <p className="mt-6 text-sm font-medium text-ink">{journal.beyondTheCity.exampleLabel}</p>
+              <ul className="mt-4 space-y-4">
+                {journal.beyondTheCity.places.map((place) => (
+                  <li key={place.title}>
+                    <p className="text-sm font-semibold tracking-[0.08em] text-ink uppercase">
+                      {place.title}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-body">{place.body}</p>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </Reveal>
         </div>
       </div>
     </section>

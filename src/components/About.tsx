@@ -1,55 +1,42 @@
+import { founder } from "../content/home"
+
 export function About() {
   return (
-    <section
-      id="founder"
-      className="grid w-full overflow-hidden bg-gradient-to-br from-peach-soft via-peach-soft to-white lg:grid-cols-2"
-    >
-      <div className="flex min-w-0 flex-col justify-center px-5 py-12 sm:px-10 md:px-14 lg:px-16">
-        <h2 className="text-[1.45rem] font-semibold tracking-wide text-ink uppercase md:text-[2rem]">
-          Meet Prashant Kalal
-        </h2>
-        <div className="mt-6 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
-          <p>
-            With 13+ years of experience in real estate, Prashant Kalal brings
-            deep knowledge of Pune’s property market and a clear understanding
-            of what buyers and investors need.
-          </p>
-          <p>
-            As a MahaRERA-certified real estate agent, his approach is simple:
-            listen, understand and advise-rather than push a sale.
-          </p>
-          <p>
-            Through Kshetra, he helps clients discover the right opportunities
-            and make real estate decisions with clarity and confidence.
-          </p>
-        </div>
-        <div className="mt-8 h-px w-16 bg-brand" />
-        <p className="mt-5 text-sm font-medium text-brand italic">
-          One objective: helping you make better property decisions.
-        </p>
-      </div>
+    <section id="founder" className="relative flex w-full flex-col overflow-hidden lg:block">
+      <img
+        src="/meet-pk-banner.jpg"
+        alt="Prashant Kalal"
+        className="order-2 h-auto w-full lg:absolute lg:inset-0 lg:h-full lg:w-full lg:object-cover lg:object-right"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 left-0 hidden w-[52%] bg-gradient-to-r from-peach-soft/55 via-white/20 to-transparent lg:block"
+      />
 
-      <div className="relative min-h-[420px] overflow-hidden sm:min-h-[500px] lg:min-h-[560px]">
-        <img
-          src="/founder.jpg"
-          alt="Prashant Kalal"
-          className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
-        />
-        <div className="absolute right-0 bottom-8 z-20 w-[min(16rem,72%)] sm:bottom-10 sm:w-[18rem]">
-          <p className="mb-4 pr-5 text-right text-[0.9rem] leading-snug text-ink italic md:text-[0.95rem]">
-            “Because the right investment begins with the right questions”
+      <div className="relative z-10 order-1 grid w-full lg:grid-cols-2">
+        <div className="flex min-w-0 flex-col justify-center bg-peach-soft px-5 py-12 sm:px-10 md:px-14 lg:bg-transparent lg:px-16 lg:py-20">
+          <h2 className="text-[1.45rem] font-semibold tracking-wide text-ink uppercase md:text-[2rem]">
+            {founder.heading}
+          </h2>
+          <p className="mt-3 text-[0.95rem] font-medium tracking-wide text-brand md:text-[1.05rem]">
+            {founder.subhead}
           </p>
-          <div className="bg-brand px-5 py-3 text-right">
-            <p className="text-[0.95rem] font-semibold tracking-[0.12em] text-white uppercase">
-              Prashant
-              <br />
-              Kalal
-            </p>
+          <div className="mt-6 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
+            {founder.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
-          <div className="bg-plate px-5 py-1.5 text-right">
-            <p className="text-[0.7rem] tracking-[0.14em] text-white">Founder</p>
+          <h3 className="mt-8 text-[0.95rem] font-semibold tracking-[0.12em] text-ink uppercase md:text-[1.05rem]">
+            {founder.beyondHeading}
+          </h3>
+          <div className="mt-4 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
+            {founder.beyondParagraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
         </div>
+
+        <div className="hidden min-h-[36rem] lg:block" aria-hidden="true" />
       </div>
     </section>
   )

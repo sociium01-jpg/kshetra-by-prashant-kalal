@@ -1,46 +1,27 @@
+import { journey } from "../content/home"
 import { Reveal } from "./Reveal"
 
 export function Differentiator() {
   return (
-    <section id="values" className="bg-white py-16 md:py-24">
+    <section id="journey" className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
         <Reveal>
-          <h2 className="section-title text-center text-balance">
-            I&apos;ve Seen Both Sides of the Property Journey.
-          </h2>
+          <h2 className="section-title text-center text-balance">{journey.heading}</h2>
         </Reveal>
-        <Reveal delay={60}>
-          <p className="mx-auto mt-5 max-w-2xl text-center text-body">
-            Sales taught me how a property is brought to market. Post-Sales taught
-            me what happens after the booking. You get both when we talk.
-          </p>
-        </Reveal>
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
-          <Reveal delay={80}>
-            <article className="card-lift border-t-2 border-brand bg-gray px-5 py-8 sm:px-8 sm:py-10">
-              <h3 className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">
-                Sales
-              </h3>
-              <p className="mt-4 leading-relaxed text-body">
-                I know how inventory is positioned, how pricing is built, and
-                which questions are worth asking before you commit. That is the
-                difference between being shown a project and understanding it.
-              </p>
-            </article>
-          </Reveal>
-          <Reveal delay={140}>
-            <article className="card-lift border-t-2 border-brand bg-gray px-5 py-8 sm:px-8 sm:py-10">
-              <h3 className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">
-                Post-Sales
-              </h3>
-              <p className="mt-4 leading-relaxed text-body">
-                I know what follows the handshake — documentation, possession,
-                snags, and the wait. I factor that into the advice I give you
-                today, so the decision still holds after you move in.
-              </p>
-            </article>
-          </Reveal>
-        </div>
+        <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {journey.steps.map((step, i) => {
+            const last = i === journey.steps.length - 1
+            return (
+              <Reveal key={step.title} as="li" delay={i * 70} className="relative text-center">
+                <p className="text-sm font-semibold tracking-[0.16em] text-brand uppercase">
+                  {step.title}
+                  {last ? "" : <span className="ml-2 hidden font-normal lg:inline">→</span>}
+                </p>
+                <p className="mt-4 text-sm leading-relaxed text-body">{step.body}</p>
+              </Reveal>
+            )
+          })}
+        </ol>
       </div>
     </section>
   )

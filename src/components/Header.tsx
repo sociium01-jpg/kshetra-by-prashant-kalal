@@ -32,12 +32,12 @@ export function Header() {
         </a>
 
         <div className="flex min-w-0 items-center gap-5 lg:gap-8">
-          <nav className="hidden items-center gap-6 lg:flex xl:gap-8" aria-label="Primary">
+          <nav className="hidden max-w-3xl flex-wrap items-center justify-end gap-x-5 gap-y-1 xl:flex" aria-label="Primary">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[0.68rem] font-medium tracking-[0.22em] text-ink uppercase transition-colors hover:text-brand"
+                className="text-[0.72rem] font-medium text-ink transition-colors hover:text-brand"
               >
                 {item.label}
               </a>
@@ -71,7 +71,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="border-b border-gray py-3 text-[0.8rem] font-medium tracking-[0.22em] text-ink uppercase"
+                className="border-b border-gray py-3 text-[0.9rem] font-medium text-ink"
                 onClick={() => setOpen(false)}
               >
                 {item.label}

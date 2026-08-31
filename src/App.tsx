@@ -6,9 +6,7 @@ import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { Hero } from "./components/Hero"
 import { HowICanHelp } from "./components/HowICanHelp"
-import { HowIWork } from "./components/HowIWork"
 import { Insights } from "./components/Insights"
-import { Pune } from "./components/Pune"
 
 export default function App() {
   return (
@@ -19,10 +17,8 @@ export default function App() {
         <ConsideredApproach />
         <About />
         <Differentiator />
-        <HowICanHelp />
-        <HowIWork />
-        <Pune />
         <Insights />
+        <HowICanHelp />
         <Contact />
       </main>
       <Footer />

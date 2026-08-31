@@ -10,98 +10,145 @@ export const contact = {
 
 export const nav = [
   { href: "#home", label: "Home" },
-  { href: "#why", label: "Why Kshetra" },
-  { href: "#founder", label: "Founder" },
-  { href: "#values", label: "Our Values" },
-  { href: "#what-we-do", label: "What We Do" },
+  { href: "#why", label: "Why Kshetra By Prashant Kalal?" },
+  { href: "#founder", label: "Meet Prashant Kalal" },
+  { href: "#journey", label: "I’ve Worked Across the Property Journey" },
+  { href: "#journal", label: "The Journal" },
+  { href: "#what-we-do", label: "What I Bring to the Table" },
+  { href: "#contact", label: "Contact" },
 ] as const
+
+export const heroTagline =
+  "Understanding property, people and the places that bring them together."
 
 export const quotes = [
   {
-    lines: ["Behind every address", "is a DECISION.", "Behind every decision", "should be TRUST."],
+    lines: [
+      "I have seen properties from sale to possession. That journey taught me that what happens after the sale matters just as much as what happens before it.",
+    ],
     wash: "tl" as const,
   },
   {
-    lines: ["A good ADVICE", "can change the way", "you see an", "INVESTMENT."],
+    lines: ["Real estate is ultimately about people, places and the lives that unfold between them."],
     wash: "tr" as const,
   },
   {
-    lines: ["The right INVESTMENT", "begins with", "the right", "QUESTIONS."],
-    wash: "tl" as const,
-  },
-  {
-    lines: ["Real estate isn't just", "about finding a PROPERTY.", "It's about making", "the right CHOICE."],
-    wash: "tr" as const,
-  },
-  {
-    lines: ["Listen. Understand.", "ADVISE —", "rather than", "push a sale."],
+    lines: [
+      "Kshetra by Prashant Kalal isn’t about telling people what to buy. It’s about helping them understand enough to decide for themselves.",
+    ],
     wash: "tl" as const,
   },
 ]
 
-export const intents = [
-  "Residential",
-  "Commercial",
-  "Investment",
-  "Property Evaluation",
-] as const
+export const whyKshetra = {
+  heading: "Why Kshetra By Prashant Kalal?",
+  subhead: "To share what experience has taught me.",
+  paragraphs: [
+    "Over 13+ years in real estate, I’ve seen how overwhelming a property decision can be,  from understanding locations and projects to evaluating documents, timelines and future potential.",
+    "Kshetra By Prashant Kalal began with a simple thought: what if more understanding came before the decision?",
+    "It is my way of sharing what I’ve learnt helping buyers and investors ask better questions, understand their choices and approach property with greater clarity.",
+    "Sometimes the right decision is to buy. Sometimes, it’s to wait.",
+    "Either way, the aim is simple - understand before you decide.",
+  ],
+}
 
-export const helpCards = [
-  {
-    icon: "home" as const,
-    title: "Residential Real Estate",
-    body: "A home has to work for how you live now — and for the years after you move in. I help you read product, location, and timing without the noise of a sales floor.",
-  },
-  {
-    icon: "building" as const,
-    title: "Commercial Real Estate",
-    body: "Office, retail, or mixed-use: this is a business decision. I look at use, tenure, and whether the numbers hold once you are actually operating from the space.",
-  },
-  {
-    icon: "compass" as const,
-    title: "Property Advisory",
-    body: "Already have a shortlist, a resale, or a project in mind? I evaluate it independently — strengths, gaps, and whether it is the right decision for you.",
-  },
-  {
-    icon: "chart" as const,
-    title: "Investment Guidance",
-    body: "Yield, holding period, and exit. I separate a good story from a good asset, and I will tell you when waiting is the better move.",
-  },
-]
+export const founder = {
+  heading: "Meet Prashant Kalal",
+  subhead: "13+ years. Many roles. One industry.",
+  paragraphs: [
+    "My journey in real estate began in sales, where I learnt to understand people, their aspirations and what goes into a property decision.",
+    "Over the years, I moved beyond sales into customer relationships, post-sales, possession and eventually operations for 100+ acre township developments as an Assistant General Manager.",
+    "These experiences gave me a broader view of real estate from a buyer’s first conversation to the many details that shape a successful development.",
+    "Today, as a MahaRERA-certified real estate agent, I bring this experience to Kshetra By Prashant Kalal, helping people approach property with greater clarity and perspective.",
+  ],
+  beyondHeading: "Beyond Real Estate",
+  beyondParagraphs: [
+    "Away from work, I enjoy yoga, good food, nature and discovering new places through hikes and trails.",
+    "Perhaps that is why I’m interested not just in properties, but in places and what makes us feel connected to them.",
+  ],
+}
 
-export const workSteps = [
-  {
-    icon: "listen" as const,
-    title: "Understand",
-    body: "I start with your life, timeline, and what this decision needs to do for you.",
-  },
-  {
-    icon: "search" as const,
-    title: "Evaluate",
-    body: "Location, product, pricing, and the risks that do not show up in a brochure.",
-  },
-  {
-    icon: "compare" as const,
-    title: "Compare",
-    body: "Options side by side — without the pressure of someone else's target.",
-  },
-  {
-    icon: "advise" as const,
-    title: "Advise",
-    body: "A clear recommendation, and the reasoning behind it. Then you decide.",
-  },
-  {
-    icon: "decide" as const,
-    title: "Decide",
-    body: "You choose. I stay with you through the paperwork and the questions after.",
-  },
-]
+export const journey = {
+  heading: "I’ve Worked Across the Property Journey",
+  steps: [
+    {
+      title: "Sales",
+      body: "Taught me to understand what people are really looking for.",
+    },
+    {
+      title: "Post-sales",
+      body: "Showed me the questions and concerns that emerge after a decision has been made.",
+    },
+    {
+      title: "Possession",
+      body: "Taught me how important execution, communication and attention to detail become when promises finally turn into homes.",
+    },
+    {
+      title: "Township Operations",
+      body: "Managing operations for large-scale township developments gave me a wider understanding of how numerous moving parts come together behind every development.",
+    },
+  ],
+}
 
-export const insightTopics = [
-  "Pune real estate",
-  "Residential",
-  "Commercial",
-  "Luxury",
-  "Investment",
-  "Property buying advice",
-]
+export const journal = {
+  heading: "The Journal",
+  intro: [
+    "A collection of thoughts, observations and places that shape my perspective.",
+    "From real estate and the way Pune is changing, to places beyond the city that offer a different pace and perspective, this is where I’ll share things I find interesting, useful or simply worth remembering.",
+  ],
+  realEstate: {
+    heading: "Real Estate",
+    body: "Insights, observations and things Prashant has learnt over 13+ years from questions worth asking before buying to understanding locations, projects, documentation, value and what happens after possession.",
+  },
+  beyondTheCity: {
+    heading: "Beyond the City",
+    body: "A visual collection of places around Pune, each accompanied by a short personal observation.",
+    exampleLabel: "For Example -",
+    places: [
+      {
+        title: "Mulshi",
+        body: "For the days when a little distance from the city brings a lot of perspective.",
+      },
+      {
+        title: "Panshet",
+        body: "A reminder that Pune's best escapes are often closer than we think.",
+      },
+      {
+        title: "Bhor",
+        body: "Quiet places have a way of making you slow down.",
+      },
+    ],
+  },
+}
+
+export const whatIBring = {
+  heading: "What I Bring to the Table",
+  subhead: "Experience that looks beyond the transaction.",
+  items: [
+    {
+      icon: "home" as const,
+      title: "A wider perspective",
+      body: "Having worked across sales, post-sales, possession and operations.",
+    },
+    {
+      icon: "building" as const,
+      title: "A buyer-first approach",
+      body: "Understanding the questions and concerns that arise at different stages.",
+    },
+    {
+      icon: "compass" as const,
+      title: "Local understanding",
+      body: "A perspective shaped by working within Pune’s evolving real estate landscape.",
+    },
+    {
+      icon: "chart" as const,
+      title: "An independent conversation",
+      body: "Helping you evaluate a decision without assuming that every decision needs to end in a purchase.",
+    },
+  ],
+}
+
+export const contactCopy = {
+  heading: "Have a property question?",
+  body: "Sometimes a conversation is a good place to start.",
+}

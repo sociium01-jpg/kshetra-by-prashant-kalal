@@ -1,26 +1,23 @@
-import { helpCards } from "../content/home"
+import { whatIBring } from "../content/home"
 import { helpIcons } from "./Icons"
 import { Reveal } from "./Reveal"
 
 export function HowICanHelp() {
   return (
-    <section id="what-we-do" className="bg-gray py-16 md:py-24">
+    <section id="what-we-do" className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
         <Reveal>
-          <h2 className="section-title text-center">How I Can Help</h2>
+          <h2 className="section-title text-center">{whatIBring.heading}</h2>
         </Reveal>
         <Reveal delay={60}>
-          <p className="mx-auto mt-5 max-w-2xl text-center text-body">
-            Residential, commercial, or a question about a property you already
-            have in mind. Advisory-first — not sales-first.
-          </p>
+          <p className="mx-auto mt-5 max-w-2xl text-center text-body">{whatIBring.subhead}</p>
         </Reveal>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {helpCards.map((card, i) => {
+          {whatIBring.items.map((card, i) => {
             const Icon = helpIcons[card.icon]
             return (
               <Reveal key={card.title} delay={i * 70}>
-                <article className="card-lift bg-white px-5 py-8 sm:px-8 sm:py-10">
+                <article className="card-lift bg-gray px-5 py-8 sm:px-8 sm:py-10">
                   <span className="icon-anim inline-flex text-brand">
                     <Icon />
                   </span>

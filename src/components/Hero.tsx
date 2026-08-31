@@ -1,5 +1,17 @@
 import { quotes } from "../content/home"
-import { useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
+
+/** PDF: opening 66 (blobs top-left), closing 99 (blobs bottom-right). Extra-heavy peach. */
+function QuoteMark({ closing = false }: { closing?: boolean }) {
+  return (
+    <img
+      src={closing ? "/quote-close.png?v=5" : "/quote-open.png?v=5"}
+      alt=""
+      aria-hidden="true"
+      className={`quote-mark ${closing ? "quote-mark-close" : "quote-mark-open"}`}
+    />
+  )
+}
 
 function QuoteLines({ lines, animate }: { lines: string[]; animate: boolean }) {
   return (
@@ -11,20 +23,21 @@ function QuoteLines({ lines, animate }: { lines: string[]; animate: boolean }) {
             {words.map((word, wordIndex) => {
               const emphasized = /^[A-Z]{2,}/.test(word)
               return (
-                <span
-                  key={`${word}-${wordIndex}`}
-                  className={`quote-hero-word inline-block ${emphasized ? "font-medium" : ""} ${
-                    animate ? "quote-hero-line" : ""
-                  }`}
-                  style={
-                    animate
-                      ? { animationDelay: `${80 + lineIndex * 90 + wordIndex * 45}ms` }
-                      : undefined
-                  }
-                >
-                  {word}
-                  {wordIndex < words.length - 1 ? "\u00a0" : ""}
-                </span>
+                <Fragment key={`${word}-${wordIndex}`}>
+                  <span
+                    className={`quote-hero-word inline-block ${emphasized ? "font-medium" : ""} ${
+                      animate ? "quote-hero-line" : ""
+                    }`}
+                    style={
+                      animate
+                        ? { animationDelay: `${80 + lineIndex * 90 + wordIndex * 45}ms` }
+                        : undefined
+                    }
+                  >
+                    {word}
+                  </span>
+                  {wordIndex < words.length - 1 ? " " : ""}
+                </Fragment>
               )
             })}
           </span>
@@ -57,11 +70,11 @@ export function Hero() {
 
   useEffect(() => {
     if (paused) return
-    const id = window.setInterval(() => goTo(indexRef.current + 1, 1), 5200)
+    const id = window.setInterval(() => goTo(indexRef.current + 1, 1), 5000)
     return () => window.clearInterval(id)
   }, [paused])
 
-  const quote = quotes[index]
+  const quote = quotes[index] ?? quotes[0]
   const wash = quote.wash === "tr" ? "peach-wash-tr" : "peach-wash-tl"
 
   return (
@@ -72,15 +85,9 @@ export function Hero() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <h1 className="sr-only">Kshetra by Prashant Kalal</h1>
-      <div className="relative mx-auto w-full max-w-2xl px-8 py-10 text-center sm:px-12 sm:py-14">
-        <span
-          className="quote-mark pointer-events-none absolute top-4 left-[8%] text-[clamp(5rem,14vw,9rem)] leading-none"
-          aria-hidden="true"
-        >
-          “
-        </span>
-        <div className="relative z-10 min-h-[8.5rem] overflow-hidden sm:min-h-[11.5rem] md:min-h-[12.5rem]">
+      <div className="relative mx-auto w-full max-w-2xl px-6 py-10 text-center sm:px-8 sm:py-12">
+        <QuoteMark />
+        <div className="relative z-10 min-h-[10.5rem] overflow-hidden sm:min-h-[11.5rem] md:min-h-[12.5rem]">
           {quotes.map((item, i) => {
             const active = i === index
             const exiting = i === prevIndex && prevIndex !== index
@@ -92,19 +99,14 @@ export function Hero() {
               <blockquote
                 key={item.lines[0]}
                 aria-hidden={!active}
-                className={`absolute inset-0 flex flex-col justify-center text-[clamp(1.15rem,3.2vw,1.85rem)] leading-[1.5] font-normal text-ink ${slide}`}
+                className={`absolute inset-0 flex flex-col justify-center text-[clamp(1.05rem,2.6vw,1.5rem)] leading-[1.55] font-normal text-ink ${slide}`}
               >
                 <QuoteLines key={active ? `on-${i}` : `off-${i}`} lines={item.lines} animate={active} />
               </blockquote>
             )
           })}
         </div>
-        <span
-          className="quote-mark pointer-events-none absolute right-[10%] bottom-4 text-[clamp(5rem,14vw,9rem)] leading-none"
-          aria-hidden="true"
-        >
-          ”
-        </span>
+        <QuoteMark closing />
       </div>
       <div className="mt-2 flex justify-center gap-1.5">
         {quotes.map((item, i) => (
