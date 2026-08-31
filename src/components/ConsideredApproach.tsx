@@ -1,0 +1,45 @@
+import { useParallax } from "../hooks/useParallax"
+import { Reveal } from "./Reveal"
+
+export function ConsideredApproach() {
+  const imgRef = useParallax<HTMLImageElement>(0.14, 1.12)
+
+  return (
+    <section className="grid overflow-hidden lg:grid-cols-2">
+      <div className="relative min-h-[420px] overflow-hidden bg-ink lg:min-h-[560px]">
+        <img
+          ref={imgRef}
+          src="/considered-approach.jpg"
+          alt="Pune hills and neighbourhoods"
+          className="absolute inset-0 h-full w-full object-cover will-change-transform"
+        />
+      </div>
+      <div className="flex flex-col justify-center bg-gray px-8 py-14 md:px-14 lg:px-16">
+        <Reveal>
+          <h2 className="section-title">Why this practice?</h2>
+        </Reveal>
+        <Reveal delay={80}>
+          <div className="mt-8 max-w-lg space-y-5 text-[0.98rem] leading-relaxed text-body">
+            <p>
+              I built Kshetra as a personal real estate advisory — not a listing
+              desk, and not a channel-partner shop.
+            </p>
+            <p>
+              A property decision is more than finding an address. It needs a
+              clear read of the market, the risks, and what actually fits your
+              life today and later.
+            </p>
+            <p>
+              You work with me directly: transparent, consultative, and paced
+              around your questions.
+            </p>
+            <p>
+              Because real estate isn’t just about finding a property. It’s about
+              making the right choice.
+            </p>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
