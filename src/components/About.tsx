@@ -1,30 +1,26 @@
-import { useParallax } from "../hooks/useParallax"
-import { Reveal } from "./Reveal"
-
 export function About() {
-  const photoRef = useParallax<HTMLImageElement>(0.06)
-
   return (
-    <section id="about" className="grid w-full overflow-hidden bg-peach-soft lg:grid-cols-2">
-      <div className="flex min-w-0 flex-col justify-center px-4 py-12 sm:px-8 md:px-14 lg:px-16 lg:py-14">
-        <Reveal>
-          <h2 className="text-[1.45rem] font-semibold tracking-wide text-ink uppercase md:text-[2rem]">
-            Meet Prashant Kalal
-          </h2>
-        </Reveal>
+    <section
+      id="founder"
+      className="grid w-full overflow-hidden bg-gradient-to-br from-peach-soft via-peach-soft to-white lg:grid-cols-2"
+    >
+      <div className="flex min-w-0 flex-col justify-center px-5 py-12 sm:px-10 md:px-14 lg:px-16">
+        <h2 className="text-[1.45rem] font-semibold tracking-wide text-ink uppercase md:text-[2rem]">
+          Meet Prashant Kalal
+        </h2>
         <div className="mt-6 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
           <p>
-            For 12+ years I worked with a real estate developer — across Sales
-            and Post-Sales. That meant sitting with buyers before they signed,
-            and staying with them after they moved in.
+            With 13+ years of experience in real estate, Prashant Kalal brings
+            deep knowledge of Pune’s property market and a clear understanding
+            of what buyers and investors need.
           </p>
           <p>
-            As a MahaRERA-registered real estate agent, my approach is simple:
-            listen, understand and advise — rather than push a sale.
+            As a MahaRERA-certified real estate agent, his approach is simple:
+            listen, understand and advise-rather than push a sale.
           </p>
           <p>
-            Through Kshetra, I help you discover the right opportunities and
-            make real estate decisions with clarity and confidence.
+            Through Kshetra, he helps clients discover the right opportunities
+            and make real estate decisions with clarity and confidence.
           </p>
         </div>
         <div className="mt-8 h-px w-16 bg-brand" />
@@ -33,14 +29,13 @@ export function About() {
         </p>
       </div>
 
-      <div className="relative min-h-[420px] overflow-hidden bg-peach-soft sm:min-h-[500px] lg:min-h-[560px]">
+      <div className="relative min-h-[420px] overflow-hidden sm:min-h-[500px] lg:min-h-[560px]">
         <img
-          ref={photoRef}
           src="/founder.jpg"
           alt="Prashant Kalal"
-          className="absolute inset-0 h-full w-full object-cover object-[center_18%] will-change-transform"
+          className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
         />
-        <div className="absolute right-0 bottom-8 z-20 w-[min(16rem,70%)] sm:bottom-10 sm:max-w-[18rem]">
+        <div className="absolute right-0 bottom-8 z-20 w-[min(16rem,72%)] sm:bottom-10 sm:w-[18rem]">
           <p className="mb-4 pr-5 text-right text-[0.9rem] leading-snug text-ink italic md:text-[0.95rem]">
             “Because the right investment begins with the right questions”
           </p>

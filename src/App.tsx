@@ -9,7 +9,6 @@ import { HowICanHelp } from "./components/HowICanHelp"
 import { HowIWork } from "./components/HowIWork"
 import { Insights } from "./components/Insights"
 import { Pune } from "./components/Pune"
-import { QuoteStrip } from "./components/QuoteStrip"
 
 export default function App() {
   return (
@@ -17,7 +16,6 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <QuoteStrip />
         <ConsideredApproach />
         <About />
         <Differentiator />

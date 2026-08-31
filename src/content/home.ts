@@ -10,11 +10,10 @@ export const contact = {
 
 export const nav = [
   { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#help", label: "How I help" },
-  { href: "#pune", label: "Pune" },
-  { href: "#insights", label: "Insights" },
-  { href: "#contact", label: "Contact" },
+  { href: "#why", label: "Why Kshetra" },
+  { href: "#founder", label: "Founder" },
+  { href: "#values", label: "Our Values" },
+  { href: "#what-we-do", label: "What We Do" },
 ] as const
 
 export const quotes = [

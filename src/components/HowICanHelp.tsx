@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal"
 
 export function HowICanHelp() {
   return (
-    <section id="help" className="bg-gray py-16 md:py-24">
+    <section id="what-we-do" className="bg-gray py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
         <Reveal>
           <h2 className="section-title text-center">How I Can Help</h2>

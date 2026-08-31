@@ -2,7 +2,7 @@ import { Reveal } from "./Reveal"
 
 export function Differentiator() {
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section id="values" className="bg-white py-16 md:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
         <Reveal>
           <h2 className="section-title text-center text-balance">

@@ -32,21 +32,14 @@ blockquote {
 
 .menu-toggle {
   display: flex;
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 2.5rem;
+  width: 2.5rem;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 999px;
-  background: var(--color-peach-soft);
+  background: transparent;
   cursor: pointer;
-}
-
-@media (min-width: 1024px) {
-  .menu-toggle {
-    display: none;
-  }
 }
 
 body {
@@ -153,8 +146,107 @@ body {
   }
 }
 
-.hero-fade {
-  animation: fade 1s ease both;
+.quote-hero-line {
+  animation: quote-line 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes quote-line {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.quote-slide-idle {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.quote-slide-in,
+.quote-slide-in-rev,
+.quote-slide-out,
+.quote-slide-out-rev {
+  visibility: visible;
+}
+
+.quote-slide-in {
+  animation: quote-slide-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.quote-slide-in-rev {
+  animation: quote-slide-in-rev 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.quote-slide-out {
+  animation: quote-slide-out 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.quote-slide-out-rev {
+  animation: quote-slide-out-rev 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes quote-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(56px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes quote-slide-in-rev {
+  from {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes quote-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+}
+
+@keyframes quote-slide-out-rev {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(56px);
+  }
+}
+
+.quote-mark-anim {
+  animation: quote-mark-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes quote-mark-in {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .btn-shine {
@@ -236,6 +328,10 @@ body {
   .hero-enter,
   .hero-fade,
   .quote-mark,
+  .quote-hero-line,
+  .quote-mark-anim,
+  .quote-slide-in,
+  .quote-slide-in-rev,
   .card-lift,
   .btn-shine::after,
   .icon-anim svg,
@@ -244,5 +340,12 @@ body {
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
+  }
+
+  .quote-slide-out,
+  .quote-slide-out-rev {
+    animation: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
   }
 }
