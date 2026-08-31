@@ -9,7 +9,7 @@ export function Footer() {
           <Logo invert />
         </div>
       </div>
-      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 text-center md:grid-cols-3 md:px-8 md:text-left">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 text-center sm:px-5 md:grid-cols-3 md:px-8 md:text-left">
         <div>
           <p className="text-[0.7rem] tracking-[0.2em] text-brand uppercase">
             Prashant Kalal

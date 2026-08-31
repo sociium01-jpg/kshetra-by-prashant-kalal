@@ -9,10 +9,16 @@ export function useParallax<T extends HTMLElement = HTMLImageElement>(
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const compact = window.matchMedia("(max-width: 1023px)")
 
     let frame = 0
     const update = () => {
+      if (reduce.matches || compact.matches) {
+        el.style.transform = ""
+        return
+      }
       const rect = el.getBoundingClientRect()
       const mid = rect.top + rect.height / 2 - window.innerHeight / 2
       const y = mid * factor
@@ -25,9 +31,15 @@ export function useParallax<T extends HTMLElement = HTMLImageElement>(
     }
     update()
     window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    reduce.addEventListener("change", onScroll)
+    compact.addEventListener("change", onScroll)
     return () => {
       cancelAnimationFrame(frame)
       window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+      reduce.removeEventListener("change", onScroll)
+      compact.removeEventListener("change", onScroll)
     }
   }, [factor, scale])
 

@@ -49,9 +49,9 @@ export function Contact() {
 
   return (
     <section id="contact" className="peach-wash-tl py-16 md:py-24">
-      <div className="mx-auto grid max-w-6xl items-start gap-12 px-5 md:grid-cols-2 md:px-8">
+      <div className="mx-auto grid max-w-6xl items-start gap-10 px-4 sm:px-5 lg:grid-cols-2 lg:gap-12 md:px-8">
         <Reveal>
-          <h2 className="text-[1.7rem] leading-tight font-medium text-ink md:text-[2.2rem]">
+          <h2 className="text-[1.45rem] leading-tight font-medium text-balance text-ink md:text-[2.2rem]">
             Thinking About Your Next Property Decision?
           </h2>
           <p className="mt-5 max-w-md leading-relaxed text-body">
@@ -70,7 +70,7 @@ export function Contact() {
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
-            className="glass space-y-5 p-6 md:p-8"
+            className="glass min-w-0 space-y-5 p-5 sm:p-6 md:p-8"
             onSubmit={onSubmit}
           >
             <input type="hidden" name="form-name" value="enquiry" />

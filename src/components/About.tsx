@@ -5,14 +5,14 @@ export function About() {
   const photoRef = useParallax<HTMLImageElement>(0.06)
 
   return (
-    <section id="about" className="grid overflow-hidden bg-peach-soft lg:grid-cols-2">
-      <div className="flex flex-col justify-center px-8 py-14 md:px-14 lg:px-16">
+    <section id="about" className="grid w-full overflow-hidden bg-peach-soft lg:grid-cols-2">
+      <div className="flex min-w-0 flex-col justify-center px-4 py-12 sm:px-8 md:px-14 lg:px-16 lg:py-14">
         <Reveal>
-          <h2 className="text-[1.7rem] font-semibold tracking-wide text-ink uppercase md:text-[2rem]">
+          <h2 className="text-[1.45rem] font-semibold tracking-wide text-ink uppercase md:text-[2rem]">
             Meet Prashant Kalal
           </h2>
         </Reveal>
-        <div className="mt-6 max-w-lg space-y-4 text-[0.98rem] leading-relaxed text-body">
+        <div className="mt-6 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
           <p>
             For 12+ years I worked with a real estate developer — across Sales
             and Post-Sales. That meant sitting with buyers before they signed,
@@ -33,19 +33,15 @@ export function About() {
         </p>
       </div>
 
-      <div className="relative min-h-[480px] overflow-hidden bg-peach-soft lg:min-h-[560px]">
+      <div className="relative min-h-[420px] overflow-hidden bg-peach-soft sm:min-h-[500px] lg:min-h-[560px]">
         <img
           ref={photoRef}
-          src="/founder-cutout.png"
+          src="/founder.jpg"
           alt="Prashant Kalal"
-          className="relative z-10 mx-auto h-full max-h-[560px] w-auto object-contain object-bottom will-change-transform lg:max-h-[620px]"
+          className="absolute inset-0 h-full w-full object-cover object-[center_18%] will-change-transform"
         />
-        <div
-          className="pointer-events-none absolute bottom-10 left-1/2 z-[5] h-8 w-48 -translate-x-1/2 rounded-full bg-ink/25 blur-xl"
-          aria-hidden="true"
-        />
-        <div className="absolute right-0 bottom-10 z-20 max-w-[16rem] md:max-w-[18rem]">
-          <p className="mb-4 pr-6 text-right text-[0.95rem] leading-snug text-ink italic">
+        <div className="absolute right-0 bottom-8 z-20 w-[min(16rem,70%)] sm:bottom-10 sm:max-w-[18rem]">
+          <p className="mb-4 pr-5 text-right text-[0.9rem] leading-snug text-ink italic md:text-[0.95rem]">
             “Because the right investment begins with the right questions”
           </p>
           <div className="bg-brand px-5 py-3 text-right">

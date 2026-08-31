@@ -7,16 +7,16 @@ export function Pune() {
   return (
     <section id="pune" className="relative overflow-hidden">
       <div className="grid lg:grid-cols-2">
-        <div className="relative min-h-[380px] overflow-hidden bg-ink">
+        <div className="relative aspect-[2.4/1] min-w-0 overflow-hidden bg-ink lg:aspect-auto lg:min-h-[560px]">
           <img
             ref={imgRef}
             src="/pune-city.jpg"
             alt="Pune cityscape"
-            className="absolute inset-0 h-full w-full object-cover grayscale will-change-transform"
+            className="absolute inset-0 h-full w-full object-cover object-center grayscale will-change-transform"
           />
           <div className="absolute inset-0 bg-ink/25" />
         </div>
-        <div className="flex flex-col justify-center bg-peach-soft px-8 py-14 md:px-14 lg:px-16">
+        <div className="flex min-w-0 flex-col justify-center bg-peach-soft px-4 py-12 sm:px-8 md:px-14 lg:px-16 lg:py-14">
           <Reveal>
             <h2 className="section-title">Pune, as I know it</h2>
           </Reveal>

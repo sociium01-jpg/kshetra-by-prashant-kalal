@@ -3,9 +3,9 @@ import { Reveal } from "./Reveal"
 export function Differentiator() {
   return (
     <section className="bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
         <Reveal>
-          <h2 className="section-title text-center">
+          <h2 className="section-title text-center text-balance">
             I&apos;ve Seen Both Sides of the Property Journey.
           </h2>
         </Reveal>
@@ -17,7 +17,7 @@ export function Differentiator() {
         </Reveal>
         <div className="mt-12 grid gap-8 md:grid-cols-2">
           <Reveal delay={80}>
-            <article className="card-lift border-t-2 border-brand bg-gray px-8 py-10">
+            <article className="card-lift border-t-2 border-brand bg-gray px-5 py-8 sm:px-8 sm:py-10">
               <h3 className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">
                 Sales
               </h3>
@@ -29,7 +29,7 @@ export function Differentiator() {
             </article>
           </Reveal>
           <Reveal delay={140}>
-            <article className="card-lift border-t-2 border-brand bg-gray px-8 py-10">
+            <article className="card-lift border-t-2 border-brand bg-gray px-5 py-8 sm:px-8 sm:py-10">
               <h3 className="text-sm font-semibold tracking-[0.18em] text-brand uppercase">
                 Post-Sales
               </h3>

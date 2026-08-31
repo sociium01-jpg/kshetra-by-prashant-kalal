@@ -28,8 +28,8 @@ export function Header() {
           : "bg-white/55 backdrop-blur-sm"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 md:px-8">
-        <a href="#home" className="shrink-0" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:gap-6 sm:px-5 sm:py-4 md:px-8">
+        <a href="#home" className="min-w-0 shrink" onClick={() => setOpen(false)}>
           <Logo compact />
         </a>
 
@@ -47,7 +47,7 @@ export function Header() {
 
         <button
           type="button"
-          className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center"
+          className="menu-toggle"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -65,8 +65,8 @@ export function Header() {
       </div>
 
       {open ? (
-        <div className="border-t border-peach-soft bg-white">
-          <nav className="flex flex-col px-5 py-4 lg:hidden" aria-label="Mobile">
+        <div className="border-t border-peach-soft bg-white lg:hidden">
+          <nav className="flex flex-col px-4 py-4 sm:px-5" aria-label="Mobile">
             {nav.map((item) => (
               <a
                 key={item.href}
