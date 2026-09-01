@@ -15,6 +15,7 @@ export const nav = [
   { href: "#journey", label: "I’ve Worked Across the Property Journey" },
   { href: "#journal", label: "The Journal" },
   { href: "#what-we-do", label: "What I Bring to the Table" },
+  { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ] as const
 
@@ -29,7 +30,11 @@ export const quotes = [
     wash: "tl" as const,
   },
   {
-    lines: ["Real estate is ultimately about people, places and the lives that unfold between them."],
+    lines: [
+      "Real estate is ultimately about",
+      "people, places and the lives",
+      "that unfold between them.",
+    ],
     wash: "tr" as const,
   },
   {
@@ -144,6 +149,25 @@ export const whatIBring = {
       icon: "chart" as const,
       title: "An independent conversation",
       body: "Helping you evaluate a decision without assuming that every decision needs to end in a purchase.",
+    },
+  ],
+}
+
+export const testimonials = {
+  heading: "Testimonials",
+  items: [
+    {
+      quote:
+        "Kshetra By Prashant Kalal began with a simple thought: what if more understanding came before the decision?",
+      name: "Prashant Kalal",
+    },
+    {
+      quote: "Sometimes the right decision is to buy. Sometimes, it’s to wait.",
+      name: "Prashant Kalal",
+    },
+    {
+      quote: "Either way, the aim is simple - understand before you decide.",
+      name: "Prashant Kalal",
     },
   ],
 }

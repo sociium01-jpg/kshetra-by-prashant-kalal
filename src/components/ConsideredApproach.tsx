@@ -4,22 +4,26 @@ import { Logo } from "./Logo"
 export function ConsideredApproach() {
   return (
     <section id="why" className="grid w-full overflow-hidden lg:grid-cols-2">
-      <div className="relative min-h-[260px] overflow-hidden bg-ink sm:min-h-[380px] md:min-h-[440px] lg:min-h-[560px]">
+      <div className="relative aspect-[12/5] min-h-[200px] overflow-hidden bg-ink sm:min-h-[240px] lg:aspect-auto lg:h-full lg:min-h-[420px] lg:max-h-[480px]">
         <img
           src="/kshetra-cityscape.jpg"
           alt="Pune"
           className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-ink/30" />
-        <div className="absolute top-5 right-5 z-10 sm:top-7 sm:right-7 md:top-8 md:right-8">
+        <div className="absolute inset-0 bg-ink/35" />
+        <div className="absolute top-5 right-5 z-10 sm:top-6 sm:right-6 md:top-7 md:right-8">
           <Logo invert compact />
         </div>
-        <div className="absolute inset-0 flex items-end p-5 pt-16 sm:items-start sm:p-10 sm:pt-20 md:p-12 md:pt-24">
-          <div className="flex max-w-lg items-stretch gap-3 sm:gap-4">
+        <div className="absolute inset-0 flex items-center p-5 pt-16 sm:p-10 sm:pt-16 md:p-12">
+          <div className="flex max-w-xl items-stretch gap-3 sm:gap-4">
             <span className="w-[3px] shrink-0 bg-brand" aria-hidden="true" />
-            <h2 className="text-[1.15rem] leading-[1.25] font-semibold tracking-[0.06em] text-white uppercase sm:text-[1.75rem] md:text-[2.05rem]">
-              {whyKshetra.subhead}
-            </h2>
+            <p className="text-[1.05rem] leading-[1.35] font-semibold tracking-[0.02em] text-white sm:text-[1.45rem] md:text-[1.7rem] lg:text-[1.85rem]">
+              Understanding property, people
+              <br />
+              and the places that bring
+              <br />
+              them together.
+            </p>
           </div>
         </div>
       </div>

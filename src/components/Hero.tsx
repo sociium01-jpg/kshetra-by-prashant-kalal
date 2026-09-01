@@ -1,15 +1,17 @@
 import { quotes } from "../content/home"
 import { Fragment, useEffect, useRef, useState } from "react"
 
-/** PDF: opening 66 (blobs top-left), closing 99 (blobs bottom-right). Extra-heavy peach. */
+/** Decorative 66/99 commas matching the original Kshetra PDF banners. */
 function QuoteMark({ closing = false }: { closing?: boolean }) {
   return (
-    <img
-      src={closing ? "/quote-close.png?v=5" : "/quote-open.png?v=5"}
-      alt=""
-      aria-hidden="true"
+    <svg
       className={`quote-mark ${closing ? "quote-mark-close" : "quote-mark-open"}`}
-    />
+      viewBox="0 0 64 80"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M16.4.8C7.4.8.8 7.2.8 16.2c0 8.6 6.8 15.6 15.4 16.6-2.2 11.2-8.6 21.4-18.2 29.6l6.8 6C16.6 59.2 27 44.8 30.2 28.6 32.2 17.6 29.2 6.2 22 2.2 20.2 1.2 18.4.8 16.4.8zm31.2 0C38.6.8 32 7.2 32 16.2c0 8.6 6.8 15.6 15.4 16.6-2.2 11.2-8.6 21.4-18.2 29.6l6.8 6C47.8 59.2 58.2 44.8 61.4 28.6 63.4 17.6 60.4 6.2 53.2 2.2 51.4 1.2 49.6.8 47.6.8z" />
+    </svg>
   )
 }
 
@@ -19,7 +21,7 @@ function QuoteLines({ lines, animate }: { lines: string[]; animate: boolean }) {
       {lines.map((line, lineIndex) => {
         const words = line.split(" ")
         return (
-          <span key={`${line}-${lineIndex}`} className="block">
+          <span key={`${line}-${lineIndex}`} className="block whitespace-nowrap">
             {words.map((word, wordIndex) => {
               const emphasized = /^[A-Z]{2,}/.test(word)
               return (
@@ -90,7 +92,7 @@ export function Hero() {
         <QuoteMark />
         <div className="relative z-10 overflow-hidden">
           <blockquote
-            className="invisible px-1 text-[clamp(0.98rem,3.6vw,1.5rem)] leading-[1.55] font-normal"
+            className="invisible px-1 text-[clamp(0.88rem,3.4vw,1.5rem)] leading-[1.55] font-normal"
             aria-hidden="true"
           >
             <QuoteLines lines={quote.lines} animate={false} />
@@ -106,7 +108,7 @@ export function Hero() {
               <blockquote
                 key={item.lines[0]}
                 aria-hidden={!active}
-                className={`absolute inset-0 flex flex-col justify-center px-1 text-[clamp(0.98rem,3.6vw,1.5rem)] leading-[1.55] font-normal text-ink ${slide}`}
+                className={`absolute inset-0 flex flex-col justify-center px-1 text-[clamp(0.88rem,3.4vw,1.5rem)] leading-[1.55] font-normal text-ink ${slide}`}
               >
                 <QuoteLines key={active ? `on-${i}` : `off-${i}`} lines={item.lines} animate={active} />
               </blockquote>

@@ -82,32 +82,33 @@ body {
   position: absolute;
   z-index: 0;
   display: block;
-  width: clamp(4.35rem, 11.5vw, 6.85rem);
+  width: clamp(3.5rem, 9.5vw, 5.6rem);
   height: auto;
-  opacity: 0.5;
+  color: #f0c2a8;
   user-select: none;
   pointer-events: none;
 }
 
 .quote-mark-open {
-  top: 1.15rem;
-  left: -0.1rem;
+  top: 0.35rem;
+  left: 0.15rem;
 }
 
 .quote-mark-close {
-  right: -0.15rem;
-  bottom: 1rem;
+  right: 0.15rem;
+  bottom: 0.2rem;
+  transform: rotate(180deg);
 }
 
 @media (min-width: 640px) {
   .quote-mark-open {
-    top: 1.5rem;
-    left: 0.15rem;
+    top: 0.55rem;
+    left: 0.45rem;
   }
 
   .quote-mark-close {
-    right: 0.2rem;
-    bottom: 1.2rem;
+    right: 0.45rem;
+    bottom: 0.35rem;
   }
 }
 
@@ -272,35 +273,6 @@ body {
   }
 }
 
-.tagline-marquee {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.tagline-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: tagline-marquee 28s linear infinite;
-}
-
-.tagline-marquee:hover .tagline-marquee-track {
-  animation-play-state: paused;
-}
-
-.tagline-marquee-item {
-  flex-shrink: 0;
-  padding-right: 3.5rem;
-}
-
-@keyframes tagline-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
 .btn-shine {
   position: relative;
   overflow: hidden;
@@ -386,29 +358,11 @@ body {
   .card-lift,
   .btn-shine::after,
   .icon-anim svg,
-  .step-icon,
-  .tagline-marquee-track {
+  .step-icon {
     animation: none !important;
     transition: none !important;
     transform: none !important;
     opacity: 1 !important;
-  }
-
-  .tagline-marquee {
-    white-space: normal;
-  }
-
-  .tagline-marquee-track {
-    display: block;
-    width: auto;
-  }
-
-  .tagline-marquee-item {
-    padding-right: 0;
-  }
-
-  .tagline-marquee-item[aria-hidden="true"] {
-    display: none;
   }
 
   .quote-slide-out,

@@ -7,6 +7,7 @@ import { Header } from "./components/Header"
 import { Hero } from "./components/Hero"
 import { HowICanHelp } from "./components/HowICanHelp"
 import { Insights } from "./components/Insights"
+import { Testimonials } from "./components/Testimonials"
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Differentiator />
         <Insights />
         <HowICanHelp />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />

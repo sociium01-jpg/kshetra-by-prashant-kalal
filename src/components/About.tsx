@@ -4,10 +4,10 @@ export function About() {
   return (
     <section id="founder" className="relative grid w-full">
       <img
-        src="/meet-pk-banner.jpg"
+        src="/meet-pk-banner.png"
         alt="Prashant Kalal"
-        width={1024}
-        height={568}
+        width={1920}
+        height={1067}
         className="col-start-1 row-start-2 h-auto w-full max-w-full xl:row-start-1"
       />
 

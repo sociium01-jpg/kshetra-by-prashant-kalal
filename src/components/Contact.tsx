@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react"
-import { contactCopy, heroTagline } from "../content/home"
+import { contactCopy } from "../content/home"
 import { Reveal } from "./Reveal"
 
 type Status = "idle" | "submitting" | "success" | "error"
@@ -54,14 +54,6 @@ export function Contact() {
         </Reveal>
 
         <div className="min-w-0">
-          <p className="tagline-marquee mb-5 text-[1.05rem] leading-relaxed font-medium text-ink sm:text-[1.15rem]">
-            <span className="tagline-marquee-track">
-              <span className="tagline-marquee-item">{heroTagline}</span>
-              <span className="tagline-marquee-item" aria-hidden="true">
-                {heroTagline}
-              </span>
-            </span>
-          </p>
           {status === "success" ? (
             <p className="bg-white px-8 py-12 text-body">Thank you.</p>
           ) : (
