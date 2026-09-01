@@ -9,9 +9,9 @@ export function About() {
     <section
       id="founder"
       ref={ref}
-      className={`peach-wash-tl w-full overflow-hidden ${visible ? "is-in" : ""}`}
+      className={`peach-wash-tl w-full ${visible ? "is-in" : ""}`}
     >
-      <div className="section-split">
+      <div className="section-split section-split-meet">
         <div className="split-copy">
           <Reveal>
             <h2 className="text-[1.25rem] font-semibold tracking-[0.04em] text-ink uppercase sm:text-[1.45rem] md:text-[2rem]">
@@ -44,14 +44,16 @@ export function About() {
           </div>
         </div>
 
-        <div className={`split-media bg-brand ${visible ? "is-in" : ""}`}>
-          <img
-            src="/founder-pk.jpg"
-            alt="Prashant Kalal"
-            width={819}
-            height={1024}
-            className="split-photo-in absolute inset-0 h-full w-full object-cover object-[center_12%]"
-          />
+        <div className={`split-media split-media-fit ${visible ? "is-in" : ""}`}>
+          <div className="split-photo-frame">
+            <img
+              src="/founder-pk.jpg"
+              alt="Prashant Kalal"
+              width={819}
+              height={1024}
+              className="split-photo-in"
+            />
+          </div>
         </div>
       </div>
     </section>
