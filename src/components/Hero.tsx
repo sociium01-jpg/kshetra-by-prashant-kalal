@@ -1,27 +1,6 @@
 import { quotes } from "../content/home"
 import { useEffect, useRef, useState } from "react"
 
-/** Heavy 9-comma pair (blob on top, tail down). Opening 66 is this rotated 180°. */
-const QUOTE_99 =
-  "M22.5 3.2C10.2 3.2 1.6 12.4 1.6 25.2c0 12.6 9.8 23 22.4 24.4-3.2 16.4-12.6 31.2-26.6 43.2l12.4 8.8C26.2 86.2 41.4 66.4 46.2 43.6 49.4 27.6 44.8 10.8 34.2 5.2 31.4 3.8 27.2 3.2 22.5 3.2zm45.6 0C55.8 3.2 47.2 12.4 47.2 25.2c0 12.6 9.8 23 22.4 24.4-3.2 16.4-12.6 31.2-26.6 43.2l12.4 8.8C71.8 86.2 87 66.4 91.8 43.6 95 27.6 90.4 10.8 79.8 5.2 77 3.8 72.8 3.2 68.1 3.2z"
-
-function QuoteMark({ closing = false }: { closing?: boolean }) {
-  return (
-    <svg
-      className={`quote-mark ${closing ? "quote-mark-close" : "quote-mark-open"}`}
-      viewBox="-8 -6 112 118"
-      fill="currentColor"
-      overflow="visible"
-      aria-hidden="true"
-    >
-      {/* Left = 66 opening (blob bottom). Right = 99 closing (blob top). */}
-      <g transform={closing ? undefined : "rotate(180 48 52)"}>
-        <path d={QUOTE_99} />
-      </g>
-    </svg>
-  )
-}
-
 function preventOrphan(line: string) {
   const i = line.lastIndexOf(" ")
   if (i < 0) return line
@@ -84,12 +63,8 @@ export function Hero() {
     >
       <h1 className="sr-only">Kshetra by Prashant Kalal</h1>
       <div className="page-shell relative min-w-0 overflow-visible text-center">
-        <QuoteMark />
-        <div className="relative z-10 min-w-0 overflow-visible px-4 py-4 sm:px-10 sm:py-5 md:px-16 lg:overflow-hidden">
-          <blockquote
-            className="invisible min-w-0 px-1 text-[0.62rem] leading-[1.5] font-normal sm:text-[0.85rem] md:text-[1.05rem] lg:text-[1.22rem]"
-            aria-hidden="true"
-          >
+        <div className="quote-hero-stage relative z-10 min-w-0 overflow-visible">
+          <blockquote className="quote-hero invisible min-w-0" aria-hidden="true">
             <QuoteLines lines={quote.lines} animate={false} />
           </blockquote>
           {quotes.map((item, i) => {
@@ -103,15 +78,14 @@ export function Hero() {
               <blockquote
                 key={item.lines[0]}
                 aria-hidden={!active}
-                className={`absolute inset-0 flex min-w-0 flex-col justify-center px-1 text-[0.62rem] leading-[1.5] font-normal text-ink sm:text-[0.85rem] md:text-[1.05rem] lg:text-[1.22rem] ${slide}`}
+                className={`quote-hero absolute inset-0 flex min-w-0 flex-col justify-center text-ink ${slide}`}
               >
                 <QuoteLines key={active ? `on-${i}` : `off-${i}`} lines={item.lines} animate={active} />
               </blockquote>
             )
           })}
         </div>
-        <QuoteMark closing />
-        <div className="relative z-10 mt-4 flex justify-center gap-1.5">
+        <div className="relative z-10 mt-5 flex justify-center gap-1.5 md:mt-6">
           {quotes.map((item, i) => (
             <button
               key={item.lines[0]}

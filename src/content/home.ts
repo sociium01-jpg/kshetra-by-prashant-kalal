@@ -10,11 +10,11 @@ export const contact = {
 
 export const nav = [
   { href: "#home", label: "Home" },
-  { href: "#why", label: "Why Kshetra By Prashant Kalal?" },
-  { href: "#founder", label: "Meet Prashant Kalal" },
-  { href: "#journey", label: "I’ve Worked Across the Property Journey" },
-  { href: "#journal", label: "The Journal" },
-  { href: "#what-we-do", label: "What I Bring to the Table" },
+  { href: "#why", label: "Why Kshetra" },
+  { href: "#founder", label: "Meet Prashant" },
+  { href: "#journey", label: "Property Journey" },
+  { href: "#journal", label: "Journal" },
+  { href: "#what-we-do", label: "Expertise" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
 ] as const

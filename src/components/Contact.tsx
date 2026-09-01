@@ -51,11 +51,12 @@ export function Contact() {
             {contactCopy.heading}
           </h2>
           <p className="mt-5 max-w-md leading-relaxed text-body">{contactCopy.body}</p>
-          <div className="relative mt-8 min-h-[18rem] flex-1 overflow-hidden bg-peach-soft sm:min-h-[22rem]">
+          <div className="contact-line-art mt-8 flex flex-1 items-center">
             <img
-              src="/pune-city.jpg"
+              src="/contact-banner.png"
               alt=""
-              className="absolute inset-0 h-full w-full object-cover object-center"
+              width={1024}
+              height={819}
             />
           </div>
         </Reveal>

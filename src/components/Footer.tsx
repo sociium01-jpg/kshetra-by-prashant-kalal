@@ -1,14 +1,8 @@
 import { contact } from "../content/home"
-import { Logo } from "./Logo"
 
 export function Footer() {
   return (
     <footer className="bg-charcoal text-white">
-      <div className="bg-brand py-8 text-center">
-        <div className="flex justify-center">
-          <Logo invert />
-        </div>
-      </div>
       <div className="page-shell grid gap-8 py-12 text-center lg:grid-cols-3 lg:text-left">
         <div>
           <p className="text-[0.7rem] tracking-[0.04em] text-brand uppercase">

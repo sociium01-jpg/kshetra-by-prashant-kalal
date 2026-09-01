@@ -1,6 +1,5 @@
 import { whyKshetra } from "../content/home"
 import { useInView } from "../hooks/useInView"
-import { Logo } from "./Logo"
 import { Reveal } from "./Reveal"
 
 export function ConsideredApproach() {
@@ -20,10 +19,7 @@ export function ConsideredApproach() {
             className="split-kenburns absolute inset-0 h-full w-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-ink/35" />
-          <div className="split-overlay-copy absolute top-5 right-5 z-10 sm:top-6 sm:right-6">
-            <Logo invert compact />
-          </div>
-          <div className="absolute inset-0 flex items-center p-5 pt-16 sm:p-8 sm:pt-16 md:p-10">
+          <div className="absolute inset-0 flex items-start p-5 pt-12 sm:p-8 sm:pt-14 md:p-10 md:pt-16">
             <div
               className="split-overlay-copy flex max-w-xl items-stretch gap-3 sm:gap-4"
               style={{ transitionDelay: "160ms" }}

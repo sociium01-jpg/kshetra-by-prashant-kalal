@@ -47,11 +47,10 @@ export function About() {
         <div className={`split-media split-media-fit ${visible ? "is-in" : ""}`}>
           <div className="split-photo-frame">
             <img
-              src="/founder-pk.jpg"
+              src="/founder-pk.png"
               alt="Prashant Kalal"
               width={819}
               height={1024}
-              className="split-photo-in"
             />
           </div>
         </div>
