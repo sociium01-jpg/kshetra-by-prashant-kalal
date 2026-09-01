@@ -3,8 +3,8 @@ import { Reveal } from "./Reveal"
 
 export function Insights() {
   return (
-    <section id="journal" className="bg-gray py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
+    <section id="journal" className="section-band bg-gray">
+      <div className="page-shell">
         <Reveal>
           <h2 className="section-title text-center">{journal.heading}</h2>
         </Reveal>

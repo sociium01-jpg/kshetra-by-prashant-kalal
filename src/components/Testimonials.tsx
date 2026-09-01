@@ -3,8 +3,8 @@ import { Reveal } from "./Reveal"
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="peach-wash-tl py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
+    <section id="testimonials" className="section-band peach-wash-tl">
+      <div className="page-shell">
         <Reveal>
           <h2 className="section-title text-center">{testimonials.heading}</h2>
         </Reveal>

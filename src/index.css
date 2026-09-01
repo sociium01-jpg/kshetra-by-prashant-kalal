@@ -15,10 +15,111 @@
   --color-charcoal: #2c2c2c;
 }
 
+:root {
+  --page-max: 72rem;
+  --page-px: 1rem;
+  --section-py: 3rem;
+  --section-min-h: 32rem;
+  --section-split-h: 32rem;
+  --header-offset: 4.75rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --page-px: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-px: 2rem;
+    --section-py: 5rem;
+    --section-min-h: 40rem;
+    --section-split-h: 40rem;
+    --header-offset: 5.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --section-min-h: 44rem;
+    --section-split-h: 44rem;
+  }
+}
+
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: var(--header-offset);
   overflow-x: hidden;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--page-px);
+  min-width: 0;
+}
+
+.section-band {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: var(--section-min-h);
+  padding-block: var(--section-py);
+}
+
+.section-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  min-height: calc(var(--section-min-h) + var(--header-offset));
+  padding-top: var(--header-offset);
+  padding-bottom: var(--section-py);
+}
+
+.section-split {
+  display: grid;
+  width: 100%;
+  min-height: var(--section-split-h);
+}
+
+@media (min-width: 1024px) {
+  .section-split {
+    grid-template-columns: 1fr 1fr;
+    min-height: var(--section-split-h);
+  }
+}
+
+.split-media {
+  position: relative;
+  min-height: 22rem;
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .split-media {
+    min-height: 0;
+    height: 100%;
+  }
+}
+
+.split-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--section-py);
+}
+
+@media (min-width: 1024px) {
+  .split-copy {
+    padding-inline: 2rem;
+  }
 }
 
 p,
@@ -78,37 +179,54 @@ body {
   }
 }
 
+.quote-hero-text {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1024px) {
+  .quote-hero-text {
+    white-space: nowrap !important;
+    overflow-wrap: normal;
+  }
+}
+
 .quote-mark {
   position: absolute;
-  z-index: 0;
+  z-index: 1;
   display: block;
-  width: clamp(3.5rem, 9.5vw, 5.6rem);
+  width: clamp(4.75rem, 15vw, 8.25rem);
   height: auto;
-  color: #f0c2a8;
+  overflow: visible;
+  color: #f3c4a8;
+  opacity: 0.5;
   user-select: none;
   pointer-events: none;
 }
 
 .quote-mark-open {
-  top: 0.35rem;
-  left: 0.15rem;
+  top: 0.15rem;
+  left: 0.1rem;
 }
 
 .quote-mark-close {
-  right: 0.15rem;
-  bottom: 0.2rem;
-  transform: rotate(180deg);
+  right: 0.1rem;
+  bottom: 0.1rem;
 }
 
 @media (min-width: 640px) {
   .quote-mark-open {
-    top: 0.55rem;
-    left: 0.45rem;
+    top: 0.25rem;
+    left: 0.35rem;
   }
 
   .quote-mark-close {
-    right: 0.45rem;
-    bottom: 0.35rem;
+    right: 0.35rem;
+    bottom: 0.2rem;
   }
 }
 

@@ -44,8 +44,8 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="peach-wash-tl overflow-x-hidden py-14 sm:py-16 md:py-24">
-      <div className="mx-auto grid max-w-6xl items-start gap-8 px-4 sm:px-5 md:gap-10 lg:grid-cols-2 lg:gap-12 md:px-8">
+    <section id="contact" className="section-band peach-wash-tl overflow-x-hidden">
+      <div className="page-shell grid items-start gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
         <Reveal>
           <h2 className="text-[1.3rem] leading-tight font-medium text-balance text-ink sm:text-[1.45rem] md:text-[2.2rem]">
             {contactCopy.heading}

@@ -26,7 +26,7 @@ export function Header() {
         scrolled || open ? "shadow-sm" : ""
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 md:px-8 md:py-4">
+      <div className="page-shell flex items-center justify-between gap-4 py-3 md:py-4">
         <a href="#home" className="min-w-0 shrink" onClick={() => setOpen(false)}>
           <Logo compact />
         </a>
@@ -66,7 +66,7 @@ export function Header() {
 
       {open ? (
         <div className="max-h-[min(28rem,calc(100dvh-4.5rem))] overflow-y-auto border-t border-gray bg-white">
-          <nav className="flex flex-col px-4 py-2 sm:px-6" aria-label="Mobile">
+          <nav className="page-shell flex flex-col py-2" aria-label="Mobile">
             {nav.map((item) => (
               <a
                 key={item.href}

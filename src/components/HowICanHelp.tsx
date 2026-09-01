@@ -4,8 +4,8 @@ import { Reveal } from "./Reveal"
 
 export function HowICanHelp() {
   return (
-    <section id="what-we-do" className="bg-white py-16 md:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8">
+    <section id="what-we-do" className="section-band bg-white">
+      <div className="page-shell">
         <Reveal>
           <h2 className="section-title text-center">{whatIBring.heading}</h2>
         </Reveal>

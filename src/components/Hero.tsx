@@ -1,50 +1,45 @@
 import { quotes } from "../content/home"
-import { Fragment, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
-/** Decorative 66/99 commas matching the original Kshetra PDF banners. */
+/** Heavy 9-comma pair (blob on top, tail down). Opening 66 is this rotated 180°. */
+const QUOTE_99 =
+  "M22.5 3.2C10.2 3.2 1.6 12.4 1.6 25.2c0 12.6 9.8 23 22.4 24.4-3.2 16.4-12.6 31.2-26.6 43.2l12.4 8.8C26.2 86.2 41.4 66.4 46.2 43.6 49.4 27.6 44.8 10.8 34.2 5.2 31.4 3.8 27.2 3.2 22.5 3.2zm45.6 0C55.8 3.2 47.2 12.4 47.2 25.2c0 12.6 9.8 23 22.4 24.4-3.2 16.4-12.6 31.2-26.6 43.2l12.4 8.8C71.8 86.2 87 66.4 91.8 43.6 95 27.6 90.4 10.8 79.8 5.2 77 3.8 72.8 3.2 68.1 3.2z"
+
 function QuoteMark({ closing = false }: { closing?: boolean }) {
   return (
     <svg
       className={`quote-mark ${closing ? "quote-mark-close" : "quote-mark-open"}`}
-      viewBox="0 0 64 80"
+      viewBox="-8 -6 112 118"
       fill="currentColor"
+      overflow="visible"
       aria-hidden="true"
     >
-      <path d="M16.4.8C7.4.8.8 7.2.8 16.2c0 8.6 6.8 15.6 15.4 16.6-2.2 11.2-8.6 21.4-18.2 29.6l6.8 6C16.6 59.2 27 44.8 30.2 28.6 32.2 17.6 29.2 6.2 22 2.2 20.2 1.2 18.4.8 16.4.8zm31.2 0C38.6.8 32 7.2 32 16.2c0 8.6 6.8 15.6 15.4 16.6-2.2 11.2-8.6 21.4-18.2 29.6l6.8 6C47.8 59.2 58.2 44.8 61.4 28.6 63.4 17.6 60.4 6.2 53.2 2.2 51.4 1.2 49.6.8 47.6.8z" />
+      {/* Left = 66 opening (blob bottom). Right = 99 closing (blob top). */}
+      <g transform={closing ? undefined : "rotate(180 48 52)"}>
+        <path d={QUOTE_99} />
+      </g>
     </svg>
   )
+}
+
+function preventOrphan(line: string) {
+  const i = line.lastIndexOf(" ")
+  if (i < 0) return line
+  return `${line.slice(0, i)}\u00a0${line.slice(i + 1)}`
 }
 
 function QuoteLines({ lines, animate }: { lines: string[]; animate: boolean }) {
   return (
     <>
-      {lines.map((line, lineIndex) => {
-        const words = line.split(" ")
-        return (
-          <span key={`${line}-${lineIndex}`} className="block whitespace-nowrap">
-            {words.map((word, wordIndex) => {
-              const emphasized = /^[A-Z]{2,}/.test(word)
-              return (
-                <Fragment key={`${word}-${wordIndex}`}>
-                  <span
-                    className={`quote-hero-word inline-block ${emphasized ? "font-medium" : ""} ${
-                      animate ? "quote-hero-line" : ""
-                    }`}
-                    style={
-                      animate
-                        ? { animationDelay: `${80 + lineIndex * 90 + wordIndex * 45}ms` }
-                        : undefined
-                    }
-                  >
-                    {word}
-                  </span>
-                  {wordIndex < words.length - 1 ? " " : ""}
-                </Fragment>
-              )
-            })}
-          </span>
-        )
-      })}
+      {lines.map((line, lineIndex) => (
+        <span
+          key={`${line}-${lineIndex}`}
+          className={`quote-hero-text block min-w-0 max-w-full ${animate ? "quote-hero-line" : ""}`}
+          style={animate ? { animationDelay: `${80 + lineIndex * 120}ms` } : undefined}
+        >
+          {preventOrphan(line)}
+        </span>
+      ))}
     </>
   )
 }
@@ -82,17 +77,17 @@ export function Hero() {
   return (
     <section
       id="home"
-      className={`${wash} relative flex min-h-[58vh] flex-col justify-center overflow-hidden pt-24 pb-14 transition-[background] duration-700 sm:min-h-[62vh] md:pt-28 md:pb-20`}
+      className={`${wash} section-hero relative transition-[background] duration-700`}
       aria-live="polite"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <h1 className="sr-only">Kshetra by Prashant Kalal</h1>
-      <div className="relative mx-auto w-full max-w-lg px-6 py-10 text-center sm:max-w-xl sm:px-10 sm:py-12">
+      <div className="page-shell relative min-w-0 overflow-visible text-center">
         <QuoteMark />
-        <div className="relative z-10 overflow-hidden">
+        <div className="relative z-10 min-w-0 overflow-visible px-4 py-4 sm:px-10 sm:py-5 md:px-16 lg:overflow-hidden">
           <blockquote
-            className="invisible px-1 text-[clamp(0.88rem,3.4vw,1.5rem)] leading-[1.55] font-normal"
+            className="invisible min-w-0 px-1 text-[0.62rem] leading-[1.5] font-normal sm:text-[0.85rem] md:text-[1.05rem] lg:text-[1.22rem]"
             aria-hidden="true"
           >
             <QuoteLines lines={quote.lines} animate={false} />
@@ -108,7 +103,7 @@ export function Hero() {
               <blockquote
                 key={item.lines[0]}
                 aria-hidden={!active}
-                className={`absolute inset-0 flex flex-col justify-center px-1 text-[clamp(0.88rem,3.4vw,1.5rem)] leading-[1.55] font-normal text-ink ${slide}`}
+                className={`absolute inset-0 flex min-w-0 flex-col justify-center px-1 text-[0.62rem] leading-[1.5] font-normal text-ink sm:text-[0.85rem] md:text-[1.05rem] lg:text-[1.22rem] ${slide}`}
               >
                 <QuoteLines key={active ? `on-${i}` : `off-${i}`} lines={item.lines} animate={active} />
               </blockquote>
@@ -116,20 +111,20 @@ export function Hero() {
           })}
         </div>
         <QuoteMark closing />
-      </div>
-      <div className="mt-2 flex justify-center gap-1.5">
-        {quotes.map((item, i) => (
-          <button
-            key={item.lines[0]}
-            type="button"
-            aria-label={`Show quote ${i + 1}`}
-            aria-current={i === index ? true : undefined}
-            className={`h-1.5 rounded-full transition-all duration-500 ${
-              i === index ? "w-5 bg-muted" : "w-1.5 bg-muted/35 hover:bg-muted/60"
-            }`}
-            onClick={() => goTo(i)}
-          />
-        ))}
+        <div className="relative z-10 mt-4 flex justify-center gap-1.5">
+          {quotes.map((item, i) => (
+            <button
+              key={item.lines[0]}
+              type="button"
+              aria-label={`Show quote ${i + 1}`}
+              aria-current={i === index ? true : undefined}
+              className={`h-1.5 rounded-full transition-all duration-500 ${
+                i === index ? "w-5 bg-muted" : "w-1.5 bg-muted/35 hover:bg-muted/60"
+              }`}
+              onClick={() => goTo(i)}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
