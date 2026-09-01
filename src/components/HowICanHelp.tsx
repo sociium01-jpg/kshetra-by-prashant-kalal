@@ -21,7 +21,7 @@ export function HowICanHelp() {
                   <span className="icon-anim inline-flex text-brand">
                     <Icon />
                   </span>
-                  <h3 className="mt-4 text-[0.95rem] font-semibold tracking-[0.06em] text-brand uppercase sm:text-[1.05rem] sm:tracking-[0.08em]">
+                  <h3 className="mt-4 text-[0.95rem] font-semibold tracking-[0.04em] text-brand uppercase sm:text-[1.05rem]">
                     {card.title}
                   </h3>
                   <p className="mt-4 leading-relaxed text-body">{card.body}</p>

@@ -11,13 +11,13 @@ export function Footer() {
       </div>
       <div className="page-shell grid gap-8 py-12 text-center lg:grid-cols-3 lg:text-left">
         <div>
-          <p className="text-[0.7rem] tracking-[0.2em] text-brand uppercase">
+          <p className="text-[0.7rem] tracking-[0.04em] text-brand uppercase">
             Prashant Kalal
           </p>
           <p className="mt-2 text-sm text-white/70">Kshetra By Prashant Kalal</p>
         </div>
         <div>
-          <p className="text-[0.7rem] tracking-[0.2em] text-white/50 uppercase">
+          <p className="text-[0.7rem] tracking-[0.04em] text-white/50 uppercase">
             Contact
           </p>
           <a href={contact.phoneHref} className="mt-2 block text-sm hover:text-brand">
@@ -36,7 +36,7 @@ export function Footer() {
           </a>
         </div>
         <div>
-          <p className="text-[0.7rem] tracking-[0.2em] text-white/50 uppercase">
+          <p className="text-[0.7rem] tracking-[0.04em] text-white/50 uppercase">
             MahaRERA
           </p>
           <p className="mt-2 text-sm text-white/80">No. {contact.rera}</p>

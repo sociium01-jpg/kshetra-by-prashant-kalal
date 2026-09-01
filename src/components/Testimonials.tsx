@@ -16,7 +16,7 @@ export function Testimonials() {
                   “
                 </span>
                 <p className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-ink">{item.quote}</p>
-                <p className="mt-6 text-[0.72rem] font-semibold tracking-[0.14em] text-brand uppercase">
+                <p className="mt-6 text-[0.72rem] font-semibold tracking-[0.04em] text-brand uppercase">
                   {item.name}
                 </p>
               </article>

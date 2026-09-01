@@ -1,59 +1,57 @@
 import { founder } from "../content/home"
+import { useInView } from "../hooks/useInView"
 import { Reveal } from "./Reveal"
 
 export function About() {
+  const { ref, visible } = useInView<HTMLElement>()
+
   return (
-    <section id="founder" className="peach-wash-tl w-full">
-      <div className="page-shell">
-        <div className="section-split">
-          <div className="split-copy">
-            <Reveal>
-              <h2 className="text-[1.25rem] font-semibold tracking-wide text-ink uppercase sm:text-[1.45rem] md:text-[2rem]">
-                {founder.heading}
-              </h2>
-            </Reveal>
-            <p className="mt-3 text-[0.95rem] font-medium tracking-wide text-brand md:text-[1.05rem]">
+    <section
+      id="founder"
+      ref={ref}
+      className={`peach-wash-tl w-full overflow-hidden ${visible ? "is-in" : ""}`}
+    >
+      <div className="section-split">
+        <div className="split-copy">
+          <Reveal>
+            <h2 className="text-[1.25rem] font-semibold tracking-[0.04em] text-ink uppercase sm:text-[1.45rem] md:text-[2rem]">
+              {founder.heading}
+            </h2>
+          </Reveal>
+          <Reveal delay={70}>
+            <p className="mt-3 text-[0.95rem] font-medium tracking-[0.04em] text-brand md:text-[1.05rem]">
               {founder.subhead}
             </p>
-            <div className="mt-6 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
-              {founder.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
-            <h3 className="mt-8 text-[0.95rem] font-semibold tracking-[0.12em] text-ink uppercase md:text-[1.05rem]">
+          </Reveal>
+          <div className="mt-6 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
+            {founder.paragraphs.map((paragraph, i) => (
+              <Reveal key={paragraph} delay={120 + i * 70}>
+                <p>{paragraph}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal delay={420}>
+            <h3 className="mt-8 text-[0.95rem] font-semibold tracking-[0.04em] text-ink uppercase md:text-[1.05rem]">
               {founder.beyondHeading}
             </h3>
-            <div className="mt-4 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
-              {founder.beyondParagraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </div>
+          </Reveal>
+          <div className="mt-4 max-w-lg space-y-4 text-[0.95rem] leading-relaxed text-body md:text-[0.98rem]">
+            {founder.beyondParagraphs.map((paragraph, i) => (
+              <Reveal key={paragraph} delay={480 + i * 70}>
+                <p>{paragraph}</p>
+              </Reveal>
+            ))}
           </div>
+        </div>
 
-          <div className="split-media">
-            <img
-              src="/founder.jpg"
-              alt="Prashant Kalal"
-              width={1200}
-              height={1600}
-              className="absolute inset-0 h-full w-full object-cover object-[center_18%]"
-            />
-            <div className="absolute right-0 bottom-8 z-20 w-[min(16rem,72%)] sm:bottom-10 sm:max-w-[18rem]">
-              <p className="mb-4 pr-5 text-right text-[0.9rem] leading-snug text-ink italic md:text-[0.95rem]">
-                “Because the right investment begins with the right questions”
-              </p>
-              <div className="bg-brand px-5 py-3 text-right">
-                <p className="text-[0.95rem] font-semibold tracking-[0.12em] text-white uppercase">
-                  Prashant
-                  <br />
-                  Kalal
-                </p>
-              </div>
-              <div className="bg-plate px-5 py-1.5 text-right">
-                <p className="text-[0.7rem] tracking-[0.14em] text-white">Founder</p>
-              </div>
-            </div>
-          </div>
+        <div className={`split-media bg-brand ${visible ? "is-in" : ""}`}>
+          <img
+            src="/founder-pk.jpg"
+            alt="Prashant Kalal"
+            width={819}
+            height={1024}
+            className="split-photo-in absolute inset-0 h-full w-full object-cover object-[center_12%]"
+          />
         </div>
       </div>
     </section>

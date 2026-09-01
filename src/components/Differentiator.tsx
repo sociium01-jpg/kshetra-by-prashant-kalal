@@ -13,7 +13,7 @@ export function Differentiator() {
             const last = i === journey.steps.length - 1
             return (
               <Reveal key={step.title} as="li" delay={i * 70} className="relative text-center">
-                <p className="text-sm font-semibold tracking-[0.16em] text-brand uppercase">
+                <p className="text-sm font-semibold tracking-[0.04em] text-brand uppercase">
                   {step.title}
                   {last ? "" : <span className="ml-2 hidden font-normal lg:inline">→</span>}
                 </p>

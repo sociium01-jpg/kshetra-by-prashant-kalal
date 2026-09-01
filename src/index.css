@@ -114,11 +114,12 @@ html {
   flex-direction: column;
   justify-content: center;
   padding-block: var(--section-py);
+  padding-inline: var(--page-px);
 }
 
 @media (min-width: 1024px) {
   .split-copy {
-    padding-inline: 2rem;
+    padding-inline: clamp(2rem, 5vw, 4.5rem);
   }
 }
 
@@ -167,16 +168,10 @@ body {
 .section-title {
   font-size: clamp(1.2rem, 4.2vw, 2.15rem);
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   text-wrap: balance;
   color: var(--color-brand);
-}
-
-@media (min-width: 768px) {
-  .section-title {
-    letter-spacing: 0.12em;
-  }
 }
 
 .quote-hero-text {
@@ -460,9 +455,45 @@ body {
     box-shadow 0.35s ease;
 }
 
-.step-icon:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(239, 127, 26, 0.28);
+@keyframes split-ken {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-2.4%, -1.6%, 0);
+  }
+}
+
+.split-kenburns {
+  transform-origin: center center;
+  animation: split-ken 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.split-photo-in {
+  opacity: 0;
+  transform: scale(1.08) translate3d(28px, 0, 0);
+  transition:
+    opacity 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.split-media.is-in .split-photo-in {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.split-overlay-copy {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.is-in .split-overlay-copy {
+  opacity: 1;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -476,7 +507,10 @@ body {
   .card-lift,
   .btn-shine::after,
   .icon-anim svg,
-  .step-icon {
+  .step-icon,
+  .split-kenburns,
+  .split-photo-in,
+  .split-overlay-copy {
     animation: none !important;
     transition: none !important;
     transform: none !important;

@@ -45,12 +45,19 @@ export function Contact() {
 
   return (
     <section id="contact" className="section-band peach-wash-tl overflow-x-hidden">
-      <div className="page-shell grid items-start gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
-        <Reveal>
+      <div className="page-shell grid items-stretch gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
+        <Reveal className="flex min-h-0 flex-col">
           <h2 className="text-[1.3rem] leading-tight font-medium text-balance text-ink sm:text-[1.45rem] md:text-[2.2rem]">
             {contactCopy.heading}
           </h2>
           <p className="mt-5 max-w-md leading-relaxed text-body">{contactCopy.body}</p>
+          <div className="relative mt-8 min-h-[18rem] flex-1 overflow-hidden bg-peach-soft sm:min-h-[22rem]">
+            <img
+              src="/pune-city.jpg"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover object-center"
+            />
+          </div>
         </Reveal>
 
         <div className="min-w-0">
@@ -62,7 +69,7 @@ export function Contact() {
               method="POST"
               data-netlify="true"
               netlify-honeypot="bot-field"
-              className="glass min-w-0 space-y-5 p-5 sm:p-6 md:p-8"
+              className="glass flex h-full min-w-0 flex-col space-y-5 p-5 sm:p-6 md:p-8"
               onSubmit={onSubmit}
             >
               <input type="hidden" name="form-name" value="enquiry" />
