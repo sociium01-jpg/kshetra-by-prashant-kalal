@@ -94,7 +94,12 @@ export function Footer({ onOpenLegal }: FooterProps) {
 
         {/* Copyright & Credit Bar */}
         <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 pb-28 text-xs text-white/40 sm:flex-row lg:pb-0">
-          <p>© {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.</p>
+          <p className="text-center sm:text-left">
+            © {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.
+          </p>
+          <p className="text-center font-medium text-white/50">
+            Designed by Studio Athaees
+          </p>
           <p className="relative z-20 text-center pointer-events-auto sm:text-right">
             Website developed by{" "}
             <a
