@@ -42,17 +42,6 @@ const navTabs = [
       </svg>
     ),
   },
-  {
-    href: "#journal",
-    label: "Journal",
-    icon: (
-      <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-0.5-5" />
-        <line x1="8" y1="7" x2="16" y2="7" />
-        <line x1="8" y1="11" x2="16" y2="11" />
-      </svg>
-    ),
-  },
 ]
 
 export function BottomNav() {

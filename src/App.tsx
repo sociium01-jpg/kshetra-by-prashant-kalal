@@ -8,7 +8,6 @@ import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { Hero } from "./components/Hero"
 import { HowICanHelp } from "./components/HowICanHelp"
-import { Insights } from "./components/Insights"
 import { PopUpModal } from "./components/PopUpModal"
 import { Testimonials } from "./components/Testimonials"
 import { Values } from "./components/Values"
@@ -26,7 +25,6 @@ export default function App() {
         <HowICanHelp />
         <Testimonials />
         <Contact />
-        <Insights />
       </main>
       <Footer />
       <BottomNav />

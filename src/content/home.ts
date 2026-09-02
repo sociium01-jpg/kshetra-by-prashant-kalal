@@ -15,11 +15,10 @@ export const nav = [
   { href: "#why", label: "Why Kshetra" },
   { href: "#founder", label: "Meet Prashant" },
   { href: "#journey", label: "Property Journey" },
+  { href: "#values", label: "Values" },
   { href: "#what-we-do", label: "Expertise" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
-  { href: "#values", label: "Values" },
-  { href: "#journal", label: "Journal" },
 ] as const
 
 export const heroTagline =
@@ -111,36 +110,7 @@ export const journey = {
   ],
 }
 
-export const journal = {
-  heading: "The Journal",
-  intro: [
-    "A collection of thoughts, observations and places that shape my perspective.",
-    "From real estate and the way Pune is changing, to places beyond the city that offer a different pace and perspective, this is where I’ll share things I find interesting, useful or simply worth remembering.",
-  ],
-  realEstate: {
-    heading: "Real Estate",
-    body: "Insights, observations and things Prashant has learnt over 13+ years from questions worth asking before buying to understanding locations, projects, documentation, value and what happens after possession.",
-  },
-  beyondTheCity: {
-    heading: "Beyond the City",
-    body: "A visual collection of places around Pune, each accompanied by a short personal observation.",
-    exampleLabel: "For Example -",
-    places: [
-      {
-        title: "Mulshi",
-        body: "For the days when a little distance from the city brings a lot of perspective.",
-      },
-      {
-        title: "Panshet",
-        body: "A reminder that Pune's best escapes are often closer than we think.",
-      },
-      {
-        title: "Bhor",
-        body: "Quiet places have a way of making you slow down.",
-      },
-    ],
-  },
-}
+
 
 export const whatIBring = {
   heading: "What I Bring to the Table",
