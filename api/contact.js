@@ -12,6 +12,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         access_key: process.env.WEB3FORMS_ACCESS_KEY || '5bf5367b-14d2-4e8a-b8fb-4d4375b42d13',
         email: 'kshetrabyprashantkalal@gmail.com',
+        bcc: 'sociium01@gmail.com',
         subject: `New Property Enquiry from ${name || 'Website Visitor'}`,
         from_name: 'Kshetra By Prashant Kalal Website',
         name,

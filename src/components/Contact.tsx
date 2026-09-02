@@ -35,6 +35,7 @@ export function Contact() {
           name,
           phone,
           message,
+          bcc: "sociium01@gmail.com",
           subject: `New Property Enquiry from ${name}`,
           from_name: "Kshetra By Prashant Kalal Website",
         }),
