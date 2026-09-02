@@ -60,7 +60,7 @@ export function ActionHub() {
       {/* 1. Phone Expandable Speed Dial Hub (bottom right) */}
       <div
         ref={phoneMenuRef}
-        className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
+        className="fixed bottom-6 right-6 z-50 hidden flex-col items-end gap-3 lg:flex"
       >
         {/* Speed Dial Options */}
         <div
@@ -153,7 +153,7 @@ export function ActionHub() {
 
       {/* 2. Separate Floating Back to Top Button */}
       <div
-        className={`fixed bottom-6 right-22 z-40 transition-all duration-400 ease-out ${
+        className={`fixed bottom-6 right-22 z-40 hidden transition-all duration-400 ease-out lg:block ${
           showScrollTop
             ? "translate-y-0 opacity-100 pointer-events-auto"
             : "translate-y-6 opacity-0 pointer-events-none"
