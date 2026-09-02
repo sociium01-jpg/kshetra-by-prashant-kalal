@@ -4,14 +4,36 @@ import { Magnetic } from "./Magnetic"
 
 export function Footer() {
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [isScrollingDown, setIsScrollingDown] = useState(false)
 
   useEffect(() => {
+    let lastY = window.scrollY
+    let pauseTimer: number
+
     const onScroll = () => {
-      setShowScrollTop(window.scrollY > 300)
+      const curY = window.scrollY
+      setShowScrollTop(curY > 250)
+
+      if (curY > lastY + 5) {
+        setIsScrollingDown(true)
+      } else if (curY < lastY - 5) {
+        setIsScrollingDown(false)
+      }
+
+      lastY = curY
+
+      window.clearTimeout(pauseTimer)
+      pauseTimer = window.setTimeout(() => {
+        setIsScrollingDown(false)
+      }, 1000)
     }
+
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.clearTimeout(pauseTimer)
+    }
   }, [])
 
   function scrollToTop() {
@@ -62,7 +84,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Floating Back to Top Icon at extreme bottom right */}
+      {/* Liquid Morphing Floating Back to Top Icon at extreme bottom right */}
       <div
         className={`fixed bottom-6 right-6 z-40 transition-all duration-400 ease-out ${
           showScrollTop
@@ -75,10 +97,13 @@ export function Footer() {
             type="button"
             onClick={scrollToTop}
             aria-label="Scroll to first section"
-            className="group flex h-12 w-12 items-center justify-center rounded-full border border-brand/40 bg-brand text-white shadow-[0_8px_24px_rgba(239,127,26,0.4)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-brand hover:bg-brand-dark hover:shadow-[0_12px_32px_rgba(239,127,26,0.6)] active:scale-95"
+            className="liquid-morph-btn group flex h-13 w-13 items-center justify-center text-white shadow-[0_10px_28px_rgba(239,127,26,0.45)] transition-all duration-300 hover:scale-110 hover:shadow-[0_14px_36px_rgba(239,127,26,0.65)] active:scale-95"
           >
             <svg
-              className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1"
+              className="relative z-10 h-5 w-5 transition-transform duration-400 ease-out"
+              style={{
+                transform: isScrollingDown ? "rotate(180deg)" : "rotate(0deg)",
+              }}
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
