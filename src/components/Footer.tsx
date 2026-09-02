@@ -1,7 +1,11 @@
+import { useState } from "react"
 import { contact } from "../content/home"
 import { ActionHub } from "./ActionHub"
+import { LegalModal, type LegalType } from "./LegalModal"
 
 export function Footer() {
+  const [legalType, setLegalType] = useState<LegalType>(null)
+
   return (
     <footer className="relative bg-charcoal text-white">
       <div className="page-shell py-12">
@@ -60,7 +64,35 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 pb-28 text-xs text-white/40 sm:flex-row lg:pb-0">
+        {/* Legal Links Row */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-white/50 sm:justify-start">
+          <button
+            type="button"
+            onClick={() => setLegalType("privacy")}
+            className="transition-colors hover:text-brand"
+          >
+            Privacy Policy
+          </button>
+          <span>•</span>
+          <button
+            type="button"
+            onClick={() => setLegalType("terms")}
+            className="transition-colors hover:text-brand"
+          >
+            Terms & Conditions
+          </button>
+          <span>•</span>
+          <button
+            type="button"
+            onClick={() => setLegalType("accessibility")}
+            className="transition-colors hover:text-brand"
+          >
+            Accessibility Statement
+          </button>
+        </div>
+
+        {/* Copyright & Credit Bar */}
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 pb-28 text-xs text-white/40 sm:flex-row lg:pb-0">
           <p>© {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.</p>
           <p className="relative z-20 text-center pointer-events-auto sm:text-right">
             Website developed by{" "}
@@ -77,6 +109,7 @@ export function Footer() {
       </div>
 
       <ActionHub />
+      <LegalModal type={legalType} onClose={() => setLegalType(null)} />
     </footer>
   )
 }
