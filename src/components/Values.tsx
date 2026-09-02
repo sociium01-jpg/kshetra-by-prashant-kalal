@@ -24,8 +24,8 @@ export function Values() {
   return (
     <section id="values" className="section-band bg-white">
       <div className="page-shell">
-        <Reveal>
-          <div className="max-w-2xl">
+        <Reveal variant="blur-in">
+          <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-[1.35rem] font-bold tracking-[0.04em] text-brand uppercase md:text-[1.7rem]">
               Values
             </h2>
