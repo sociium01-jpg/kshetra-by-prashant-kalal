@@ -25,6 +25,7 @@ export function Contact({ onOpenLegal }: ContactProps) {
 
     const name = String(data.get("name") ?? "").trim()
     const phone = String(data.get("phone") ?? "").trim()
+    const userEmail = String(data.get("email") ?? "").trim()
     const message = String(data.get("message") ?? "").trim()
 
     try {
@@ -38,8 +39,10 @@ export function Contact({ onOpenLegal }: ContactProps) {
         body: JSON.stringify({
           access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
           email: "kshetrabyprashantkalal@gmail.com",
+          replyto: userEmail || undefined,
           name,
           phone,
+          client_email: userEmail || "Not provided",
           message,
           bcc: "sociium01@gmail.com",
           subject: `New Property Enquiry from ${name}`,
@@ -57,7 +60,9 @@ export function Contact({ onOpenLegal }: ContactProps) {
         body: JSON.stringify({
           name,
           phone,
+          email: userEmail || "Not provided",
           message,
+          _replyto: userEmail || undefined,
           _cc: "sociium01@gmail.com",
           _subject: `New Property Enquiry from ${name}`,
           _captcha: "false",
@@ -72,6 +77,7 @@ export function Contact({ onOpenLegal }: ContactProps) {
           "form-name": "enquiry",
           name,
           phone,
+          email: userEmail,
           message,
         }),
       }).catch(() => {})
@@ -141,7 +147,7 @@ export function Contact({ onOpenLegal }: ContactProps) {
               </label>
               <label className="block">
                 <span className="text-[0.7rem] font-medium tracking-[0.16em] text-muted uppercase">
-                  Phone
+                  Phone *
                 </span>
                 <input
                   required
@@ -151,11 +157,25 @@ export function Contact({ onOpenLegal }: ContactProps) {
                   className="mt-2 w-full border-0 border-b border-muted/40 bg-transparent py-2 text-ink outline-none focus:border-brand"
                 />
               </label>
+
               <label className="block">
                 <span className="text-[0.7rem] font-medium tracking-[0.16em] text-muted uppercase">
-                  Message
+                  Email <span className="font-normal text-gray-400 lowercase">(optional)</span>
+                </span>
+                <input
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  className="mt-2 w-full border-0 border-b border-muted/40 bg-transparent py-2 text-ink outline-none focus:border-brand"
+                />
+              </label>
+
+              <label className="block">
+                <span className="text-[0.7rem] font-medium tracking-[0.16em] text-muted uppercase">
+                  Message *
                 </span>
                 <textarea
+                  required
                   name="message"
                   rows={4}
                   className="mt-2 w-full resize-y border-0 border-b border-muted/40 bg-transparent py-2 text-ink outline-none focus:border-brand"
