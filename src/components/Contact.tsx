@@ -190,7 +190,7 @@ export function Contact({ onOpenLegal }: ContactProps) {
                   className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 accent-brand focus:ring-brand"
                 />
                 <label htmlFor="contact-terms" className="text-[0.74rem] leading-snug text-gray-400">
-                  You agree to all{" "}
+                  By submitting, you agree to the{" "}
                   <button
                     type="button"
                     onClick={() => onOpenLegal?.("terms")}
