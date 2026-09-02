@@ -64,15 +64,9 @@ export const founder = {
   heading: "Meet Prashant Kalal",
   subhead: "13+ years. Many roles. One industry.",
   paragraphs: [
-    "My journey in real estate began in sales, where I learnt to understand people, their aspirations and what goes into a property decision.",
-    "Over the years, I moved beyond sales into customer relationships, post-sales, possession and eventually operations for 100+ acre township developments as an Assistant General Manager.",
-    "These experiences gave me a broader view of real estate from a buyer’s first conversation to the many details that shape a successful development.",
-    "Today, as a MahaRERA-certified real estate agent, I bring this experience to Kshetra By Prashant Kalal, helping people approach property with greater clarity and perspective.",
-  ],
-  beyondHeading: "Beyond Real Estate",
-  beyondParagraphs: [
-    "Away from work, I enjoy yoga, good food, nature and discovering new places through hikes and trails.",
-    "Perhaps that is why I’m interested not just in properties, but in places and what makes us feel connected to them.",
+    "My journey in real estate began in sales and grew across customer relationships, post-sales, possession and operations for 100+ acre township developments.",
+    "These experiences gave me a broader understanding of what goes into a property decision—from the first conversation to the finer details of a development.",
+    "Today, as a MahaRERA-certified real estate advisor, I bring this perspective to KSHETRA BY PRASHANT KALAL, helping people make property decisions with greater clarity and confidence.",
   ],
 }
 
@@ -80,18 +74,22 @@ export const journey = {
   heading: "I’ve Worked Across the Property Journey",
   steps: [
     {
+      icon: "search" as const,
       title: "Sales",
       body: "Taught me to understand what people are really looking for.",
     },
     {
+      icon: "listen" as const,
       title: "Post-sales",
       body: "Showed me the questions and concerns that emerge after a decision has been made.",
     },
     {
+      icon: "decide" as const,
       title: "Possession",
       body: "Taught me how important execution, communication and attention to detail become when promises finally turn into homes.",
     },
     {
+      icon: "building" as const,
       title: "Township Operations",
       body: "Managing operations for large-scale township developments gave me a wider understanding of how numerous moving parts come together behind every development.",
     },

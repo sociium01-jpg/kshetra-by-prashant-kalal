@@ -5,9 +5,15 @@ import { Logo } from "./Logo"
 export function Header() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
+    const onScroll = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight
+      const cur = window.scrollY
+      setProgress(total > 0 ? Math.min(100, Math.max(0, (cur / total) * 100)) : 0)
+      setScrolled(cur > 12)
+    }
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
     return () => window.removeEventListener("scroll", onScroll)
@@ -26,6 +32,11 @@ export function Header() {
         scrolled || open ? "shadow-sm" : ""
       }`}
     >
+      <div
+        className="h-[2px] bg-brand transition-all duration-150 ease-out"
+        style={{ width: `${progress}%` }}
+        aria-hidden="true"
+      />
       <div className="page-shell flex items-center justify-between gap-4 py-3 md:py-4">
         <a href="#home" className="min-w-0 shrink" onClick={() => setOpen(false)}>
           <Logo compact />

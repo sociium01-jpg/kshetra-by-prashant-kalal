@@ -26,11 +26,9 @@ export function ConsideredApproach() {
             >
               <span className="w-[3px] shrink-0 bg-brand" aria-hidden="true" />
               <p className="text-[1.05rem] leading-[1.35] font-semibold tracking-[0.02em] text-white sm:text-[1.45rem] md:text-[1.7rem] lg:text-[1.85rem]">
-                Understanding property, people
-                <br />
-                and the places that bring
-                <br />
-                them together.
+                <span className="block">Understanding Property,</span>
+                <span className="block">People and the Places that</span>
+                <span className="block">bring them Together.</span>
               </p>
             </div>
           </div>
@@ -38,7 +36,7 @@ export function ConsideredApproach() {
 
         <div className="split-copy bg-gray">
           <Reveal>
-            <h2 className="text-[1.35rem] font-medium tracking-[0.04em] text-brand uppercase md:text-[1.7rem]">
+            <h2 className="text-[1.35rem] font-bold tracking-[0.04em] text-brand uppercase md:text-[1.7rem]">
               {whyKshetra.heading}
             </h2>
           </Reveal>

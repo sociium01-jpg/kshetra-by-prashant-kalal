@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react"
 import { contactCopy } from "../content/home"
+import { Magnetic } from "./Magnetic"
 import { Reveal } from "./Reveal"
 
 type Status = "idle" | "submitting" | "success" | "error"
@@ -45,23 +46,24 @@ export function Contact() {
 
   return (
     <section id="contact" className="section-band peach-wash-tl overflow-x-hidden">
-      <div className="page-shell grid items-stretch gap-8 md:gap-10 lg:grid-cols-2 lg:gap-12">
-        <Reveal className="flex min-h-0 flex-col">
-          <h2 className="text-[1.3rem] leading-tight font-medium text-balance text-ink sm:text-[1.45rem] md:text-[2.2rem]">
+      <div className="page-shell grid items-stretch gap-6 md:gap-8 lg:grid-cols-2 lg:gap-10">
+        <Reveal className="flex min-h-0 flex-col" variant="fade-right">
+          <h2 className="text-[1.3rem] leading-tight font-bold text-balance text-ink sm:text-[1.45rem] md:text-[2.2rem]">
             {contactCopy.heading}
           </h2>
-          <p className="mt-5 max-w-md leading-relaxed text-body">{contactCopy.body}</p>
-          <div className="contact-line-art mt-8 flex flex-1 items-center">
+          <p className="mt-4 max-w-md leading-relaxed text-body">{contactCopy.body}</p>
+          <div className="contact-line-art mt-5 flex flex-1 items-center">
             <img
               src="/contact-banner.png"
               alt=""
+              className="img-float-gentle"
               width={1024}
               height={819}
             />
           </div>
         </Reveal>
 
-        <div className="min-w-0">
+        <Reveal className="min-w-0" variant="fade-left" delay={120}>
           {status === "success" ? (
             <p className="bg-white px-8 py-12 text-body">Thank you.</p>
           ) : (
@@ -70,7 +72,7 @@ export function Contact() {
               method="POST"
               data-netlify="true"
               netlify-honeypot="bot-field"
-              className="glass flex h-full min-w-0 flex-col space-y-5 p-5 sm:p-6 md:p-8"
+              className="glass flex h-full min-w-0 flex-col space-y-4 p-5 sm:p-6"
               onSubmit={onSubmit}
             >
               <input type="hidden" name="form-name" value="enquiry" />
@@ -114,16 +116,18 @@ export function Contact() {
                 />
               </label>
               {status === "error" ? <p className="text-sm text-brand">Something went wrong.</p> : null}
-              <button
-                type="submit"
-                disabled={status === "submitting"}
-                className="btn-shine bg-brand px-8 py-3 text-[0.72rem] font-semibold tracking-[0.16em] text-white uppercase transition hover:bg-brand-dark disabled:opacity-60"
-              >
-                Send
-              </button>
+              <Magnetic className="self-start">
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="btn-shine bg-brand px-8 py-3 text-[0.72rem] font-semibold tracking-[0.16em] text-white uppercase transition hover:bg-brand-dark disabled:opacity-60"
+                >
+                  Send
+                </button>
+              </Magnetic>
             </form>
           )}
-        </div>
+        </Reveal>
       </div>
     </section>
   )
