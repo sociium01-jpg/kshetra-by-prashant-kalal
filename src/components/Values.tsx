@@ -3,20 +3,20 @@ import { Reveal } from "./Reveal"
 
 const valuesData = [
   {
-    title: "Integrity & Transparency",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    title: "INTEGRITY",
+    body: "You can trust the advice.",
   },
   {
-    title: "Clarity Before Commitment",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit.",
+    title: "ATTENTION",
+    body: "Your needs are genuinely heard.",
   },
   {
-    title: "Long-term Perspective",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Excepteur sint occaecat cupidatat non proident.",
+    title: "DELIBERATION",
+    body: "Decisions aren't rushed.",
   },
   {
-    title: "Client-First Advisory",
-    body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation.",
+    title: "CLARITY",
+    body: "You understand what you're choosing.",
   },
 ]
 
