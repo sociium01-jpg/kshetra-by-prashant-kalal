@@ -52,7 +52,7 @@ export const whyKshetra = {
   heading: "Why Kshetra By Prashant Kalal?",
   subhead: "To share what experience has taught me.",
   paragraphs: [
-    "Over 13+ years in real estate, I’ve seen how overwhelming a property decision can be,  from understanding locations and projects to evaluating documents, timelines and future potential.",
+    "Over 13+ years in real estate, I’ve seen how overwhelming a property decision can be, from understanding locations and projects to evaluating documents, timelines and future potential.",
     "Kshetra By Prashant Kalal began with a simple thought: what if more understanding came before the decision?",
     "It is my way of sharing what I’ve learnt helping buyers and investors ask better questions, understand their choices and approach property with greater clarity.",
     "Sometimes the right decision is to buy. Sometimes, it’s to wait.",

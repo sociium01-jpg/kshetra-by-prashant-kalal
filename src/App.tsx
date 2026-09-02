@@ -1,4 +1,5 @@
 import { About } from "./components/About"
+import { BottomNav } from "./components/BottomNav"
 import { ConsideredApproach } from "./components/ConsideredApproach"
 import { Contact } from "./components/Contact"
 import { Differentiator } from "./components/Differentiator"
@@ -24,6 +25,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <BottomNav />
     </>
   )
 }
