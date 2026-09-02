@@ -17,9 +17,16 @@ export function Testimonials() {
                   “
                 </span>
                 <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-ink">{item.quote}</p>
-                <p className="mt-6 text-[0.72rem] font-bold tracking-[0.04em] text-brand uppercase">
-                  {item.name}
-                </p>
+                <div className="mt-6">
+                  <p className="text-[0.75rem] font-bold tracking-[0.04em] text-brand uppercase">
+                    {item.name}
+                  </p>
+                  {item.title ? (
+                    <p className="mt-0.5 text-[0.72rem] font-medium text-ink/75">
+                      {item.title}
+                    </p>
+                  ) : null}
+                </div>
               </Card3D>
             </Reveal>
           ))}

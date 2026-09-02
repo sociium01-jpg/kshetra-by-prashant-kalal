@@ -173,16 +173,21 @@ export const testimonials = {
   items: [
     {
       quote:
+        "Prashant brings a rare level of depth to real estate advisory. Having managed end-to-end operations for 100+ acre township developments, his insight goes far beyond sales talk. He understands execution, long-term value, and what truly matters to property buyers.",
+      name: "Aravind Menon",
+      title: "Founder, Sociium",
+    },
+    {
+      quote:
         "Kshetra By Prashant Kalal began with a simple thought: what if more understanding came before the decision?",
       name: "Prashant Kalal",
+      title: "Real Estate Advisor",
     },
     {
-      quote: "Sometimes the right decision is to buy. Sometimes, it’s to wait.",
+      quote:
+        "Sometimes the right decision is to buy. Sometimes, it’s to wait. Either way, the aim is simple - understand before you decide.",
       name: "Prashant Kalal",
-    },
-    {
-      quote: "Either way, the aim is simple - understand before you decide.",
-      name: "Prashant Kalal",
+      title: "Real Estate Advisor",
     },
   ],
 }
