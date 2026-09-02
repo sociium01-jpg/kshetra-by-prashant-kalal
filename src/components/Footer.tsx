@@ -68,7 +68,7 @@ export function Footer() {
               href="https://sociium.in/"
               target="_blank"
               rel="noreferrer"
-              className="font-medium text-white/70 underline underline-offset-2 transition-colors hover:text-brand"
+              className="font-medium text-white/80 no-underline transition-colors hover:text-brand"
             >
               Soc<span className="text-[#0077ff]">ii</span>um
             </a>
