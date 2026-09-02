@@ -86,7 +86,7 @@ export function BottomNav() {
   const whatsappHref = "https://wa.me/919730183066"
 
   return (
-    <div ref={dockRef} className="fixed bottom-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-sm -translate-x-1/2 lg:hidden">
+    <div ref={dockRef} className="fixed bottom-3 left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-sm -translate-x-1/2 pointer-events-none lg:hidden">
       <div
         className={
           "mb-3 flex flex-col items-center gap-2 transition-all duration-300 " +
@@ -141,7 +141,7 @@ export function BottomNav() {
 
       <nav
         aria-label="Mobile Navigation Dock"
-        className="flex items-center justify-around rounded-full border border-white/20 bg-charcoal/95 px-2 py-1.5 text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl">
+        className="pointer-events-auto flex items-center justify-around rounded-full border border-white/20 bg-charcoal/95 px-2 py-1.5 text-white shadow-[0_12px_32px_rgba(0,0,0,0.4)] backdrop-blur-xl">
         {navTabs.map((tab) => {
           const isActive = activeHash === tab.href
           return (
