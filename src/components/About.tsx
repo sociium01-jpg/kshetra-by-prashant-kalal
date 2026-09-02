@@ -19,7 +19,7 @@ export function About() {
             </h2>
           </Reveal>
           <Reveal delay={70} variant="fade-right">
-            <p className="line-wipe mt-3 text-[0.95rem] font-medium tracking-[0.04em] text-brand md:text-[1.05rem]">
+            <p className="mt-3 text-[0.95rem] font-medium tracking-[0.04em] text-brand md:text-[1.05rem]">
               {founder.subhead}
             </p>
           </Reveal>
