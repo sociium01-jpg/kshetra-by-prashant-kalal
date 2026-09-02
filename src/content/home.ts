@@ -15,10 +15,11 @@ export const nav = [
   { href: "#why", label: "Why Kshetra" },
   { href: "#founder", label: "Meet Prashant" },
   { href: "#journey", label: "Property Journey" },
-  { href: "#journal", label: "Journal" },
   { href: "#what-we-do", label: "Expertise" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
+  { href: "#values", label: "Values" },
+  { href: "#journal", label: "Journal" },
 ] as const
 
 export const heroTagline =
