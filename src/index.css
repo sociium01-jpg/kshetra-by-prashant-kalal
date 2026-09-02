@@ -296,11 +296,17 @@ button {
 }
 
 .quote-hero {
-  font-size: clamp(1.2rem, 1.55vw + 0.85rem, 2.125rem);
+  font-size: clamp(0.95rem, 3.4vw, 1.3rem);
   line-height: 1.45;
   font-weight: 400;
   letter-spacing: 0.01em;
   color: #333333;
+}
+
+@media (min-width: 1024px) {
+  .quote-hero {
+    font-size: clamp(1.2rem, 1.55vw + 0.85rem, 2.125rem);
+  }
 }
 
 .quote-hero-text {

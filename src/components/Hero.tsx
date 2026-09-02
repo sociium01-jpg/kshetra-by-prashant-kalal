@@ -47,8 +47,18 @@ export function Hero() {
   const [dir, setDir] = useState(1)
   const [paused, setPaused] = useState(false)
   const [scrollOffset, setScrollOffset] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
   const indexRef = useRef(0)
   indexRef.current = index
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
 
   function goTo(next: number, direction?: number) {
     const wrapped = (next + quotes.length) % quotes.length
@@ -81,6 +91,7 @@ export function Hero() {
   }, [paused])
 
   const quote = quotes[index] ?? quotes[0]
+  const currentLines = isMobile ? (quote.linesMobile ?? quote.lines) : quote.lines
   const wash = quote.wash === "tr" ? "peach-wash-tr" : "peach-wash-tl"
 
   return (
@@ -95,7 +106,7 @@ export function Hero() {
       <div className="page-shell relative min-w-0 overflow-visible text-center">
         <div className="quote-hero-stage relative z-10 min-w-0 overflow-visible">
           <blockquote className="quote-hero invisible min-w-0" aria-hidden="true">
-            <QuoteLines lines={quote.lines} animate={false} scrollOffset={0} />
+            <QuoteLines lines={currentLines} animate={false} scrollOffset={0} />
           </blockquote>
           {quotes.map((item, i) => {
             const active = i === index
@@ -103,6 +114,8 @@ export function Hero() {
             let slide = "quote-slide-idle"
             if (active) slide = dir >= 0 ? "quote-slide-in" : "quote-slide-in-rev"
             else if (exiting) slide = dir >= 0 ? "quote-slide-out" : "quote-slide-out-rev"
+
+            const itemLines = isMobile ? (item.linesMobile ?? item.lines) : item.lines
 
             return (
               <blockquote
@@ -112,7 +125,7 @@ export function Hero() {
               >
                 <QuoteLines
                   key={active ? `on-${i}` : `off-${i}`}
-                  lines={item.lines}
+                  lines={itemLines}
                   animate={active}
                   scrollOffset={scrollOffset}
                 />
