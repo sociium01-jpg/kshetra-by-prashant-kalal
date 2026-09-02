@@ -50,21 +50,21 @@ export function Header() {
           <Logo compact />
         </a>
 
-        <div className="flex min-w-0 items-center gap-5 lg:gap-7">
-          {/* 4 Essential Desktop Navigation Links */}
-          <nav className="hidden items-center justify-end gap-x-6 md:flex" aria-label="Primary Essential">
-            {essentialNav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-[0.76rem] font-semibold tracking-wider text-ink uppercase transition-colors hover:text-brand"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+        {/* Centered Main Navigation Links */}
+        <nav className="hidden items-center justify-center gap-x-7 md:flex md:grow lg:gap-x-9" aria-label="Primary Essential">
+          {essentialNav.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="text-[0.76rem] font-semibold tracking-wider text-ink uppercase transition-colors hover:text-brand"
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
-          {/* Menu Box Toggle Button */}
+        {/* Menu Box Toggle Button */}
+        <div className="flex shrink-0 items-center pl-4 md:pl-8 lg:pl-12">
           <button
             type="button"
             className="menu-toggle flex items-center gap-2 rounded-lg border border-gray/80 bg-gray/50 px-2.5 py-1.5 transition-colors hover:bg-gray"
