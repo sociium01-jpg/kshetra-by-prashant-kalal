@@ -18,25 +18,49 @@ export function Contact() {
     const data = new FormData(form)
     setStatus("submitting")
 
-    if (import.meta.env.DEV) {
-      form.reset()
-      setStatus("success")
-      return
-    }
+    const name = String(data.get("name") ?? "").trim()
+    const phone = String(data.get("phone") ?? "").trim()
+    const message = String(data.get("message") ?? "").trim()
 
     try {
-      const res = await fetch("/", {
+      // Direct Email Submission Pipeline (forwards to kshetrabyprashantkalal@gmail.com)
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
+          name,
+          phone,
+          message,
+          subject: `New Property Enquiry from ${name}`,
+          from_name: "Kshetra By Prashant Kalal Website",
+        }),
+      })
+
+      // Also trigger Netlify / Vercel API fallback
+      await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: encode({
           "form-name": "enquiry",
-          name: String(data.get("name") ?? ""),
-          phone: String(data.get("phone") ?? ""),
-          message: String(data.get("message") ?? ""),
-          "bot-field": String(data.get("bot-field") ?? ""),
+          name,
+          phone,
+          message,
         }),
-      })
-      if (!res.ok) throw new Error("Submit failed")
+      }).catch(() => {})
+
+      if (!res.ok) {
+        // Fallback to Vercel API
+        await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, phone, message }),
+        }).catch(() => {})
+      }
+
       form.reset()
       setStatus("success")
     } catch {
