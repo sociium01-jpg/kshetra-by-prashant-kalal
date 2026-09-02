@@ -3,11 +3,13 @@ import { BottomNav } from "./components/BottomNav"
 import { ConsideredApproach } from "./components/ConsideredApproach"
 import { Contact } from "./components/Contact"
 import { Differentiator } from "./components/Differentiator"
+import { DraggableScrollTop } from "./components/DraggableScrollTop"
 import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { Hero } from "./components/Hero"
 import { HowICanHelp } from "./components/HowICanHelp"
 import { Insights } from "./components/Insights"
+import { PopUpModal } from "./components/PopUpModal"
 import { Testimonials } from "./components/Testimonials"
 
 export default function App() {
@@ -26,6 +28,8 @@ export default function App() {
       </main>
       <Footer />
       <BottomNav />
+      <DraggableScrollTop />
+      <PopUpModal />
     </>
   )
 }
