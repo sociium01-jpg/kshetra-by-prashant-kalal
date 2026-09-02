@@ -13,7 +13,7 @@ export function Testimonials() {
           {testimonials.items.map((item, i) => (
             <Reveal key={item.quote} delay={i * 90} variant="zoom-in">
               <Card3D className="flex h-full flex-col px-5 py-6 sm:px-6 sm:py-7">
-                <span className="font-serif text-5xl leading-none text-[#f3c4a8]" aria-hidden="true">
+                <span className="text-5xl font-bold leading-none text-[#f3c4a8]" aria-hidden="true">
                   “
                 </span>
                 <p className="mt-3 flex-1 text-[0.98rem] leading-relaxed text-ink">{item.quote}</p>
