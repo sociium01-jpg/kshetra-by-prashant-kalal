@@ -97,8 +97,16 @@ export function Footer({ onOpenLegal }: FooterProps) {
           <p className="text-center sm:text-left">
             © {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.
           </p>
-          <p className="text-center font-medium text-white/50">
-            Designed by Studio Athaees
+          <p className="text-center text-white/40">
+            Designed by{" "}
+            <a
+              href="https://www.instagram.com/studioathaees/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-white/50 no-underline transition-colors hover:text-brand"
+            >
+              Studio Athaees
+            </a>
           </p>
           <p className="relative z-20 text-center pointer-events-auto sm:text-right">
             Website developed by{" "}
