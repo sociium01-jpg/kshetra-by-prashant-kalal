@@ -7,18 +7,36 @@ function preventOrphan(line: string) {
   return `${line.slice(0, i)}\u00a0${line.slice(i + 1)}`
 }
 
-function QuoteLines({ lines, animate }: { lines: string[]; animate: boolean }) {
+function QuoteLines({
+  lines,
+  animate,
+  scrollOffset,
+}: {
+  lines: string[]
+  animate: boolean
+  scrollOffset: number
+}) {
   return (
     <>
-      {lines.map((line, lineIndex) => (
-        <span
-          key={`${line}-${lineIndex}`}
-          className={`quote-hero-text block min-w-0 max-w-full ${animate ? "quote-hero-line" : ""}`}
-          style={animate ? { animationDelay: `${80 + lineIndex * 120}ms` } : undefined}
-        >
-          {preventOrphan(line)}
-        </span>
-      ))}
+      {lines.map((line, lineIndex) => {
+        const speed = (lineIndex - (lines.length - 1) / 2) * 0.2
+        const parallaxY = scrollOffset * speed
+
+        return (
+          <span
+            key={`${line}-${lineIndex}`}
+            className={`quote-hero-text block min-w-0 max-w-full ${animate ? "quote-hero-line" : ""}`}
+            style={{
+              animationDelay: animate ? `${80 + lineIndex * 120}ms` : undefined,
+              transform: `translate3d(0, ${parallaxY}px, 0)`,
+              transition: animate ? "transform 0.15s ease-out" : undefined,
+              willChange: "transform",
+            }}
+          >
+            {preventOrphan(line)}
+          </span>
+        )
+      })}
     </>
   )
 }
@@ -28,6 +46,7 @@ export function Hero() {
   const [prevIndex, setPrevIndex] = useState(0)
   const [dir, setDir] = useState(1)
   const [paused, setPaused] = useState(false)
+  const [scrollOffset, setScrollOffset] = useState(0)
   const indexRef = useRef(0)
   indexRef.current = index
 
@@ -43,6 +62,17 @@ export function Hero() {
     setPrevIndex(indexRef.current)
     setIndex(wrapped)
   }
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY < 800) {
+        setScrollOffset(window.scrollY)
+      }
+    }
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   useEffect(() => {
     if (paused) return
@@ -65,7 +95,7 @@ export function Hero() {
       <div className="page-shell relative min-w-0 overflow-visible text-center">
         <div className="quote-hero-stage relative z-10 min-w-0 overflow-visible">
           <blockquote className="quote-hero invisible min-w-0" aria-hidden="true">
-            <QuoteLines lines={quote.lines} animate={false} />
+            <QuoteLines lines={quote.lines} animate={false} scrollOffset={0} />
           </blockquote>
           {quotes.map((item, i) => {
             const active = i === index
@@ -80,7 +110,12 @@ export function Hero() {
                 aria-hidden={!active}
                 className={`quote-hero absolute inset-0 flex min-w-0 flex-col justify-center text-ink ${slide}`}
               >
-                <QuoteLines key={active ? `on-${i}` : `off-${i}`} lines={item.lines} animate={active} />
+                <QuoteLines
+                  key={active ? `on-${i}` : `off-${i}`}
+                  lines={item.lines}
+                  animate={active}
+                  scrollOffset={scrollOffset}
+                />
               </blockquote>
             )
           })}
