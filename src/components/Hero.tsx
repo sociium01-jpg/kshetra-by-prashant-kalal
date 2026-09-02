@@ -10,33 +10,23 @@ function preventOrphan(line: string) {
 function QuoteLines({
   lines,
   animate,
-  scrollOffset,
 }: {
   lines: string[]
   animate: boolean
-  scrollOffset: number
 }) {
   return (
     <>
-      {lines.map((line, lineIndex) => {
-        const speed = (lineIndex - (lines.length - 1) / 2) * 0.2
-        const parallaxY = scrollOffset * speed
-
-        return (
-          <span
-            key={`${line}-${lineIndex}`}
-            className={`quote-hero-text block min-w-0 max-w-full ${animate ? "quote-hero-line" : ""}`}
-            style={{
-              animationDelay: animate ? `${80 + lineIndex * 120}ms` : undefined,
-              transform: `translate3d(0, ${parallaxY}px, 0)`,
-              transition: animate ? "transform 0.15s ease-out" : undefined,
-              willChange: "transform",
-            }}
-          >
-            {preventOrphan(line)}
-          </span>
-        )
-      })}
+      {lines.map((line, lineIndex) => (
+        <span
+          key={`${line}-${lineIndex}`}
+          className={`quote-hero-text block min-w-0 max-w-full ${animate ? "quote-hero-line" : ""}`}
+          style={{
+            animationDelay: animate ? `${80 + lineIndex * 120}ms` : undefined,
+          }}
+        >
+          {preventOrphan(line)}
+        </span>
+      ))}
     </>
   )
 }
@@ -46,7 +36,6 @@ export function Hero() {
   const [prevIndex, setPrevIndex] = useState(0)
   const [dir, setDir] = useState(1)
   const [paused, setPaused] = useState(false)
-  const [scrollOffset, setScrollOffset] = useState(0)
   const [isMobile, setIsMobile] = useState(false)
   const indexRef = useRef(0)
   indexRef.current = index
@@ -74,25 +63,18 @@ export function Hero() {
   }
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY < 800) {
-        setScrollOffset(window.scrollY)
-      }
-    }
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
     if (paused) return
     const id = window.setInterval(() => goTo(indexRef.current + 1, 1), 5000)
     return () => window.clearInterval(id)
   }, [paused])
 
   const quote = quotes[index] ?? quotes[0]
-  const currentLines = isMobile ? (quote.linesMobile ?? quote.lines) : quote.lines
   const wash = quote.wash === "tr" ? "peach-wash-tr" : "peach-wash-tl"
+
+  // Always use Quote 0 lines for max height placeholder to keep stage height 100% constant & un-shifting
+  const maxPlaceholderLines = isMobile
+    ? (quotes[0].linesMobile ?? quotes[0].lines)
+    : quotes[0].lines
 
   return (
     <section
@@ -105,9 +87,11 @@ export function Hero() {
       <h1 className="sr-only">Kshetra by Prashant Kalal</h1>
       <div className="page-shell relative min-w-0 overflow-visible text-center">
         <div className="quote-hero-stage relative z-10 min-w-0 overflow-visible">
+          {/* Constant Height Placeholder (Prevents Layout Shifts & Jerks) */}
           <blockquote className="quote-hero invisible min-w-0" aria-hidden="true">
-            <QuoteLines lines={currentLines} animate={false} scrollOffset={0} />
+            <QuoteLines lines={maxPlaceholderLines} animate={false} />
           </blockquote>
+
           {quotes.map((item, i) => {
             const active = i === index
             const exiting = i === prevIndex && prevIndex !== index
@@ -127,7 +111,6 @@ export function Hero() {
                   key={active ? `on-${i}` : `off-${i}`}
                   lines={itemLines}
                   animate={active}
-                  scrollOffset={scrollOffset}
                 />
               </blockquote>
             )
