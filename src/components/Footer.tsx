@@ -1,7 +1,19 @@
+import { useEffect, useState } from "react"
 import { contact } from "../content/home"
 import { Magnetic } from "./Magnetic"
 
 export function Footer() {
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   function scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -47,30 +59,39 @@ export function Footer() {
           <p className="text-xs text-white/40">
             © {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.
           </p>
-          <Magnetic className="mt-4 sm:mt-0">
-            <button
-              type="button"
-              onClick={scrollToTop}
-              aria-label="Scroll to first section"
-              className="group flex items-center gap-2.5 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.72rem] font-semibold tracking-[0.14em] text-white uppercase transition-all duration-300 hover:border-brand hover:bg-brand hover:text-white"
-            >
-              <span>Back to Top</span>
-              <svg
-                className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-1"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M12 19V5" />
-                <path d="m5 12 7-7 7 7" />
-              </svg>
-            </button>
-          </Magnetic>
         </div>
+      </div>
+
+      {/* Floating Back to Top Icon at extreme bottom right */}
+      <div
+        className={`fixed bottom-6 right-6 z-40 transition-all duration-400 ease-out ${
+          showScrollTop
+            ? "translate-y-0 opacity-100 pointer-events-auto"
+            : "translate-y-6 opacity-0 pointer-events-none"
+        }`}
+      >
+        <Magnetic strength={0.4}>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            aria-label="Scroll to first section"
+            className="group flex h-12 w-12 items-center justify-center rounded-full border border-brand/40 bg-brand text-white shadow-[0_8px_24px_rgba(239,127,26,0.4)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-brand hover:bg-brand-dark hover:shadow-[0_12px_32px_rgba(239,127,26,0.6)] active:scale-95"
+          >
+            <svg
+              className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-1"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 19V5" />
+              <path d="m5 12 7-7 7 7" />
+            </svg>
+          </button>
+        </Magnetic>
       </div>
     </footer>
   )
