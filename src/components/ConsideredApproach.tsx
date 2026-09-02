@@ -37,7 +37,8 @@ export function ConsideredApproach() {
         <div className="split-copy bg-gray">
           <Reveal>
             <h2 className="text-[1.35rem] font-bold tracking-[0.04em] text-brand uppercase md:text-[1.7rem]">
-              {whyKshetra.heading}
+              <span className="block">Why Kshetra</span>
+              <span className="block">By Prashant Kalal?</span>
             </h2>
           </Reveal>
           <Reveal delay={80}>
