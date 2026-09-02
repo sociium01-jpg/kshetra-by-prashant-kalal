@@ -471,6 +471,54 @@ button {
   background: var(--color-brand-dark);
 }
 
+.liquid-morph-btn-white {
+  position: relative;
+  border-radius: 50%;
+  transition:
+    border-radius 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.liquid-morph-btn-white:hover {
+  border-radius: 34% 66% 64% 36% / 42% 38% 62% 58%;
+}
+
+.liquid-morph-btn-white::before {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--color-brand) 120deg,
+    transparent 240deg,
+    var(--color-brand) 360deg
+  );
+  animation: rotate-sheen 3.5s linear infinite;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.liquid-morph-btn-white:hover::before {
+  opacity: 1;
+}
+
+.liquid-morph-btn-white::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #ffffff;
+  border-radius: inherit;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.liquid-morph-btn-white:hover::after {
+  background: #ffffff;
+}
+
 @keyframes rise {
   from {
     opacity: 0;

@@ -164,10 +164,10 @@ export function ActionHub() {
             type="button"
             onClick={scrollToTop}
             aria-label="Scroll to first section"
-            className="group flex h-12 w-12 items-center justify-center rounded-full border border-brand/40 bg-white text-brand shadow-[0_8px_24px_rgba(0,0,0,0.12)] backdrop-blur-md transition-all duration-300 hover:scale-110 hover:border-brand hover:bg-brand hover:text-white hover:shadow-[0_12px_28px_rgba(239,127,26,0.5)] active:scale-95"
+            className="liquid-morph-btn-white group flex h-13 w-13 items-center justify-center text-brand shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_28px_rgba(239,127,26,0.45)] active:scale-95"
           >
             <svg
-              className="h-5 w-5 transition-transform duration-400 ease-out"
+              className="relative z-10 h-5 w-5 transition-transform duration-400 ease-out"
               style={{
                 transform: isScrollingDown ? "rotate(180deg)" : "rotate(0deg)",
               }}
