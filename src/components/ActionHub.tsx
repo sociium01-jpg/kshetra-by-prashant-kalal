@@ -4,38 +4,17 @@ import { Magnetic } from "./Magnetic"
 
 export function ActionHub() {
   const [showScrollTop, setShowScrollTop] = useState(false)
-  const [isScrollingDown, setIsScrollingDown] = useState(false)
   const [isPhoneMenuOpen, setIsPhoneMenuOpen] = useState(false)
   const phoneMenuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let lastY = window.scrollY
-    let pauseTimer: number
-
     const onScroll = () => {
-      const curY = window.scrollY
-      setShowScrollTop(curY > 250)
-
-      if (curY > lastY + 5) {
-        setIsScrollingDown(true)
-      } else if (curY < lastY - 5) {
-        setIsScrollingDown(false)
-      }
-
-      lastY = curY
-
-      window.clearTimeout(pauseTimer)
-      pauseTimer = window.setTimeout(() => {
-        setIsScrollingDown(false)
-      }, 1000)
+      setShowScrollTop(window.scrollY > 250)
     }
 
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => {
-      window.removeEventListener("scroll", onScroll)
-      window.clearTimeout(pauseTimer)
-    }
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   // Close phone menu when clicking outside
@@ -163,14 +142,11 @@ export function ActionHub() {
           <button
             type="button"
             onClick={scrollToTop}
-            aria-label="Scroll to first section"
-            className="liquid-morph-btn-white group flex h-13 w-13 items-center justify-center text-brand shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_28px_rgba(239,127,26,0.45)] active:scale-95"
+            aria-label="Scroll to top"
+            className="liquid-morph-btn-white group flex h-13 w-13 items-center justify-center text-brand shadow-[0_10px_28px_rgba(239,127,26,0.35)] transition-all duration-300 hover:scale-110 hover:shadow-[0_14px_36px_rgba(239,127,26,0.55)] active:scale-95"
           >
             <svg
-              className="relative z-10 h-5 w-5 transition-transform duration-400 ease-out"
-              style={{
-                transform: isScrollingDown ? "rotate(180deg)" : "rotate(0deg)",
-              }}
+              className="relative z-10 h-5 w-5 text-brand transition-transform duration-300 group-hover:-translate-y-1"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"

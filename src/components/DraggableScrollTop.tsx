@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, type TouchEvent } from "react"
 
 export function DraggableScrollTop() {
   const [show, setShow] = useState(false)
-  const [isScrollingDown, setIsScrollingDown] = useState(false)
   const [position, setPosition] = useState<{ x: number; y: number } | null>(null)
   const [isDragging, setIsDragging] = useState(false)
   const dragStartRef = useRef<{ x: number; y: number; posX: number; posY: number }>({
@@ -14,32 +13,13 @@ export function DraggableScrollTop() {
   const hasMovedRef = useRef(false)
 
   useEffect(() => {
-    let lastY = window.scrollY
-    let pauseTimer: number
-
     const onScroll = () => {
-      const curY = window.scrollY
-      setShow(curY > 250)
-
-      if (curY > lastY + 5) {
-        setIsScrollingDown(true)
-      } else if (curY < lastY - 5) {
-        setIsScrollingDown(false)
-      }
-      lastY = curY
-
-      window.clearTimeout(pauseTimer)
-      pauseTimer = window.setTimeout(() => {
-        setIsScrollingDown(false)
-      }, 1000)
+      setShow(window.scrollY > 250)
     }
 
     onScroll()
     window.addEventListener("scroll", onScroll, { passive: true })
-    return () => {
-      window.removeEventListener("scroll", onScroll)
-      window.clearTimeout(pauseTimer)
-    }
+    return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
   function handleTouchStart(e: TouchEvent<HTMLDivElement>) {
@@ -79,10 +59,8 @@ export function DraggableScrollTop() {
     setIsDragging(false)
   }
 
-  function handleClick() {
-    if (!hasMovedRef.current) {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    }
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   if (!show) return null
@@ -92,7 +70,7 @@ export function DraggableScrollTop() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onClick={handleClick}
+      onClick={scrollToTop}
       className={
         "fixed z-40 transition-transform duration-300 lg:hidden " +
         (isDragging ? "scale-110 opacity-90 cursor-grabbing" : "opacity-100 cursor-grab")
@@ -105,14 +83,15 @@ export function DraggableScrollTop() {
     >
       <button
         type="button"
+        onClick={(e) => {
+          e.stopPropagation()
+          scrollToTop()
+        }}
         aria-label="Scroll to top"
-        className="liquid-morph-btn-white flex h-12 w-12 items-center justify-center text-brand shadow-[0_8px_24px_rgba(0,0,0,0.2)] transition-transform active:scale-95"
+        className="liquid-morph-btn-white flex h-12 w-12 items-center justify-center text-brand shadow-[0_10px_28px_rgba(239,127,26,0.35)] transition-all hover:scale-110 active:scale-95"
       >
         <svg
-          className="relative z-10 h-5 w-5 transition-transform duration-400 ease-out"
-          style={{
-            transform: isScrollingDown ? "rotate(180deg)" : "rotate(0deg)",
-          }}
+          className="relative z-10 h-5 w-5 text-brand"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
