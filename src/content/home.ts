@@ -4,7 +4,9 @@ export const contact = {
   email: "kshetrabyprashantkalal@gmail.com",
   emailHref: "mailto:kshetrabyprashantkalal@gmail.com",
   instagram: "kshetrabyprashantk",
-  instagramHref: "https://instagram.com/kshetrabyprashantk",
+  instagramHref: "https://www.instagram.com/kshetrabyprashantk/?utm_source=ig_web_button_share_sheet",
+  linkedin: "Prashant Kalal",
+  linkedinHref: "https://www.linkedin.com/in/prashantkalal",
   rera: "A011262602396",
 }
 
