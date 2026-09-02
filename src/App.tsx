@@ -11,6 +11,7 @@ import { HowICanHelp } from "./components/HowICanHelp"
 import { Insights } from "./components/Insights"
 import { PopUpModal } from "./components/PopUpModal"
 import { Testimonials } from "./components/Testimonials"
+import { Values } from "./components/Values"
 
 export default function App() {
   return (
@@ -21,10 +22,11 @@ export default function App() {
         <ConsideredApproach />
         <About />
         <Differentiator />
-        <Insights />
+        <Values />
         <HowICanHelp />
         <Testimonials />
         <Contact />
+        <Insights />
       </main>
       <Footer />
       <BottomNav />
