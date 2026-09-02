@@ -451,6 +451,13 @@ button {
   overflow: hidden;
 }
 
+.liquid-morph-btn::before,
+.liquid-morph-btn::after,
+.liquid-morph-btn-white::before,
+.liquid-morph-btn-white::after {
+  pointer-events: none;
+}
+
 .liquid-morph-btn::before {
   content: "";
   position: absolute;

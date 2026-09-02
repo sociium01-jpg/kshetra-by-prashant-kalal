@@ -29,6 +29,10 @@ export function ActionHub() {
   }, [])
 
   function scrollToTop() {
+    const homeEl = document.getElementById("home")
+    if (homeEl) {
+      homeEl.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 

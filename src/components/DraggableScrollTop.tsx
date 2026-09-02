@@ -60,6 +60,10 @@ export function DraggableScrollTop() {
   }
 
   function scrollToTop() {
+    const homeEl = document.getElementById("home")
+    if (homeEl) {
+      homeEl.scrollIntoView({ behavior: "smooth", block: "start" })
+    }
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
@@ -70,9 +74,8 @@ export function DraggableScrollTop() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      onClick={scrollToTop}
       className={
-        "fixed z-40 transition-transform duration-300 lg:hidden " +
+        "fixed z-40 transition-transform duration-300 lg:hidden pointer-events-auto " +
         (isDragging ? "scale-110 opacity-90 cursor-grabbing" : "opacity-100 cursor-grab")
       }
       style={
@@ -84,14 +87,18 @@ export function DraggableScrollTop() {
       <button
         type="button"
         onClick={(e) => {
+          e.preventDefault()
           e.stopPropagation()
           scrollToTop()
         }}
+        onPointerDown={(e) => {
+          e.stopPropagation()
+        }}
         aria-label="Scroll to top"
-        className="liquid-morph-btn-white flex h-12 w-12 items-center justify-center text-brand shadow-[0_10px_28px_rgba(239,127,26,0.35)] transition-all hover:scale-110 active:scale-95"
+        className="liquid-morph-btn-white relative z-10 flex h-12 w-12 items-center justify-center text-brand shadow-[0_10px_28px_rgba(239,127,26,0.35)] transition-all hover:scale-110 active:scale-95 pointer-events-auto"
       >
         <svg
-          className="relative z-10 h-5 w-5 text-brand"
+          className="relative z-20 h-5 w-5 text-brand pointer-events-none"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
