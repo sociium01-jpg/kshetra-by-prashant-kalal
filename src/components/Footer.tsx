@@ -70,7 +70,7 @@ export function Footer() {
               rel="noreferrer"
               className="font-medium text-white/70 underline underline-offset-2 transition-colors hover:text-brand"
             >
-              Sociium
+              Soc<span className="text-[#0077ff]">ii</span>um
             </a>
           </p>
         </div>
