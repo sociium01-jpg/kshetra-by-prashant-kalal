@@ -6,6 +6,7 @@ const essentialNav = [
   { href: "#home", label: "Home" },
   { href: "#why", label: "Why Kshetra" },
   { href: "#founder", label: "Meet Prashant" },
+  { href: "#values", label: "Values" },
   { href: "#contact", label: "Contact" },
 ]
 
