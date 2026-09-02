@@ -42,13 +42,13 @@ export function Header() {
           <Logo compact />
         </a>
 
-        <div className="flex min-w-0 items-center gap-5 lg:gap-8">
-          <nav className="hidden max-w-4xl flex-wrap items-center justify-end gap-x-4 gap-y-1 2xl:flex" aria-label="Primary">
+        <div className="flex min-w-0 items-center gap-4 lg:gap-6">
+          <nav className="hidden items-center justify-end gap-x-5 gap-y-1 md:flex" aria-label="Primary">
             {nav.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="text-[0.72rem] font-medium text-ink transition-colors hover:text-brand"
+                className="text-[0.75rem] font-semibold tracking-wider text-ink uppercase transition-colors hover:text-brand"
               >
                 {item.label}
               </a>
@@ -57,7 +57,7 @@ export function Header() {
 
           <button
             type="button"
-            className="menu-toggle"
+            className="menu-toggle md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
