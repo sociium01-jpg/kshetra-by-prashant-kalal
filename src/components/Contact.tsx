@@ -190,15 +190,23 @@ export function Contact({ onOpenLegal }: ContactProps) {
                   className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 accent-brand focus:ring-brand"
                 />
                 <label htmlFor="contact-terms" className="text-[0.74rem] leading-snug text-gray-400">
-                  By submitting, you agree to the{" "}
+                  I agree to Kshetra By Prashant Kalal's{" "}
                   <button
                     type="button"
                     onClick={() => onOpenLegal?.("terms")}
                     className="text-gray-500 underline transition-colors hover:text-brand"
                   >
-                    terms and conditions
+                    Terms & Conditions
                   </button>{" "}
-                  of Kshetra By Prashant Kalal.
+                  and{" "}
+                  <button
+                    type="button"
+                    onClick={() => onOpenLegal?.("privacy")}
+                    className="text-gray-500 underline transition-colors hover:text-brand"
+                  >
+                    Privacy Policy
+                  </button>
+                  , and consent to being contacted about this enquiry by phone, WhatsApp or email.
                 </label>
               </div>
 
