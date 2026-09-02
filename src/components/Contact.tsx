@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react"
 import { contactCopy } from "../content/home"
+import { type LegalType } from "./LegalModal"
 import { Magnetic } from "./Magnetic"
 import { Reveal } from "./Reveal"
 
@@ -9,7 +10,11 @@ function encode(data: Record<string, string>) {
   return new URLSearchParams(data).toString()
 }
 
-export function Contact() {
+interface ContactProps {
+  onOpenLegal?: (type: LegalType) => void
+}
+
+export function Contact({ onOpenLegal }: ContactProps) {
   const [status, setStatus] = useState<Status>("idle")
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -156,6 +161,27 @@ export function Contact() {
                   className="mt-2 w-full resize-y border-0 border-b border-muted/40 bg-transparent py-2 text-ink outline-none focus:border-brand"
                 />
               </label>
+              {/* Terms & Conditions Agreement Checkbox */}
+              <div className="flex items-start gap-2.5 pt-1">
+                <input
+                  type="checkbox"
+                  id="contact-terms"
+                  required
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 accent-brand focus:ring-brand"
+                />
+                <label htmlFor="contact-terms" className="text-[0.74rem] leading-snug text-gray-400">
+                  You agree to all{" "}
+                  <button
+                    type="button"
+                    onClick={() => onOpenLegal?.("terms")}
+                    className="text-gray-500 underline transition-colors hover:text-brand"
+                  >
+                    terms and conditions
+                  </button>{" "}
+                  of Kshetra By Prashant Kalal.
+                </label>
+              </div>
+
               {status === "error" ? <p className="text-sm text-brand">Something went wrong.</p> : null}
               <Magnetic className="self-start">
                 <button

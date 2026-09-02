@@ -1,11 +1,12 @@
-import { useState } from "react"
 import { contact } from "../content/home"
 import { ActionHub } from "./ActionHub"
-import { LegalModal, type LegalType } from "./LegalModal"
+import { type LegalType } from "./LegalModal"
 
-export function Footer() {
-  const [legalType, setLegalType] = useState<LegalType>(null)
+interface FooterProps {
+  onOpenLegal?: (type: LegalType) => void
+}
 
+export function Footer({ onOpenLegal }: FooterProps) {
   return (
     <footer className="relative bg-charcoal text-white">
       <div className="page-shell py-12">
@@ -68,7 +69,7 @@ export function Footer() {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-white/50 sm:justify-start">
           <button
             type="button"
-            onClick={() => setLegalType("privacy")}
+            onClick={() => onOpenLegal?.("privacy")}
             className="transition-colors hover:text-brand"
           >
             Privacy Policy
@@ -76,7 +77,7 @@ export function Footer() {
           <span>•</span>
           <button
             type="button"
-            onClick={() => setLegalType("terms")}
+            onClick={() => onOpenLegal?.("terms")}
             className="transition-colors hover:text-brand"
           >
             Terms & Conditions
@@ -84,7 +85,7 @@ export function Footer() {
           <span>•</span>
           <button
             type="button"
-            onClick={() => setLegalType("accessibility")}
+            onClick={() => onOpenLegal?.("accessibility")}
             className="transition-colors hover:text-brand"
           >
             Accessibility Statement
@@ -109,7 +110,6 @@ export function Footer() {
       </div>
 
       <ActionHub />
-      <LegalModal type={legalType} onClose={() => setLegalType(null)} />
     </footer>
   )
 }

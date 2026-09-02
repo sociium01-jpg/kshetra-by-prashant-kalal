@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { About } from "./components/About"
 import { BottomNav } from "./components/BottomNav"
 import { ConsideredApproach } from "./components/ConsideredApproach"
@@ -8,11 +9,14 @@ import { Footer } from "./components/Footer"
 import { Header } from "./components/Header"
 import { Hero } from "./components/Hero"
 import { HowICanHelp } from "./components/HowICanHelp"
+import { LegalModal, type LegalType } from "./components/LegalModal"
 import { PopUpModal } from "./components/PopUpModal"
 import { Testimonials } from "./components/Testimonials"
 import { Values } from "./components/Values"
 
 export default function App() {
+  const [legalType, setLegalType] = useState<LegalType>(null)
+
   return (
     <>
       <Header />
@@ -24,12 +28,13 @@ export default function App() {
         <Values />
         <HowICanHelp />
         <Testimonials />
-        <Contact />
+        <Contact onOpenLegal={setLegalType} />
       </main>
-      <Footer />
+      <Footer onOpenLegal={setLegalType} />
       <BottomNav />
       <DraggableScrollTop />
-      <PopUpModal />
+      <PopUpModal onOpenLegal={setLegalType} />
+      <LegalModal type={legalType} onClose={() => setLegalType(null)} />
     </>
   )
 }
