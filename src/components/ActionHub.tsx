@@ -29,11 +29,17 @@ export function ActionHub() {
   }, [])
 
   function scrollToTop() {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+    } catch {
+      window.scrollTo(0, 0)
+    }
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     const homeEl = document.getElementById("home")
     if (homeEl) {
       homeEl.scrollIntoView({ behavior: "smooth", block: "start" })
     }
-    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   const whatsappHref = `https://wa.me/${contact.phone.replace(/[^0-9]/g, "")}`

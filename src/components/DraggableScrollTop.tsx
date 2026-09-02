@@ -14,7 +14,8 @@ export function DraggableScrollTop() {
 
   useEffect(() => {
     const onScroll = () => {
-      setShow(window.scrollY > 250)
+      const curY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0
+      setShow(curY > 200)
     }
 
     onScroll()
@@ -45,7 +46,7 @@ export function DraggableScrollTop() {
     const deltaX = touch.clientX - dragStartRef.current.x
     const deltaY = touch.clientY - dragStartRef.current.y
 
-    if (Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5) {
+    if (Math.abs(deltaX) > 6 || Math.abs(deltaY) > 6) {
       hasMovedRef.current = true
     }
 
@@ -55,16 +56,26 @@ export function DraggableScrollTop() {
     setPosition({ x: newX, y: newY })
   }
 
-  function handleTouchEnd() {
+  function handleTouchEnd(e: TouchEvent<HTMLDivElement>) {
     setIsDragging(false)
+    if (!hasMovedRef.current) {
+      e.preventDefault()
+      scrollToTop()
+    }
   }
 
   function scrollToTop() {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+    } catch {
+      window.scrollTo(0, 0)
+    }
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
     const homeEl = document.getElementById("home")
     if (homeEl) {
       homeEl.scrollIntoView({ behavior: "smooth", block: "start" })
     }
-    window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
   if (!show) return null
@@ -74,8 +85,12 @@ export function DraggableScrollTop() {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onClick={(e) => {
+        e.preventDefault()
+        scrollToTop()
+      }}
       className={
-        "fixed z-40 transition-transform duration-300 lg:hidden pointer-events-auto " +
+        "fixed z-50 transition-transform duration-300 lg:hidden pointer-events-auto " +
         (isDragging ? "scale-110 opacity-90 cursor-grabbing" : "opacity-100 cursor-grab")
       }
       style={
@@ -90,9 +105,6 @@ export function DraggableScrollTop() {
           e.preventDefault()
           e.stopPropagation()
           scrollToTop()
-        }}
-        onPointerDown={(e) => {
-          e.stopPropagation()
         }}
         aria-label="Scroll to top"
         className="liquid-morph-btn-white relative z-10 flex h-12 w-12 items-center justify-center text-brand shadow-[0_10px_28px_rgba(239,127,26,0.35)] transition-all hover:scale-110 active:scale-95 pointer-events-auto"
