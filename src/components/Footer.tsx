@@ -60,9 +60,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center justify-between border-t border-white/10 pt-6 sm:flex-row">
-          <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/40 sm:flex-row">
+          <p>© {new Date().getFullYear()} Kshetra By Prashant Kalal. All rights reserved.</p>
+          <p>
+            Website developed by{" "}
+            <a
+              href="https://sociium.in/"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium text-white/70 underline underline-offset-2 transition-colors hover:text-brand"
+            >
+              Sociium
+            </a>
           </p>
         </div>
       </div>
