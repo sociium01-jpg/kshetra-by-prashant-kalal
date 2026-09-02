@@ -27,7 +27,7 @@ export function Values() {
         <Reveal variant="blur-in">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-[1.35rem] font-bold tracking-[0.04em] text-brand uppercase md:text-[1.7rem]">
-              Values
+              The Pillars of Kshetra
             </h2>
             <p className="mt-3 text-[0.95rem] font-medium text-ink md:text-[1.05rem]">
               Grounded principles that define every interaction.
