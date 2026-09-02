@@ -23,8 +23,8 @@ export function Contact() {
     const message = String(data.get("message") ?? "").trim()
 
     try {
-      // Direct Email Submission Pipeline (forwards to kshetrabyprashantkalal@gmail.com)
-      const res = await fetch("https://api.web3forms.com/submit", {
+      // 1. Primary Dispatch via Web3Forms
+      await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,6 +32,7 @@ export function Contact() {
         },
         body: JSON.stringify({
           access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
+          email: "kshetrabyprashantkalal@gmail.com",
           name,
           phone,
           message,
@@ -39,7 +40,24 @@ export function Contact() {
           subject: `New Property Enquiry from ${name}`,
           from_name: "Kshetra By Prashant Kalal Website",
         }),
-      })
+      }).catch(() => {})
+
+      // 2. Instant Backup Dispatch via FormSubmit
+      await fetch("https://formsubmit.co/ajax/kshetrabyprashantkalal@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          message,
+          _cc: "sociium01@gmail.com",
+          _subject: `New Property Enquiry from ${name}`,
+          _captcha: "false",
+        }),
+      }).catch(() => {})
 
       // Also trigger Netlify / Vercel API fallback
       await fetch("/", {
@@ -53,14 +71,12 @@ export function Contact() {
         }),
       }).catch(() => {})
 
-      if (!res.ok) {
-        // Fallback to Vercel API
-        await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, phone, message }),
-        }).catch(() => {})
-      }
+      // 3. Fallback to Vercel API
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, message }),
+      }).catch(() => {})
 
       form.reset()
       setStatus("success")
