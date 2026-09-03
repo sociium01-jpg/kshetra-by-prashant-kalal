@@ -56,8 +56,20 @@ const valuesData = [
 
 export function Values() {
   return (
-    <section id="values" className="section-band bg-white">
-      <div className="page-shell">
+    <section id="values" className="section-band relative overflow-hidden bg-white">
+      {/* Responsive Background Banner Image */}
+      <picture className="absolute inset-0 pointer-events-none select-none z-0">
+        <source media="(max-width: 639px)" srcSet="/values-banner-mobile.png" />
+        <source media="(min-width: 1920px)" srcSet="/values-banner-ultrawide.png" />
+        <img
+          src="/values-banner-desktop.png"
+          alt=""
+          className="h-full w-full object-cover object-top opacity-90 transition-opacity duration-700"
+          loading="lazy"
+        />
+      </picture>
+
+      <div className="page-shell relative z-10">
         <Reveal variant="blur-in">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-[1.35rem] font-bold tracking-[0.04em] text-brand uppercase md:text-[1.7rem]">
