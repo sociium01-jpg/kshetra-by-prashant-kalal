@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal"
 
 export function Differentiator() {
   return (
-    <section id="journey" className="section-band bg-white">
+    <section id="journey" className="section-band bg-gray">
       <div className="page-shell">
         <Reveal variant="blur-in">
           <h2 className="section-title text-center text-balance">{journey.heading}</h2>
