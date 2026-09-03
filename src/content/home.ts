@@ -144,6 +144,12 @@ export const testimonials = {
   items: [
     {
       quote:
+        "Prashanth, thank you for making my real estate experience so smooth and hassle-free. Your professionalism, patience and personal attention really stood out. I always felt that you had my best interests in mind and I would gladly recommend you to anyone looking for a reliable and trustworthy real estate professional.",
+      name: "Manish Singhani",
+      title: "",
+    },
+    {
+      quote:
         "Prashant brings a rare level of depth to real estate advisory. Having managed end-to-end operations for 100+ acre township developments, his insight goes far beyond sales talk. He understands execution, long-term value, and what truly matters to property buyers.",
       name: "Aravind Menon",
       title: "Founder, Sociium",

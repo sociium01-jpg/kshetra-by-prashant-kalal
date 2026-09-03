@@ -9,7 +9,7 @@ export function Testimonials() {
         <Reveal variant="blur-in">
           <h2 className="section-title text-center">{testimonials.heading}</h2>
         </Reveal>
-        <div className="mt-7 grid gap-4 sm:mt-8 md:grid-cols-3">
+        <div className="mt-7 grid gap-6 sm:mt-8 sm:grid-cols-2">
           {testimonials.items.map((item, i) => (
             <Reveal key={item.quote} delay={i * 90} variant="zoom-in">
               <Card3D className="flex h-full flex-col px-5 py-6 sm:px-6 sm:py-7">
