@@ -154,18 +154,6 @@ export const testimonials = {
       name: "Aravind Menon",
       title: "Founder, Sociium",
     },
-    {
-      quote:
-        "Kshetra By Prashant Kalal began with a simple thought: what if more understanding came before the decision?",
-      name: "Prashant Kalal",
-      title: "Real Estate Advisor",
-    },
-    {
-      quote:
-        "Sometimes the right decision is to buy. Sometimes, it’s to wait. Either way, the aim is simple - understand before you decide.",
-      name: "Prashant Kalal",
-      title: "Real Estate Advisor",
-    },
   ],
 }
 
