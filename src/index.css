@@ -77,16 +77,16 @@ html {
   justify-content: center;
   width: 100%;
   max-width: 100%;
-  min-height: auto;
-  padding-top: calc(var(--header-offset) + 1.5rem);
-  padding-bottom: 1.75rem;
+  min-height: 18rem;
+  padding-top: calc(var(--header-offset) + 2.5rem);
+  padding-bottom: 2.75rem;
 }
 
 @media (min-width: 768px) {
   .section-hero {
-    min-height: auto;
-    padding-top: calc(var(--header-offset) + 2rem);
-    padding-bottom: 2.25rem;
+    min-height: 22rem;
+    padding-top: calc(var(--header-offset) + 3.25rem);
+    padding-bottom: 3.75rem;
   }
 }
 
@@ -296,8 +296,8 @@ button {
 }
 
 .quote-hero {
-  font-size: clamp(0.95rem, 3.4vw, 1.3rem);
-  line-height: 1.45;
+  font-size: clamp(0.95rem, 3.2vw, 1.25rem);
+  line-height: 1.55;
   font-weight: 400;
   letter-spacing: 0.01em;
   color: #333333;
@@ -305,7 +305,8 @@ button {
 
 @media (min-width: 1024px) {
   .quote-hero {
-    font-size: clamp(1.2rem, 1.55vw + 0.85rem, 2.125rem);
+    font-size: clamp(1.1rem, 1.2vw + 0.75rem, 1.65rem);
+    line-height: 1.6;
   }
 }
 

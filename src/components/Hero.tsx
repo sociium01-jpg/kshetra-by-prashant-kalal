@@ -71,10 +71,10 @@ export function Hero() {
   const quote = quotes[index] ?? quotes[0]
   const wash = quote.wash === "tr" ? "peach-wash-tr" : "peach-wash-tl"
 
-  // Always use Quote 0 lines for max height placeholder to keep stage height 100% constant & un-shifting
+  // Always use Quote 2 (3-line quote) for max height placeholder to keep stage height 100% constant & spacious
   const maxPlaceholderLines = isMobile
-    ? (quotes[0].linesMobile ?? quotes[0].lines)
-    : quotes[0].lines
+    ? (quotes[2].linesMobile ?? quotes[2].lines)
+    : quotes[2].lines
 
   return (
     <section
