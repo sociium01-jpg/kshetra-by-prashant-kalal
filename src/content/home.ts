@@ -38,18 +38,6 @@ export const quotes = [
   },
   {
     lines: [
-      "I have seen properties from sale to possession.",
-      "That journey taught me that what happens after the sale",
-      "matters just as much as what happens before it.",
-    ],
-    linesMobile: [
-      "I have seen properties from sale to possession. That journey taught me that",
-      "what happens after the sale matters just as much as what happens before it.",
-    ],
-    wash: "tl" as const,
-  },
-  {
-    lines: [
       "Kshetra by Prashant Kalal isn’t about telling",
       "people what to buy. It’s about helping them",
       "understand enough to decide for themselves.",
@@ -57,6 +45,18 @@ export const quotes = [
     linesMobile: [
       "Kshetra by Prashant Kalal isn’t about telling people what to buy.",
       "It’s about helping them understand enough to decide for themselves.",
+    ],
+    wash: "tl" as const,
+  },
+  {
+    lines: [
+      "I have seen properties from sale to possession.",
+      "That journey taught me that what happens after the sale",
+      "matters just as much as what happens before it.",
+    ],
+    linesMobile: [
+      "I have seen properties from sale to possession. That journey taught me that",
+      "what happens after the sale matters just as much as what happens before it.",
     ],
     wash: "tl" as const,
   },
