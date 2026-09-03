@@ -27,6 +27,17 @@ export const heroTagline =
 export const quotes = [
   {
     lines: [
+      "Real estate is ultimately about people, places",
+      "and the lives that unfold between them.",
+    ],
+    linesMobile: [
+      "Real estate is ultimately about people, places",
+      "and the lives that unfold between them.",
+    ],
+    wash: "tr" as const,
+  },
+  {
+    lines: [
       "I have seen properties from sale to possession.",
       "That journey taught me that what happens after the sale",
       "matters just as much as what happens before it.",
@@ -36,17 +47,6 @@ export const quotes = [
       "what happens after the sale matters just as much as what happens before it.",
     ],
     wash: "tl" as const,
-  },
-  {
-    lines: [
-      "Real estate is ultimately about people, places",
-      "and the lives that unfold between them.",
-    ],
-    linesMobile: [
-      "Real estate is ultimately about people, places",
-      "and the lives that unfold between them.",
-    ],
-    wash: "tr" as const,
   },
   {
     lines: [
