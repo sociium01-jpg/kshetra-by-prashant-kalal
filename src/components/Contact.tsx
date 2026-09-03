@@ -97,7 +97,7 @@ export function Contact({ onOpenLegal }: ContactProps) {
   }
 
   return (
-    <section id="contact" className="section-band peach-wash-tl overflow-x-hidden">
+    <section id="contact" className="section-band bg-gray overflow-x-hidden">
       <div className="page-shell grid items-stretch gap-6 md:gap-8 lg:grid-cols-2 lg:gap-10">
         <Reveal className="flex min-h-0 flex-col" variant="fade-right">
           <h2 className="text-[1.3rem] leading-tight font-bold text-balance text-ink sm:text-[1.45rem] md:text-[2.2rem]">
