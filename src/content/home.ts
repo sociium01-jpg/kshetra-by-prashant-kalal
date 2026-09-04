@@ -144,6 +144,12 @@ export const testimonials = {
   items: [
     {
       quote:
+        "Buying a home in Pune from the US required complete trust, and Prashant made it effortless. Patient, knowledgeable, detail-oriented, and never pushy, he treated us like family and went above and beyond at every step. We were incredibly lucky to work with him!",
+      name: "Hitesh Saijpal",
+      title: "",
+    },
+    {
+      quote:
         "Prashanth, thank you for making my real estate experience so smooth and hassle-free. Your professionalism, patience and personal attention really stood out. I always felt that you had my best interests in mind and I would gladly recommend you to anyone looking for a reliable and trustworthy real estate professional.",
       name: "Manish Singhani",
       title: "",
