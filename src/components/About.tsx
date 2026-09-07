@@ -39,7 +39,7 @@ export function About() {
         >
           <div className="split-photo-frame">
             <img
-              src="/founder-pk.png?v=8"
+              src="/founder-pk.png?v=9"
               alt="Prashant Kalal"
               className="max-h-[26rem] w-auto max-w-full object-contain"
               width={819}
