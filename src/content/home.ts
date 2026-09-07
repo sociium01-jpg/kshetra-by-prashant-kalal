@@ -156,6 +156,12 @@ export const testimonials = {
     },
     {
       quote:
+        "We had a wonderful experience with Prashant while finding our home in Pune. His genuine approach, transparency, and patient guidance made the entire process smooth and stress-free. We truly appreciate his support and highly recommend him for any property needs in Pune.",
+      name: "Sejal Shah",
+      title: "",
+    },
+    {
+      quote:
         "Prashant brings a rare level of depth to real estate advisory. Having managed end-to-end operations for 100+ acre township developments, his insight goes far beyond sales talk. He understands execution, long-term value, and what truly matters to property buyers.",
       name: "Aravind Menon",
       title: "Founder, Sociium",
