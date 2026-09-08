@@ -26,7 +26,7 @@ export function Testimonials() {
                     {item.name}
                   </p>
                   {item.title ? (
-                    <p className="mt-0.5 text-[0.68rem] font-medium text-muted">
+                    <p className="mt-0.5 text-[0.65rem] font-medium text-muted whitespace-nowrap">
                       {item.title}
                     </p>
                   ) : null}

@@ -152,7 +152,7 @@ export const testimonials = {
       quote:
         "Prashanth, thank you for making my real estate experience so smooth and hassle-free. Your professionalism, patience and personal attention really stood out. I always felt that you had my best interests in mind and I would gladly recommend you to anyone looking for a reliable and trustworthy real estate professional.",
       name: "Manish Singhani",
-      title: "Owner, Kohinoor Diamonds and Jewels",
+      title: "Owner,\u00a0Kohinoor\u00a0Diamonds\u00a0and\u00a0Jewels",
     },
     {
       quote:
