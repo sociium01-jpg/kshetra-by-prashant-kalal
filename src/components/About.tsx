@@ -1,5 +1,6 @@
 import { founder } from "../content/home"
 import { useInView } from "../hooks/useInView"
+import { FounderQuoteCard } from "./FounderQuoteCard"
 import { Reveal } from "./Reveal"
 
 export function About() {
@@ -37,13 +38,17 @@ export function About() {
           delay={150}
           className={`split-media split-media-fit ${visible ? "is-in" : ""}`}
         >
-          <div className="split-photo-frame">
-            <img
-              src="/founder-pk.png?v=13"
-              alt="Prashant Kalal"
-              className="max-h-[26rem] w-auto max-w-full object-contain"
-              width={819}
-              height={1024}
+          <div className="split-photo-frame w-full max-w-[24rem]">
+            <FounderQuoteCard
+              quoteLines={[
+                "Because the right",
+                "INVESTMENT begins",
+                "with the right",
+                "QUESTIONS.",
+              ]}
+              name={["PRASHANT", "KALAL"]}
+              role="FOUNDER"
+              photo="/founder-cutout.png"
             />
           </div>
         </Reveal>
