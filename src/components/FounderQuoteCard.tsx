@@ -130,10 +130,12 @@ export function FounderQuoteCard({
         alt={`${nameAlt}, ${role.toLowerCase()}`}
         className="portrait absolute z-[2] select-none pointer-events-none"
         style={{
-          left: "5.3125%",
-          top: "6.05%",
-          width: "73.6875%",
-          height: "auto",
+          left: "1%",
+          bottom: "0px",
+          width: "84%",
+          maxHeight: "95%",
+          objectFit: "contain",
+          objectPosition: "bottom left",
         }}
       />
     </figure>

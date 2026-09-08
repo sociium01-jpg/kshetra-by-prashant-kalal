@@ -38,7 +38,7 @@ export function About() {
           delay={150}
           className={`split-media split-media-fit ${visible ? "is-in" : ""}`}
         >
-          <div className="split-photo-frame w-full max-w-[24rem]">
+          <div className="split-photo-frame w-full max-w-[26rem] sm:max-w-[28rem]">
             <FounderQuoteCard
               quoteLines={[
                 "Because the right",
