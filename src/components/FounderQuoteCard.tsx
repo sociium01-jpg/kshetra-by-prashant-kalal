@@ -126,7 +126,7 @@ export function FounderQuoteCard({
 
       {/* Transparent Cut-out Portrait Layered ABOVE Panels */}
       <img
-        src={photo}
+        src={`${photo}?v=2`}
         alt={`${nameAlt}, ${role.toLowerCase()}`}
         className="portrait absolute z-[2] select-none pointer-events-none"
         style={{
