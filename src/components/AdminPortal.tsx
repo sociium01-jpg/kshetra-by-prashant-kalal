@@ -22,6 +22,8 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
     addMediaAsset,
     deleteMediaAsset,
     updateGeminiApiKey,
+    updateGithubToken,
+    syncToGitHub,
     resetToDefaults,
   } = useSite()
 
@@ -29,11 +31,22 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
   const [leadSearch, setLeadSearch] = useState("")
   const [leadFilter, setLeadFilter] = useState<"all" | "new" | "contacted" | "closed">("all")
   const [saveSuccess, setSaveSuccess] = useState(false)
+  const [syncingGithub, setSyncingGithub] = useState(false)
+  const [syncMessage, setSyncMessage] = useState<string | null>(null)
 
-  // AI Prompt State
-  const [aiPrompt, setAiPrompt] = useState("")
-  const [aiResponse, setAiResponse] = useState("")
-  const [aiLoading, setAiLoading] = useState(false)
+  // AI Agent Chat State
+  const [chatMessages, setChatMessages] = useState<
+    Array<{ id: string; sender: "user" | "agent"; text: string; timestamp: string }>
+  >([
+    {
+      id: "init-1",
+      sender: "agent",
+      text: "Hello Prashant! I am your Antigravity AI Agent for Kshetra. Tell me what you'd like to change (e.g., 'Update founder heading to Visionary Real Estate Advisor', 'Add quote: Precision in luxury plots', 'Push changes live to GitHub') and I will execute it live!",
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    },
+  ])
+  const [chatInput, setChatInput] = useState("")
+  const [agentThinking, setAgentThinking] = useState(false)
 
   // Testimonial Form State
   const [newTestimonial, setNewTestimonial] = useState<TestimonialItem>({
@@ -47,6 +60,164 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
   function showSaveBanner() {
     setSaveSuccess(true)
     window.setTimeout(() => setSaveSuccess(false), 3000)
+  }
+
+  async function handleSyncToGitHub() {
+    setSyncingGithub(true)
+    setSyncMessage(null)
+    try {
+      const res = await syncToGitHub()
+      if (res.success) {
+        setSyncMessage("✅ " + res.message)
+        showSaveBanner()
+      } else {
+        setSyncMessage("⚠️ " + res.message)
+      }
+    } catch {
+      setSyncMessage("❌ Failed to initiate GitHub sync.")
+    } finally {
+      setSyncingGithub(false)
+    }
+  }
+
+  async function sendAgentChatMessage() {
+    const text = chatInput.trim()
+    if (!text || agentThinking) return
+
+    const userMsgId = `msg-${Date.now()}`
+    const timeStr = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+
+    setChatMessages((prev) => [
+      ...prev,
+      { id: userMsgId, sender: "user", text, timestamp: timeStr },
+    ])
+    setChatInput("")
+    setAgentThinking(true)
+
+    const apiKey = content.geminiApiKey.trim()
+    if (!apiKey) {
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          id: `msg-${Date.now()}`,
+          sender: "agent",
+          text: "⚠️ Please configure your Gemini API Key in the settings below so I can process natural language requests for you!",
+          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        },
+      ])
+      setAgentThinking(false)
+      return
+    }
+
+    try {
+      const systemPrompt = `You are Antigravity AI Agent, an intelligent website assistant for 'Kshetra by Prashant Kalal'.
+The user wants you to assist with site copy, headings, testimonials, quotes, or syncing to GitHub.
+
+Current Site State:
+- Founder Heading: "${content.founder.heading}"
+- Founder Subhead: "${content.founder.subhead}"
+- Why Kshetra Subhead: "${content.whyKshetra.subhead}"
+- Testimonials Count: ${content.testimonials.items.length}
+- Hero Quotes Count: ${content.quotes.length}
+
+If the user's request requires mutating site content, output a JSON block formatted like:
+\`\`\`json
+{
+  "action": "UPDATE_CONTENT",
+  "data": {
+    "founder": { "heading": "..." }
+  }
+}
+\`\`\`
+Or for ADD_TESTIMONIAL:
+\`\`\`json
+{
+  "action": "ADD_TESTIMONIAL",
+  "data": { "name": "...", "title": "...", "quote": "..." }
+}
+\`\`\`
+Or for ADD_QUOTE:
+\`\`\`json
+{
+  "action": "ADD_QUOTE",
+  "data": { "lines": ["Line 1", "Line 2"] }
+}
+\`\`\`
+Or for SYNC_GITHUB:
+\`\`\`json
+{
+  "action": "SYNC_GITHUB"
+}
+\`\`\`
+
+User message: ${text}
+Provide a helpful, friendly response confirming what action was taken.`
+
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: systemPrompt }] }],
+          }),
+        }
+      )
+
+      const json = await res.json()
+      const responseText =
+        json.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "I analyzed your request, but couldn't process a valid response."
+
+      // Check for JSON action block
+      const jsonMatch = responseText.match(/```json\s*([\s\S]*?)\s*```/)
+      if (jsonMatch && jsonMatch[1]) {
+        try {
+          const actionData = JSON.parse(jsonMatch[1])
+          if (actionData.action === "UPDATE_CONTENT" && actionData.data) {
+            updateContent(actionData.data)
+            showSaveBanner()
+          } else if (actionData.action === "ADD_TESTIMONIAL" && actionData.data) {
+            addTestimonial(actionData.data)
+            showSaveBanner()
+          } else if (actionData.action === "ADD_QUOTE" && actionData.data?.lines) {
+            updateContent({
+              quotes: [...content.quotes, { lines: actionData.data.lines }],
+            })
+            showSaveBanner()
+          } else if (actionData.action === "SYNC_GITHUB") {
+            handleSyncToGitHub()
+          }
+        } catch {
+          // Ignore JSON parse error
+        }
+      }
+
+      // Clean display text without raw json block if present
+      const cleanText = responseText.replace(/```json[\s\S]*?```/g, "").trim() || responseText
+
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          id: `msg-${Date.now()}`,
+          sender: "agent",
+          text: cleanText,
+          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        },
+      ])
+    } catch (err: any) {
+      setChatMessages((prev) => [
+        ...prev,
+        {
+          id: `msg-${Date.now()}`,
+          sender: "agent",
+          text: "⚠️ Sorry, I encountered an error connecting to Gemini API: " + (err?.message || "Error"),
+          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        },
+      ])
+    } finally {
+      setAgentThinking(false)
+    }
   }
 
   // Lead CSV Exporter
@@ -106,53 +277,6 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
     reader.readAsDataURL(file)
   }
 
-  // Gemini AI Assistant Call
-  async function callGeminiAI() {
-    if (!aiPrompt.trim()) return
-    setAiLoading(true)
-    setAiResponse("")
-
-    try {
-      const apiKey = content.geminiApiKey.trim()
-      if (!apiKey) {
-        setAiResponse(
-          "⚠️ Please enter your Gemini API Key in the settings below to enable AI copy assistance."
-        )
-        setAiLoading(false)
-        return
-      }
-
-      const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  {
-                    text: `You are an expert luxury real estate copywriter for 'Kshetra by Prashant Kalal'. ${aiPrompt}`,
-                  },
-                ],
-              },
-            ],
-          }),
-        }
-      )
-
-      const json = await res.json()
-      const generated =
-        json.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "No response generated. Please check your API key."
-      setAiResponse(generated)
-    } catch {
-      setAiResponse("Failed to connect to Gemini API. Please check network connection.")
-    } finally {
-      setAiLoading(false)
-    }
-  }
-
   const filteredLeads = leads.filter((l) => {
     const matchesSearch =
       l.name.toLowerCase().includes(leadSearch.toLowerCase()) ||
@@ -179,6 +303,14 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
+            disabled={syncingGithub}
+            onClick={handleSyncToGitHub}
+            className="rounded-lg bg-emerald-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-emerald-700 disabled:opacity-50 transition-colors flex items-center gap-1.5"
+          >
+            <span>{syncingGithub ? "Syncing..." : "🚀 Push & Sync Live to GitHub"}</span>
+          </button>
+          <button
+            type="button"
             onClick={() => {
               if (confirm("Reset all site content back to original defaults?")) {
                 resetToDefaults()
@@ -198,6 +330,12 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
           </button>
         </div>
       </header>
+
+      {syncMessage && (
+        <div className="bg-ink px-4 py-2 text-center text-xs font-medium text-white transition-all">
+          {syncMessage}
+        </div>
+      )}
 
       {/* Live Save Notification */}
       {saveSuccess && (
@@ -743,75 +881,108 @@ export function AdminPortal({ isOpen, onClose }: AdminPortalProps) {
             </div>
           )}
 
-          {/* TAB 5: GEMINI AI COPILOT */}
+          {/* TAB 5: GEMINI AI COPILOT & AGENT CHAT */}
           {activeTab === "ai" && (
             <div className="space-y-6 max-w-4xl">
               <div>
-                <h3 className="text-xl font-bold text-ink">Gemini AI Copywriting Copilot</h3>
+                <h3 className="text-xl font-bold text-ink">Antigravity AI Agent & GitHub Sync</h3>
                 <p className="text-xs text-body">
-                  Use Google Gemini AI to refine copy, generate high-converting headlines, and rewrite quotes.
+                  Chat with your AI Agent to change site copy, update quotes, manage testimonials, or push live updates to GitHub.
                 </p>
               </div>
 
-              {/* API Key Setup */}
-              <div className="rounded-2xl border border-muted/20 bg-white p-6 shadow-sm space-y-3">
-                <h4 className="text-xs font-bold text-ink uppercase">Gemini API Key Configuration</h4>
-                <div className="flex gap-3">
+              {/* API Keys Configuration */}
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-muted/20 bg-white p-5 shadow-sm space-y-2">
+                  <h4 className="text-xs font-bold text-ink uppercase">Gemini API Key</h4>
                   <input
                     type="password"
-                    placeholder="Enter your Gemini API Key..."
+                    placeholder="AI Key (AIzaSy...)"
                     value={content.geminiApiKey}
-                    onChange={(e) => {
-                      updateGeminiApiKey(e.target.value)
-                    }}
-                    className="flex-1 rounded-xl border border-muted/30 p-2.5 text-xs outline-none focus:border-brand"
+                    onChange={(e) => updateGeminiApiKey(e.target.value)}
+                    className="w-full rounded-xl border border-muted/30 p-2.5 text-xs outline-none focus:border-brand"
                   />
-                  <button
-                    type="button"
-                    onClick={showSaveBanner}
-                    className="rounded-xl bg-brand px-5 py-2.5 text-xs font-semibold text-white uppercase hover:bg-brand-dark"
-                  >
-                    Save Key
-                  </button>
+                  <p className="text-[0.68rem] text-muted">Required for AI Agent Chat & Copy suggestions.</p>
+                </div>
+
+                <div className="rounded-2xl border border-muted/20 bg-white p-5 shadow-sm space-y-2">
+                  <h4 className="text-xs font-bold text-ink uppercase">GitHub Personal Access Token</h4>
+                  <input
+                    type="password"
+                    placeholder="GitHub Token (ghp_...)"
+                    value={content.githubToken}
+                    onChange={(e) => updateGithubToken(e.target.value)}
+                    className="w-full rounded-xl border border-muted/30 p-2.5 text-xs outline-none focus:border-brand"
+                  />
+                  <p className="text-[0.68rem] text-muted">Optional if GITHUB_TOKEN is set in Vercel environment variables.</p>
                 </div>
               </div>
 
-              {/* AI Prompt Box */}
-              <div className="rounded-2xl border border-muted/20 bg-white p-6 shadow-sm space-y-4">
-                <h4 className="text-xs font-bold text-ink uppercase">AI Prompt Assistant</h4>
-                <textarea
-                  rows={4}
-                  placeholder="e.g., Rewrite the 'Why Kshetra' subhead to be more compelling for luxury home buyers in Pune..."
-                  value={aiPrompt}
-                  onChange={(e) => setAiPrompt(e.target.value)}
-                  className="w-full rounded-xl border border-muted/30 p-3 text-xs outline-none focus:border-brand"
-                />
-
-                <button
-                  type="button"
-                  disabled={aiLoading}
-                  onClick={callGeminiAI}
-                  className="rounded-xl bg-brand px-6 py-2.5 text-xs font-semibold text-white uppercase tracking-wider hover:bg-brand-dark disabled:opacity-60"
-                >
-                  {aiLoading ? "Gemini is Thinking..." : "✨ Generate Copy with Gemini"}
-                </button>
-
-                {aiResponse && (
-                  <div className="mt-4 rounded-xl border border-brand/30 bg-brand/5 p-4 space-y-3">
-                    <h5 className="text-xs font-bold text-brand uppercase">Gemini AI Suggestion:</h5>
-                    <p className="text-xs leading-relaxed text-ink whitespace-pre-wrap">{aiResponse}</p>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        navigator.clipboard.writeText(aiResponse)
-                        alert("AI suggestion copied to clipboard!")
-                      }}
-                      className="rounded-lg bg-brand px-3 py-1 text-[0.68rem] font-semibold text-white uppercase"
-                    >
-                      Copy Response
-                    </button>
+              {/* Interactive AI Agent Chat Box */}
+              <div className="rounded-2xl border border-brand/20 bg-white p-6 shadow-md flex flex-col h-[28rem]">
+                <div className="flex items-center justify-between border-b border-muted/15 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-2.5 w-2.5 rounded-full bg-brand animate-ping" />
+                    <h4 className="text-xs font-bold text-ink uppercase tracking-wider">
+                      🤖 Antigravity AI Agent Chat
+                    </h4>
                   </div>
-                )}
+                  <span className="text-[0.68rem] text-muted">Powered by Gemini 1.5 Flash</span>
+                </div>
+
+                {/* Chat Log Window */}
+                <div className="flex-1 overflow-y-auto my-4 space-y-3 pr-2 text-xs">
+                  {chatMessages.map((msg) => (
+                    <div
+                      key={msg.id}
+                      className={`flex flex-col ${
+                        msg.sender === "user" ? "items-end" : "items-start"
+                      }`}
+                    >
+                      <div
+                        className={`max-w-[85%] rounded-2xl p-3.5 leading-relaxed shadow-sm ${
+                          msg.sender === "user"
+                            ? "bg-brand text-white rounded-br-none"
+                            : "bg-gray text-ink border border-muted/20 rounded-bl-none"
+                        }`}
+                      >
+                        <p className="whitespace-pre-wrap">{msg.text}</p>
+                      </div>
+                      <span className="mt-1 text-[0.65rem] text-muted">{msg.timestamp}</span>
+                    </div>
+                  ))}
+
+                  {agentThinking && (
+                    <div className="flex items-center gap-2 text-xs font-semibold text-brand animate-pulse">
+                      <span>🤖 Agent is thinking & executing actions...</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Chat Input Bar */}
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault()
+                    sendAgentChatMessage()
+                  }}
+                  className="flex gap-2 border-t border-muted/15 pt-3"
+                >
+                  <input
+                    type="text"
+                    placeholder="Tell AI Agent what to change (e.g. 'Update founder heading to Visionary Advisor')..."
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    disabled={agentThinking}
+                    className="flex-1 rounded-xl border border-muted/30 p-2.5 text-xs outline-none focus:border-brand"
+                  />
+                  <button
+                    type="submit"
+                    disabled={agentThinking || !chatInput.trim()}
+                    className="rounded-xl bg-brand px-5 py-2.5 text-xs font-semibold text-white uppercase hover:bg-brand-dark disabled:opacity-50"
+                  >
+                    Send
+                  </button>
+                </form>
               </div>
             </div>
           )}

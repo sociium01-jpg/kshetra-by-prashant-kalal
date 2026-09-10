@@ -58,6 +58,7 @@ export interface SiteContent {
   }
   contactCopy: typeof defaultContactCopy
   geminiApiKey: string
+  githubToken: string
 }
 
 interface SiteContextType {
@@ -74,6 +75,8 @@ interface SiteContextType {
   addMediaAsset: (asset: Omit<MediaAsset, "id" | "timestamp">) => void
   deleteMediaAsset: (id: string) => void
   updateGeminiApiKey: (key: string) => void
+  updateGithubToken: (token: string) => void
+  syncToGitHub: () => Promise<{ success: boolean; message: string; commit?: string }>
   resetToDefaults: () => void
 }
 
@@ -92,6 +95,7 @@ const initialContent: SiteContent = {
   testimonials: defaultTestimonials,
   contactCopy: defaultContactCopy,
   geminiApiKey: "",
+  githubToken: "",
 }
 
 const SiteContext = createContext<SiteContextType | null>(null)
@@ -248,6 +252,41 @@ export function SiteProvider({ children }: { children: ReactNode }) {
     setContent((prev) => ({ ...prev, geminiApiKey: key }))
   }
 
+  function updateGithubToken(token: string) {
+    setContent((prev) => ({ ...prev, githubToken: token }))
+  }
+
+  async function syncToGitHub(): Promise<{ success: boolean; message: string; commit?: string }> {
+    try {
+      const res = await fetch("/api/sync-github", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content,
+          token: content.githubToken || undefined,
+        }),
+      })
+
+      const data = await res.json()
+      if (res.ok && data.success) {
+        return {
+          success: true,
+          message: data.message || "Successfully pushed updates to GitHub! Vercel live deployment started.",
+          commit: data.commit,
+        }
+      }
+      return {
+        success: false,
+        message: data.error || "Failed to push to GitHub. Check token settings.",
+      }
+    } catch (err: any) {
+      return {
+        success: false,
+        message: err?.message || "Network error while connecting to GitHub sync API.",
+      }
+    }
+  }
+
   function resetToDefaults() {
     setContent(initialContent)
     localStorage.removeItem(STORAGE_CONTENT_KEY)
@@ -269,6 +308,8 @@ export function SiteProvider({ children }: { children: ReactNode }) {
         addMediaAsset,
         deleteMediaAsset,
         updateGeminiApiKey,
+        updateGithubToken,
+        syncToGitHub,
         resetToDefaults,
       }}
     >

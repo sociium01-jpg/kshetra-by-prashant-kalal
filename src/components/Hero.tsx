@@ -42,6 +42,9 @@ export function Hero() {
   const indexRef = useRef(0)
   indexRef.current = index
 
+  const touchStartXRef = useRef<number | null>(null)
+  const touchEndXRef = useRef<number | null>(null)
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024)
@@ -70,6 +73,31 @@ export function Hero() {
     return () => window.clearInterval(id)
   }, [paused])
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX
+    touchEndXRef.current = e.touches[0].clientX
+    setPaused(true)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndXRef.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = () => {
+    setPaused(false)
+    if (touchStartXRef.current !== null && touchEndXRef.current !== null) {
+      const deltaX = touchEndXRef.current - touchStartXRef.current
+      const swipeThreshold = 40
+      if (deltaX < -swipeThreshold) {
+        goTo(indexRef.current + 1, 1)
+      } else if (deltaX > swipeThreshold) {
+        goTo(indexRef.current - 1, -1)
+      }
+    }
+    touchStartXRef.current = null
+    touchEndXRef.current = null
+  }
+
   const quote = quotes[index] ?? quotes[0]
   const wash = quote.wash === "tr" ? "peach-wash-tr" : "peach-wash-tl"
 
@@ -81,10 +109,13 @@ export function Hero() {
   return (
     <section
       id="home"
-      className={`${wash} section-hero relative transition-[background] duration-700`}
+      className={`${wash} section-hero relative transition-[background] duration-700 select-none cursor-grab active:cursor-grabbing`}
       aria-live="polite"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <h1 className="sr-only">Kshetra by Prashant Kalal</h1>
       <div className="page-shell relative min-w-0 overflow-visible text-center">
