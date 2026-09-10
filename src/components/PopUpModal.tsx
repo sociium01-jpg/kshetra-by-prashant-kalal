@@ -66,43 +66,16 @@ export function PopUpModal({ onOpenLegal }: PopUpModalProps) {
       closeModal()
     }, 2500)
 
-    // 2. Background Dispatches (Non-blocking)
-    fetch("https://api.web3forms.com/submit", {
+    // 3. Secure Background Dispatch to Serverless API Route
+    fetch("/api/contact", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
-        email: "kshetrabyprashantkalal@gmail.com",
-        replyto: userEmail || undefined,
-        name,
-        phone,
-        client_email: userEmail || "Not provided",
-        message,
-        bcc: "sociium01@gmail.com",
-        subject: `New Lead: ${name} (${phone}) - Popup Form`,
-        from_name: "Kshetra By Prashant Kalal Website",
-      }),
-    }).catch(() => {})
-
-    fetch("https://formsubmit.co/ajax/kshetrabyprashantkalal@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name,
         phone,
-        email: userEmail || "Not provided",
+        email: userEmail,
         message,
-        _replyto: userEmail || undefined,
-        _cc: "sociium01@gmail.com",
-        _subject: `New Lead: ${name} (${phone}) - Popup Form`,
-        _template: "table",
-        _captcha: "false",
+        source: "Popup Modal Form",
       }),
     }).catch(() => {})
   }

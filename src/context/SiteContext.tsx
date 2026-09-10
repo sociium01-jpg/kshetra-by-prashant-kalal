@@ -120,19 +120,7 @@ export function SiteProvider({ children }: { children: ReactNode }) {
     } catch {
       // Fallback
     }
-    return [
-      {
-        id: "lead-1",
-        name: "Hitesh Saijpal",
-        phone: "+1 408-555-0199",
-        email: "hitesh.saijpal@example.com",
-        message: "Interested in premium residential township options in Pune.",
-        source: "Contact Page",
-        timestamp: "2026-09-08T10:15:00.000Z",
-        status: "contacted",
-        notes: "Shared initial consultation details via WhatsApp.",
-      },
-    ]
+    return []
   })
 
   const [mediaAssets, setMediaAssets] = useState<MediaAsset[]>(() => {

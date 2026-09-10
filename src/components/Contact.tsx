@@ -6,10 +6,6 @@ import { Reveal } from "./Reveal"
 
 type Status = "idle" | "submitting" | "success" | "error"
 
-function encode(data: Record<string, string>) {
-  return new URLSearchParams(data).toString()
-}
-
 interface ContactProps {
   onOpenLegal?: (type: LegalType) => void
 }
@@ -44,64 +40,17 @@ export function Contact({ onOpenLegal }: ContactProps) {
     setStatus("success")
     form.reset()
 
-    // 2. Primary Lead Capture via Web3Forms (Delivers clean lead details to kshetrabyprashantkalal@gmail.com)
-    fetch("https://api.web3forms.com/submit", {
+    // 3. Secure Background Dispatch to Serverless API Route
+    fetch("/api/contact", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
-        email: "kshetrabyprashantkalal@gmail.com",
-        replyto: userEmail || undefined,
-        name,
-        phone,
-        client_email: userEmail || "Not provided",
-        message,
-        bcc: "sociium01@gmail.com",
-        subject: `New Lead: ${name} (${phone}) - Contact Page`,
-        from_name: "Kshetra By Prashant Kalal Website",
-      }),
-    }).catch(() => {})
-
-    // 3. Instant Backup Lead Capture via FormSubmit
-    fetch("https://formsubmit.co/ajax/kshetrabyprashantkalal@gmail.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        phone,
-        email: userEmail || "Not provided",
-        message,
-        _replyto: userEmail || undefined,
-        _cc: "sociium01@gmail.com",
-        _subject: `New Lead: ${name} (${phone}) - Contact Page`,
-        _template: "table",
-        _captcha: "false",
-      }),
-    }).catch(() => {})
-
-    // 4. Netlify Form & Vercel API Fallback
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": "enquiry",
         name,
         phone,
         email: userEmail,
         message,
+        source: "Contact Page",
       }),
-    }).catch(() => {})
-
-    fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, phone, message }),
     }).catch(() => {})
   }
 

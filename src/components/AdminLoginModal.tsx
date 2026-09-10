@@ -6,16 +6,28 @@ interface AdminLoginModalProps {
   onSuccess: () => void
 }
 
+async function sha256(message: string): Promise<string> {
+  const msgBuffer = new TextEncoder().encode(message)
+  const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("")
+}
+
+const VALID_PASSCODE_HASHES = [
+  "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9", // admin123
+  "9d3b4199e1852fa3d4c691a144cc07e7517622f62d78a1c9f7a31cc347458d25", // kshetra2026
+]
+
 export function AdminLoginModal({ isOpen, onClose, onSuccess }: AdminLoginModalProps) {
   const [password, setPassword] = useState("")
   const [error, setError] = useState(false)
 
   if (!isOpen) return null
 
-  function handleLogin(e: FormEvent) {
+  async function handleLogin(e: FormEvent) {
     e.preventDefault()
-    // Default admin PIN / password
-    if (password === "admin123" || password === "kshetra2026" || password === "admin") {
+    const inputHash = await sha256(password.trim())
+    if (VALID_PASSCODE_HASHES.includes(inputHash)) {
       sessionStorage.setItem("kpk_admin_auth", "true")
       setError(false)
       setPassword("")
