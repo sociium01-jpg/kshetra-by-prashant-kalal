@@ -66,7 +66,7 @@ export function AdminLoginModal({ isOpen, onClose, onSuccess }: AdminLoginModalP
               autoFocus
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter passcode (Default: admin123)"
+              placeholder="Enter passcode..."
               className="mt-1.5 w-full rounded-xl border border-muted/30 bg-gray/50 px-4 py-2.5 text-sm text-ink outline-none focus:border-brand focus:bg-white"
             />
           </div>
