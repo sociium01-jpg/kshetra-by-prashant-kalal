@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react"
-import { nav } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { Logo } from "./Logo"
 
-const essentialNav = [
-  { href: "#home", label: "Home" },
-  { href: "#why", label: "Why Kshetra" },
-  { href: "#founder", label: "Meet Prashant" },
-  { href: "#values", label: "Values" },
-  { href: "#contact", label: "Contact" },
-]
-
 export function Header() {
+  const { content } = useSite()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [progress, setProgress] = useState(0)
+
+  const navLinks = content.navLinks || []
+  const essentialNav = navLinks.slice(0, 5)
 
   useEffect(() => {
     const onScroll = () => {
@@ -102,7 +98,7 @@ export function Header() {
       {open ? (
         <div className="max-h-[min(28rem,calc(100dvh-4.5rem))] overflow-y-auto border-t border-gray bg-white shadow-lg">
           <nav className="page-shell grid gap-1 py-3 md:grid-cols-3 md:py-5" aria-label="All Sections">
-            {nav.map((item) => (
+            {navLinks.map((item) => (
               <a
                 key={item.href}
                 href={item.href}

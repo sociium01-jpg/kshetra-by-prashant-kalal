@@ -1,8 +1,10 @@
-import { journey } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { IconBuilding, workIcons } from "./Icons"
 import { Reveal } from "./Reveal"
 
 export function Differentiator() {
+  const { content } = useSite()
+  const journey = content.journey
   return (
     <section id="journey" className="section-band bg-gray">
       <div className="page-shell">

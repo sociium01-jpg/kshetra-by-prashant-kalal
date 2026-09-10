@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react"
-import { contactCopy } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { type LegalType } from "./LegalModal"
 import { Magnetic } from "./Magnetic"
 import { Reveal } from "./Reveal"
@@ -15,6 +15,8 @@ interface ContactProps {
 }
 
 export function Contact({ onOpenLegal }: ContactProps) {
+  const { content, addLead } = useSite()
+  const contactCopy = content.contactCopy
   const [status, setStatus] = useState<Status>("idle")
   const [submittedName, setSubmittedName] = useState("")
 
@@ -29,7 +31,16 @@ export function Contact({ onOpenLegal }: ContactProps) {
     const message = String(data.get("message") ?? "").trim()
 
     setSubmittedName(name)
-    // 1. INSTANT IMMEDIATE FEEDBACK TO THE USER
+    // 1. Capture lead locally in Admin Dashboard
+    addLead({
+      name,
+      phone,
+      email: userEmail,
+      message,
+      source: "Contact Page",
+    })
+
+    // 2. INSTANT IMMEDIATE FEEDBACK TO THE USER
     setStatus("success")
     form.reset()
 

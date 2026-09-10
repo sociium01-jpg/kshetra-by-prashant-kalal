@@ -1,8 +1,10 @@
-import { whatIBring } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { helpIcons } from "./Icons"
 import { Reveal } from "./Reveal"
 
 export function HowICanHelp() {
+  const { content } = useSite()
+  const whatIBring = content.whatIBring
   return (
     <section id="what-we-do" className="section-band bg-white">
       <div className="page-shell">

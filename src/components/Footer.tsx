@@ -4,9 +4,10 @@ import { type LegalType } from "./LegalModal"
 
 interface FooterProps {
   onOpenLegal?: (type: LegalType) => void
+  onOpenAdmin?: () => void
 }
 
-export function Footer({ onOpenLegal }: FooterProps) {
+export function Footer({ onOpenLegal, onOpenAdmin }: FooterProps) {
   return (
     <footer className="relative bg-charcoal text-white">
       <div className="page-shell py-12">
@@ -89,6 +90,14 @@ export function Footer({ onOpenLegal }: FooterProps) {
             className="transition-colors hover:text-brand"
           >
             Accessibility Statement
+          </button>
+          <span>•</span>
+          <button
+            type="button"
+            onClick={() => onOpenAdmin?.()}
+            className="font-semibold text-brand transition-colors hover:text-brand-dark hover:underline"
+          >
+            🔒 Admin Portal
           </button>
         </div>
 

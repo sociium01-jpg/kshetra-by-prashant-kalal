@@ -1,5 +1,5 @@
-import { quotes } from "../content/home"
 import { useEffect, useRef, useState } from "react"
+import { useSite } from "../context/SiteContext"
 
 function preventOrphan(line: string) {
   const i = line.lastIndexOf(" ")
@@ -32,6 +32,8 @@ function QuoteLines({
 }
 
 export function Hero() {
+  const { content } = useSite()
+  const quotes = content.quotes
   const [index, setIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
   const [dir, setDir] = useState(1)

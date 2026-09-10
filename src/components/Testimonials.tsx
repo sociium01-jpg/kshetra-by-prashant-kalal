@@ -1,8 +1,10 @@
-import { testimonials } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { Card3D } from "./Card3D"
 import { Reveal } from "./Reveal"
 
 export function Testimonials() {
+  const { content } = useSite()
+  const testimonials = content.testimonials
   return (
     <section id="testimonials" className="section-band peach-wash-tl">
       <div className="page-shell">

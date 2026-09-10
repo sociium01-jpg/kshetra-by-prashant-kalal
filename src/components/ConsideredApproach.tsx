@@ -1,8 +1,10 @@
-import { whyKshetra } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { useInView } from "../hooks/useInView"
 import { Reveal } from "./Reveal"
 
 export function ConsideredApproach() {
+  const { content } = useSite()
+  const whyKshetra = content.whyKshetra
   const { ref, visible } = useInView<HTMLElement>()
 
   return (

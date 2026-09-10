@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react"
-import { contactCopy } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { type LegalType } from "./LegalModal"
 import { Magnetic } from "./Magnetic"
 
@@ -8,6 +8,8 @@ interface PopUpModalProps {
 }
 
 export function PopUpModal({ onOpenLegal }: PopUpModalProps) {
+  const { content, addLead } = useSite()
+  const contactCopy = content.contactCopy
   const [isOpen, setIsOpen] = useState(false)
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
 
@@ -47,7 +49,16 @@ export function PopUpModal({ onOpenLegal }: PopUpModalProps) {
     const userEmail = String(data.get("email") ?? "").trim()
     const message = String(data.get("message") ?? "").trim()
 
-    // 1. INSTANT IMMEDIATE FEEDBACK TO THE USER (Zero waiting delay)
+    // 1. Capture lead in Admin Dashboard
+    addLead({
+      name,
+      phone,
+      email: userEmail,
+      message,
+      source: "Popup Modal Form",
+    })
+
+    // 2. INSTANT IMMEDIATE FEEDBACK TO THE USER (Zero waiting delay)
     setStatus("success")
     form.reset()
 

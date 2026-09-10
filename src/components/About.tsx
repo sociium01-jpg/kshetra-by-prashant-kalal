@@ -1,9 +1,11 @@
-import { founder } from "../content/home"
+import { useSite } from "../context/SiteContext"
 import { useInView } from "../hooks/useInView"
 import { FounderQuoteCard } from "./FounderQuoteCard"
 import { Reveal } from "./Reveal"
 
 export function About() {
+  const { content } = useSite()
+  const founder = content.founder
   const { ref, visible } = useInView<HTMLElement>()
 
   return (
