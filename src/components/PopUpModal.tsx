@@ -71,7 +71,7 @@ export function PopUpModal({ onOpenLegal }: PopUpModalProps) {
         client_email: userEmail || "Not provided",
         message,
         bcc: "sociium01@gmail.com",
-        subject: `New Property Enquiry from ${name} (Popup Form)`,
+        subject: `New Lead: ${name} (${phone}) - Popup Form`,
         from_name: "Kshetra By Prashant Kalal Website",
       }),
     }).catch(() => {})
@@ -89,7 +89,8 @@ export function PopUpModal({ onOpenLegal }: PopUpModalProps) {
         message,
         _replyto: userEmail || undefined,
         _cc: "sociium01@gmail.com",
-        _subject: `New Property Enquiry from ${name} (Popup Form)`,
+        _subject: `New Lead: ${name} (${phone}) - Popup Form`,
+        _template: "table",
         _captcha: "false",
       }),
     }).catch(() => {})

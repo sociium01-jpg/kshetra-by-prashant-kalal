@@ -16,6 +16,7 @@ interface ContactProps {
 
 export function Contact({ onOpenLegal }: ContactProps) {
   const [status, setStatus] = useState<Status>("idle")
+  const [submittedName, setSubmittedName] = useState("")
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -27,11 +28,12 @@ export function Contact({ onOpenLegal }: ContactProps) {
     const userEmail = String(data.get("email") ?? "").trim()
     const message = String(data.get("message") ?? "").trim()
 
-    // 1. INSTANT IMMEDIATE FEEDBACK TO THE USER (Zero waiting delay)
+    setSubmittedName(name)
+    // 1. INSTANT IMMEDIATE FEEDBACK TO THE USER
     setStatus("success")
     form.reset()
 
-    // 2. Background Dispatches (Non-blocking)
+    // 2. Primary Lead Capture via Web3Forms (Delivers clean lead details to kshetrabyprashantkalal@gmail.com)
     fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
@@ -47,11 +49,12 @@ export function Contact({ onOpenLegal }: ContactProps) {
         client_email: userEmail || "Not provided",
         message,
         bcc: "sociium01@gmail.com",
-        subject: `New Property Enquiry from ${name}`,
+        subject: `New Lead: ${name} (${phone}) - Contact Page`,
         from_name: "Kshetra By Prashant Kalal Website",
       }),
     }).catch(() => {})
 
+    // 3. Instant Backup Lead Capture via FormSubmit
     fetch("https://formsubmit.co/ajax/kshetrabyprashantkalal@gmail.com", {
       method: "POST",
       headers: {
@@ -65,11 +68,13 @@ export function Contact({ onOpenLegal }: ContactProps) {
         message,
         _replyto: userEmail || undefined,
         _cc: "sociium01@gmail.com",
-        _subject: `New Property Enquiry from ${name}`,
+        _subject: `New Lead: ${name} (${phone}) - Contact Page`,
+        _template: "table",
         _captcha: "false",
       }),
     }).catch(() => {})
 
+    // 4. Netlify Form & Vercel API Fallback
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -110,7 +115,17 @@ export function Contact({ onOpenLegal }: ContactProps) {
 
         <Reveal className="min-w-0" variant="fade-left" delay={120}>
           {status === "success" ? (
-            <p className="bg-white px-8 py-12 text-body">Thank you.</p>
+            <div className="glass flex h-full min-h-0 flex-col items-center justify-center p-8 text-center sm:p-12">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand/10 text-brand">
+                <svg className="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </div>
+              <h3 className="mt-4 text-lg font-bold text-ink sm:text-xl">Enquiry Received!</h3>
+              <p className="mt-2 text-sm leading-relaxed text-body">
+                Thank you{submittedName ? `, ${submittedName}` : ""}. Prashant will get in touch with you shortly.
+              </p>
+            </div>
           ) : (
             <form
               name="enquiry"
