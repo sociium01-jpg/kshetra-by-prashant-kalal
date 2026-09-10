@@ -37,66 +37,62 @@ export function PopUpModal({ onOpenLegal }: PopUpModalProps) {
     sessionStorage.setItem("kpk_modal_closed", "true")
   }
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
-    setStatus("submitting")
 
     const name = String(data.get("name") ?? "").trim()
     const phone = String(data.get("phone") ?? "").trim()
     const userEmail = String(data.get("email") ?? "").trim()
     const message = String(data.get("message") ?? "").trim()
 
-    try {
-      // 1. Primary Dispatch via Web3Forms
-      await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
-          email: "kshetrabyprashantkalal@gmail.com",
-          replyto: userEmail || undefined,
-          name,
-          phone,
-          client_email: userEmail || "Not provided",
-          message,
-          bcc: "sociium01@gmail.com",
-          subject: `New Property Enquiry from ${name} (Popup Form)`,
-          from_name: "Kshetra By Prashant Kalal Website",
-        }),
-      }).catch(() => {})
+    // 1. INSTANT IMMEDIATE FEEDBACK TO THE USER (Zero waiting delay)
+    setStatus("success")
+    form.reset()
 
-      // 2. Instant Backup Dispatch via FormSubmit
-      await fetch("https://formsubmit.co/ajax/kshetrabyprashantkalal@gmail.com", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          phone,
-          email: userEmail || "Not provided",
-          message,
-          _replyto: userEmail || undefined,
-          _cc: "sociium01@gmail.com",
-          _subject: `New Property Enquiry from ${name} (Popup Form)`,
-          _captcha: "false",
-        }),
-      }).catch(() => {})
+    window.setTimeout(() => {
+      closeModal()
+    }, 2500)
 
-      form.reset()
-      setStatus("success")
-      window.setTimeout(() => {
-        closeModal()
-      }, 2500)
-    } catch {
-      setStatus("error")
-    }
+    // 2. Background Dispatches (Non-blocking)
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: "5bf5367b-14d2-4e8a-b8fb-4d4375b42d13",
+        email: "kshetrabyprashantkalal@gmail.com",
+        replyto: userEmail || undefined,
+        name,
+        phone,
+        client_email: userEmail || "Not provided",
+        message,
+        bcc: "sociium01@gmail.com",
+        subject: `New Property Enquiry from ${name} (Popup Form)`,
+        from_name: "Kshetra By Prashant Kalal Website",
+      }),
+    }).catch(() => {})
+
+    fetch("https://formsubmit.co/ajax/kshetrabyprashantkalal@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        email: userEmail || "Not provided",
+        message,
+        _replyto: userEmail || undefined,
+        _cc: "sociium01@gmail.com",
+        _subject: `New Property Enquiry from ${name} (Popup Form)`,
+        _captcha: "false",
+      }),
+    }).catch(() => {})
   }
 
   if (!isOpen) return null
