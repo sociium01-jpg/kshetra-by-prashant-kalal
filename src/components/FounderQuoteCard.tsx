@@ -36,27 +36,27 @@ export function FounderQuoteCard({
     >
       {/* Background Panels */}
       <div
-        className="panel panel--orange absolute inset-y-0"
-        style={{
-          left: "39.0625%",
-          right: "3.875%",
-          backgroundColor: accent,
-        }}
-      />
-      <div
-        className="panel panel--grey absolute inset-y-0 right-0"
+        className="panel panel--grey absolute inset-y-0 left-0"
         style={{
           width: "3.875%",
           backgroundColor: "#727271",
         }}
       />
+      <div
+        className="panel panel--orange absolute inset-y-0"
+        style={{
+          left: "3.875%",
+          width: "55%",
+          backgroundColor: accent,
+        }}
+      />
 
       {/* Quote Copy */}
       <blockquote
-        className="copy quote absolute font-sans font-normal text-right text-white z-[1]"
+        className="copy quote absolute font-sans font-normal text-left text-white z-[1]"
         style={{
-          top: "2.53cqw",
-          right: "6.5cqw",
+          top: "6cqw",
+          left: "6.5cqw",
           fontSize: "5.36cqw",
           lineHeight: "5.81cqw",
           letterSpacing: "-0.005em",
@@ -77,8 +77,8 @@ export function FounderQuoteCard({
         className="rule absolute z-[1]"
         role="presentation"
         style={{
-          top: "27.06cqw",
-          right: "6.5cqw",
+          top: "31cqw",
+          left: "6.5cqw",
           width: "16.31cqw",
           height: "0.38cqw",
           backgroundColor: "#F6AD85",
@@ -88,10 +88,10 @@ export function FounderQuoteCard({
       {/* Name & Role */}
       <figcaption>
         <div
-          className="copy name absolute font-sans font-semibold text-right text-white z-[1]"
+          className="copy name absolute font-sans font-semibold text-left text-white z-[1]"
           style={{
-            top: "29.72cqw",
-            right: "6.5cqw",
+            top: "34cqw",
+            left: "6.5cqw",
             fontSize: "5.98cqw",
             lineHeight: "6.5cqw",
             letterSpacing: "0.005em",
@@ -110,10 +110,10 @@ export function FounderQuoteCard({
         </div>
 
         <div
-          className="copy role absolute font-sans font-semibold text-right z-[1]"
+          className="copy role absolute font-sans font-semibold text-left z-[1]"
           style={{
-            top: "43.3cqw",
-            right: "6.5cqw",
+            top: "48.5cqw",
+            left: "6.5cqw",
             fontSize: "3.39cqw",
             lineHeight: "3.39cqw",
             letterSpacing: "0.06em",
@@ -130,12 +130,12 @@ export function FounderQuoteCard({
         alt={`${nameAlt}, ${role.toLowerCase()}`}
         className="portrait absolute z-[2] select-none pointer-events-none"
         style={{
-          left: "3%",
+          right: "0%",
           bottom: "0px",
           width: "76%",
-          maxHeight: "83%",
+          maxHeight: "85%",
           objectFit: "contain",
-          objectPosition: "bottom left",
+          objectPosition: "bottom right",
         }}
       />
     </figure>
