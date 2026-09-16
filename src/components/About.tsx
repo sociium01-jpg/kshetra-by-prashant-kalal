@@ -59,78 +59,76 @@ export function About() {
         </div>
       </div>
 
-      {/* DESKTOP VIEW (>= 1024px) - UNIFORM PAGE-SHELL CONTAINER */}
-      <div className="hidden lg:block section-band bg-[#fff8f4]/60 py-6 lg:py-10">
-        <div className="page-shell">
+      {/* DESKTOP VIEW (>= 1024px) - FULL WIDTH UNZOOMED BANNER WITH REFINED TEXT */}
+      <div className="hidden lg:block w-full bg-[#fff8f4]">
+        <div
+          className="relative w-full overflow-hidden"
+          style={
+            {
+              containerType: "inline-size",
+              aspectRatio: "1024 / 398",
+            } as React.CSSProperties
+          }
+        >
+          {/* Unzoomed 100% Native Aspect Ratio Desktop Banner */}
+          <img
+            src="/meet-prashant-desktop-banner.png"
+            alt="Meet Prashant Kalal"
+            className="absolute inset-0 h-full w-full object-fill pointer-events-none select-none"
+          />
+
+          {/* Proportional Refined Text Overlay on Left Peach Area */}
           <div
-            className="relative w-full overflow-hidden rounded-2xl border border-muted/15 shadow-sm"
-            style={
-              {
-                containerType: "inline-size",
-                aspectRatio: "1024 / 398",
-              } as React.CSSProperties
-            }
+            className="absolute inset-y-0 flex flex-col justify-center z-10"
+            style={{
+              left: "5cqw",
+              width: "50cqw",
+            }}
           >
-            {/* Unzoomed 100% Native Aspect Ratio Desktop Banner */}
-            <img
-              src="/meet-prashant-desktop-banner.png"
-              alt="Meet Prashant Kalal"
-              className="absolute inset-0 h-full w-full object-fill pointer-events-none select-none"
-            />
-
-            {/* Proportional Text Overlay on Left Peach Area */}
-            <div
-              className="absolute inset-y-0 flex flex-col justify-center z-10"
-              style={{
-                left: "4.5cqw",
-                width: "56cqw",
-              }}
-            >
-              <Reveal variant="fade-right">
-                <h2
-                  className="font-bold tracking-[0.04em] text-ink uppercase"
-                  style={{
-                    fontSize: "2.1cqw",
-                    lineHeight: "1.15",
-                  }}
-                >
-                  {founder.heading}
-                </h2>
-              </Reveal>
-
-              <Reveal delay={70} variant="fade-right">
-                <p
-                  className="font-semibold tracking-[0.03em] text-brand"
-                  style={{
-                    fontSize: "1.18cqw",
-                    lineHeight: "1.2",
-                    marginTop: "0.7cqw",
-                  }}
-                >
-                  {founder.subhead}
-                </p>
-              </Reveal>
-
-              <div
-                className="text-body leading-relaxed"
+            <Reveal variant="fade-right">
+              <h2
+                className="font-bold tracking-[0.04em] text-ink uppercase"
                 style={{
-                  marginTop: "1cqw",
+                  fontSize: "1.75cqw",
+                  lineHeight: "1.18",
                 }}
               >
-                {founder.paragraphs.map((paragraph, i) => (
-                  <Reveal key={paragraph} delay={120 + i * 70} variant="fade-up">
-                    <p
-                      style={{
-                        fontSize: "0.98cqw",
-                        lineHeight: "1.45",
-                        marginBottom: i < founder.paragraphs.length - 1 ? "0.7cqw" : "0",
-                      }}
-                    >
-                      {paragraph}
-                    </p>
-                  </Reveal>
-                ))}
-              </div>
+                {founder.heading}
+              </h2>
+            </Reveal>
+
+            <Reveal delay={70} variant="fade-right">
+              <p
+                className="font-semibold tracking-[0.03em] text-brand"
+                style={{
+                  fontSize: "1.0cqw",
+                  lineHeight: "1.25",
+                  marginTop: "0.5cqw",
+                }}
+              >
+                {founder.subhead}
+              </p>
+            </Reveal>
+
+            <div
+              className="text-body leading-relaxed"
+              style={{
+                marginTop: "0.8cqw",
+              }}
+            >
+              {founder.paragraphs.map((paragraph, i) => (
+                <Reveal key={paragraph} delay={120 + i * 70} variant="fade-up">
+                  <p
+                    style={{
+                      fontSize: "0.85cqw",
+                      lineHeight: "1.45",
+                      marginBottom: i < founder.paragraphs.length - 1 ? "0.5cqw" : "0",
+                    }}
+                  >
+                    {paragraph}
+                  </p>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
