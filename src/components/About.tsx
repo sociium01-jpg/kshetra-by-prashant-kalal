@@ -59,33 +59,74 @@ export function About() {
         </div>
       </div>
 
-      {/* DESKTOP VIEW (>= 1024px) */}
-      <div className="hidden lg:block relative w-full overflow-hidden bg-[#fff8f4]">
-        {/* Desktop Banner Graphic Background */}
-        <img
-          src="/meet-prashant-desktop-banner.png"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-right pointer-events-none select-none"
-        />
+      {/* DESKTOP VIEW (>= 1024px) - EXACT UNZOOMED PROPORTIONAL BANNER */}
+      <div className="hidden lg:block w-full bg-[#fff8f4]">
+        <div
+          className="relative w-full overflow-hidden"
+          style={
+            {
+              containerType: "inline-size",
+              aspectRatio: "1024 / 398",
+            } as React.CSSProperties
+          }
+        >
+          {/* Unzoomed 100% Native Aspect Ratio Desktop Banner */}
+          <img
+            src="/meet-prashant-desktop-banner.png"
+            alt="Meet Prashant Kalal"
+            className="absolute inset-0 h-full w-full object-fill pointer-events-none select-none"
+          />
 
-        {/* Text Overlay on Left Peach Area */}
-        <div className="relative z-10 flex min-h-[580px] xl:min-h-[640px] items-center">
-          <div className="w-[56%] xl:w-[54%] py-14 px-12 lg:px-16 xl:px-24">
+          {/* Proportional Text Overlay on Left Peach Area */}
+          <div
+            className="absolute inset-y-0 flex flex-col justify-center z-10"
+            style={{
+              left: "4.5cqw",
+              width: "56cqw",
+            }}
+          >
             <Reveal variant="fade-right">
-              <h2 className="text-[1.85rem] xl:text-[2.2rem] font-bold tracking-[0.04em] text-ink uppercase leading-tight">
+              <h2
+                className="font-bold tracking-[0.04em] text-ink uppercase"
+                style={{
+                  fontSize: "2.25cqw",
+                  lineHeight: "1.15",
+                }}
+              >
                 {founder.heading}
               </h2>
             </Reveal>
+
             <Reveal delay={70} variant="fade-right">
-              <p className="mt-3 text-[1.05rem] xl:text-[1.15rem] font-semibold tracking-[0.03em] text-brand">
+              <p
+                className="font-semibold tracking-[0.03em] text-brand"
+                style={{
+                  fontSize: "1.25cqw",
+                  lineHeight: "1.2",
+                  marginTop: "0.8cqw",
+                }}
+              >
                 {founder.subhead}
               </p>
             </Reveal>
-            <div className="mt-6 space-y-4 text-[0.96rem] xl:text-[1.02rem] leading-relaxed text-body">
+
+            <div
+              className="text-body leading-relaxed"
+              style={{
+                marginTop: "1.2cqw",
+              }}
+            >
               {founder.paragraphs.map((paragraph, i) => (
                 <Reveal key={paragraph} delay={120 + i * 70} variant="fade-up">
-                  <p>{paragraph}</p>
+                  <p
+                    style={{
+                      fontSize: "1.02cqw",
+                      lineHeight: "1.45",
+                      marginBottom: i < founder.paragraphs.length - 1 ? "0.8cqw" : "0",
+                    }}
+                  >
+                    {paragraph}
+                  </p>
                 </Reveal>
               ))}
             </div>
